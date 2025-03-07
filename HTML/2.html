@@ -1,7 +1,7 @@
 <html>
 
     <script>
-/*
+/* HTML ascii format
         for (let n = 31; n < 200; n++)
         {
             document.write ("&#" + n + ";" + "<br>");
@@ -10,7 +10,7 @@
     </script>
     
     <script>
-        /*
+        /*  For in, For of
         var str = "12345678"
         const person = {fname:"John", lname:"Doe", age:25};
         var i 
@@ -25,20 +25,14 @@
     </script>
 
     <input id="input">
-    <button onclick = "calc_b()"> a </button>
+    <button onclick = "calc()"> a </button>
     <P id = "output"></P>
     <script>
         function calc ()
         {
-            var n = document.getElementById ("input").value
-            document.body.innerHTML += n;
-        }
-        function calc_b ()
-        {
-            var inputBox = document.getElementById ("input");
-            var n = inputBox.value;
-            var p = document.getElementById ("output");
-            p.textContent = n;
+            //var n = document.getElementById ("input").value
+            //document.getElementById ("output").innerHTML += n;
+            document.getElementById ("output").textContent = document.getElementById ("input").value;
         }
     </script>
 </html>
