@@ -1,0 +1,19 @@
+<html>
+    <img id = "black" src = "https://lienaed.github.io/Code/Images/black.jpg" alt = "black_image" width = 300 height = 300 style="position: absolute; top: 50px; left: 100px;">
+    <script>
+        var picture = document.getElementById ("black");
+        let x = 0, y = 0;
+
+        function move_right()
+        {
+            x += 10;
+            picture.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+    </script>
+    <button id = right onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
+    <button id = left onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
+    <button id = up onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
+    <button id = down onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
+
+    </html>
