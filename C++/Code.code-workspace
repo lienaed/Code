@@ -9,6 +9,7 @@
 			"vector": "cpp",
 			"queue": "cpp",
 			"string": "cpp"
-		}
+		},
+		"java.project.explorer.showNonJavaResources": true
 	}
 }
