@@ -1,8 +1,44 @@
 <html>
+
     <script>
+/*
+        for (let n = 31; n < 200; n++)
         {
-            let a = 1;
+            document.write ("&#" + n + ";" + "<br>");
         }
-        document.write (a);
+*/
+    </script>
+    
+    <script>
+        /*
+        var str = "12345678"
+        const person = {fname:"John", lname:"Doe", age:25};
+        var i 
+        for (i in person)
+        {
+            document.write (i, ": ", person[i], "<br>");
+        }
+        for (i of str)
+        {
+            document.write (i)
+        }*/
+    </script>
+
+    <input id="input">
+    <button onclick = "calc_b()"> a </button>
+    <P id = "output"></P>
+    <script>
+        function calc ()
+        {
+            var n = document.getElementById ("input").value
+            document.body.innerHTML += n;
+        }
+        function calc_b ()
+        {
+            var inputBox = document.getElementById ("input");
+            var n = inputBox.value;
+            var p = document.getElementById ("output");
+            p.textContent = n;
+        }
     </script>
 </html>
