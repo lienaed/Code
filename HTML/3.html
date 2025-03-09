@@ -1,19 +1,95 @@
 <html>
-    <img id = "black" src = "https://lienaed.github.io/Code/Images/black.jpg" alt = "black_image" width = 300 height = 300 style="position: absolute; top: 50px; left: 100px;">
+    <img id = "black" src = "https://lienaed.github.io/Code/Images/black.jpg" alt = "black_image" 
+    width = 300 height = 300 style="position: fixed;" >
     <script>
-        var picture = document.getElementById ("black");
+        let image = document.getElementById ("black");
+        let Bwidth = image.width;
+        let Bheight = image.height;
+        image.style.left = `calc(50% - ${Bwidth / 2}px)`;
+        image.style.top = `calc(50% - ${Bheight / 2}px)`;
+
+        let picture = document.getElementById ("black");
+        let status = 0;
+        let up = 0, down = 0, left = 0, right = 0;
         let x = 0, y = 0;
 
-        function move_right()
+        function set (s, d)
         {
-            x += 10;
-            picture.style.transform = `translate(${x}px, ${y}px)`;
+            status = s;
+            if (d == "right")
+                right = s;
+            else if (d == "left")
+                left = s;
+            else if (d == "up")
+                up = s;
+            else if (d == "down")
+                down = s;
         }
 
+        document.addEventListener ("keydown", (event) => 
+        {
+            if (event.key == "ArrowRight" || event.key == "d" || event.key == "D")
+                document.getElementById ("right").onmousedown();
+            if (event.key == "ArrowLeft" || event.key == "a" || event.key == "A")
+                document.getElementById ("left").onmousedown();
+            if (event.key == "ArrowUp" || event.key == "w" || event.key == "W")
+                document.getElementById ("up").onmousedown();
+            if (event.key == "ArrowDown" || event.key == "s" || event.key == "S")
+                document.getElementById ("down").onmousedown();
+        })
+        document.addEventListener ("keyup", (event) => 
+        {
+            if (event.key == "ArrowRight" || event.key == "d" || event.key == "D")
+                document.getElementById ("right").onmouseup();
+            if (event.key == "ArrowLeft" || event.key == "a" || event.key == "A")
+                document.getElementById ("left").onmouseup();
+            if (event.key == "ArrowUp" || event.key == "w" || event.key == "W")
+                document.getElementById ("up").onmouseup();
+            if (event.key == "ArrowDown" || event.key == "s" || event.key == "S")
+                document.getElementById ("down").onmouseup();
+        })
+
+        function move ()
+        {
+            let speed = 5;
+            if (right)
+            {
+                x += speed;
+            }
+            if (left)
+            {
+                x -= speed;
+            }
+            if (up)
+            {
+                y -= speed;
+            }
+            if (down)
+            {
+                y += speed;
+            }
+            picture.style.transform = `translate(${x}px, ${y}px)`;
+            //setTimeout (function() {move (direction)}, 10);
+            requestAnimationFrame (function() {move ()});
+        }
+        move();
+
     </script>
-    <button id = right onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
-    <button id = left onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
-    <button id = up onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
-    <button id = down onclick = "move_right()" style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"></button>
+    <button id = right onmousedown = "set (1, 'right')" onmouseup = "set (0, 'right')"
+    style = "position: fixed; transform: translateX(50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"> 
+        Right
+    </button>
+    <button id = left onmousedown = "set (1, 'left')" onmouseup = "set (0, 'left')"
+    style = "position: fixed; transform: translateX(-150%); left: 50%; bottom: 150px; width: 120px; height: 60px;">
+        Left
+    </button>
+    <button id = up onmousedown = "set (1, 'up')" onmouseup = "set (0, 'up')"
+    style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 200px; width: 120px; height: 60px;">
+        Up
+    </button>
+    <button id = down onmousedown = "set (1, 'down')" onmouseup = "set (0, 'down')" 
+    style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;">
+        Down
+    </button>
 
     </html>

@@ -1,14 +1,10 @@
 <html>
     <script>
         let input = prompt ("Input:")
-        if (input % 2 == 0)
+        let arr = input.split ("");
+        for (let i of arr)
         {
-            document.write ("Even")
-        }
-        else
-        {
-            document.write ("Odd")
+            document.write (i + "<br>");
         }
     </script>
-
 </html>
