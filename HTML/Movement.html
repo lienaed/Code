@@ -45,13 +45,15 @@
         let status = 0;
         let up = 0, down = 0, left = 0, right = 0;
         let x = 0, y = 0;
-        let velocity = 5;
+        let velocity = 5, deacceleration = 0;
+        let w_timer = 0, s_timer = 0, a_timer = 0, d_timer = 0;
 
         function stop(dir)
         {
             if (velocity > 0)
             {
-                velocity -= 0.1;
+
+                velocity -= deacceleration;
                 if (dir == "right")
                 {
                     x += velocity;
@@ -86,28 +88,56 @@
             if (!right && !left && !up && !down)
             {
                 velocity = 5;
-                stop(dir);
+                if ((w_timer > 0) + (s_timer > 0) + (a_timer > 0) + (d_timer > 0) == 2)
+                    deacceleration = 0.05;
+                else
+                    deacceleration = 0.1;
+                if (w_timer > 0)
+                    stop ("up")
+                if (s_timer > 0)
+                    stop ("down")
+                if (a_timer > 0)
+                    stop ("left")
+                if (d_timer > 0)
+                    stop ("right")
             }
         }
 
         function move ()
         {
-            let speed = 5;
+            if (w_timer > 0)
+                w_timer--;
+            if (s_timer > 0)
+                s_timer--;
+            if (a_timer > 0)
+                a_timer--;
+            if (d_timer > 0)
+                d_timer--;
+
+            let speed = 7;
             if (right)
             {
                 x += speed;
+                d_timer = 10;
+                a_timer = 0;
             }
             if (left)
             {
                 x -= speed;
+                a_timer = 10;
+                d_timer = 0;
             }
             if (up)
             {
                 y -= speed;
+                w_timer = 10;
+                s_timer = 0;
             }
             if (down)
             {
                 y += speed;
+                s_timer = 10;
+                w_timer = 0;
             }
             picture.style.transform = `translate(${x}px, ${y}px)`;
             requestAnimationFrame (function() {move ()});
