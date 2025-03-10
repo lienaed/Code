@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            /* 初始隐藏游戏按钮 */
+            .game-buttons {
+                display: none;
+            }
+            /* 居中 Start 按钮 */
+            #startButton {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px 40px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 开始按钮 -->
+        <button id="startButton" onclick="startGame()">Start</button>
+
+        <!-- 其他按钮（初始隐藏） -->
+        <div class="game-buttons">
+            <button id="right" onmousedown="set('right', 1)" onmouseup="set('right', 0)">Right</button>
+            <button id="left" onmousedown="set('left', 1)" onmouseup="set('left', 0)">Left</button>
+            <button id="up" onmousedown="set('up', 1)" onmouseup="set('up', 0)">Up</button>
+            <button id="down" onmousedown="set('down', 1)" onmouseup="set('down', 0)">Down</button>
+        </div>
+
+        <script>
+            function startGame() {
+                document.getElementById("startButton").style.display = "none"; // 隐藏 Start 按钮
+                document.querySelector(".game-buttons").style.display = "block"; // 显示游戏按钮
+            }
+
+            function set(direction, state) {
+                console.log("方向:", direction, "状态:", state);
+            }
+        </script>
+    </body>
+</html>
