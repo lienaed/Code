@@ -8,7 +8,7 @@
         </style>
     </head>
     <img id = "black" src = "https://lienaed.github.io/Code/Images/black.jpg" alt = "black_image" class = "image"
-    width = 300 height = 300>
+    width = 100 height = 100>
     <style>
         .image 
         {
@@ -87,7 +87,7 @@
 
             if (!right && !left && !up && !down)
             {
-                velocity = 5;
+                velocity = 3;
                 if ((w_timer > 0) + (s_timer > 0) + (a_timer > 0) + (d_timer > 0) == 2)
                     deacceleration = 0.05;
                 else
@@ -114,29 +114,29 @@
             if (d_timer > 0)
                 d_timer--;
 
-            let speed = 7;
+            let speed = 4;
             if (right)
             {
                 x += speed;
-                d_timer = 10;
+                d_timer = 4;
                 a_timer = 0;
             }
             if (left)
             {
                 x -= speed;
-                a_timer = 10;
+                a_timer = 4;
                 d_timer = 0;
             }
             if (up)
             {
                 y -= speed;
-                w_timer = 10;
+                w_timer = 4;
                 s_timer = 0;
             }
             if (down)
             {
                 y += speed;
-                s_timer = 10;
+                s_timer = 4;
                 w_timer = 0;
             }
             picture.style.transform = `translate(${x}px, ${y}px)`;
