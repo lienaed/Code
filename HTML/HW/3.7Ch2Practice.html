@@ -30,7 +30,7 @@
 
     <script>
         document.write ("Q5: C<br>");
-        let X = 5; Y = 2;
+        var X = 5; Y = 2;
         document.write (( ((X < 5) == (X > 5)) && ((Y < 5) == (Y > 5)) ) + "<br>");
         document.write (( (!(X >= 5) == (X > 5)) && (!(Y >= 5) == (Y > 5)) ) + "<br>");
         document.write (( (!(X <= 5) == (X > 5)) && (!(Y <= 5) == (Y > 5)) ) + "<br>");
@@ -62,6 +62,50 @@
         document.write ("Q9: A<br>");
         var myNum = "4";
 		var result = myNum + myNum;
-		document.write(result);
+		document.write(result + "<br>");
+    </script>
+
+    <script>
+        document.write ("Q10: B<br>");
+        var myNum = "4";
+		var result = myNum * myNum;
+		document.write(result + "<br>");
+    </script>
+
+    <script>
+        document.write ("Q11: A<br>");
+        var X = 23;
+		var Y = 3;
+		var Z = X + Y;
+		document.write(Z + "<br>");
+    </script>
+
+    <script>
+        document.write ("Q12: C<br>");
+        var A = "6.35";
+		document.write(parseFloat(A) + ", ");
+		document.write(parseInt(A) + "<br>");
+    </script>
+
+    <script>
+        document.write ("Q13: A<br>");
+        var result = "Yes!";
+		var multiply = "55";
+		result = (parseInt(multiply) == 55)?"Correct":"Incorrect";	
+        document.write(result + "<br>");
+    </script>
+
+    <script>
+        document.write ("Q14: D<br>");
+        var result = " ";
+		var guys = "5Guys!";
+		result = parseInt(guys);
+		document.write(result + "<br>");
+    </script>
+
+    <script>
+        document.write ("Q15: A<br>");
+        var num =123456789;
+        document.write (num == 123456789)
     </script>
 </html>
