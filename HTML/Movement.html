@@ -1,171 +1,122 @@
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Physics-Based Movement</title>
         <style>
-            body
+            body 
             {
-                background-color: rgb(255, 255, 255);
+                margin: 0;
+                overflow: hidden;
+                background-color: #ddd;
+            }
+            canvas 
+            {
+                display: block;
             }
         </style>
     </head>
-    <img id = "black" src = "https://lienaed.github.io/Code/Images/black.jpg" alt = "black_image" class = "image"
-    width = 100 height = 100>
-    <style>
-        .image 
-        {
-            position: fixed;
-        }
-    </style>
 
-    <button id = right onmousedown = "set (1, 'right')" onmouseup = "set (0, 'right')" 
-    style = "position: fixed; transform: translateX(50%); left: 50%; bottom: 150px; width: 120px; height: 60px;"> 
-        Right
-    </button>
-    <button id = left onmousedown = "set (1, 'left')" onmouseup = "set (0, 'left')"
-    style = "position: fixed; transform: translateX(-150%); left: 50%; bottom: 150px; width: 120px; height: 60px;">
-        Left
-    </button>
-    <button id = up onmousedown = "set (1, 'up')" onmouseup = "set (0, 'up')"
-    style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 200px; width: 120px; height: 60px;">
-        Up
-    </button>
-    <button id = down onmousedown = "set (1, 'down')" onmouseup = "set (0, 'down')" 
-    style = "position: fixed; transform: translateX(-50%); left: 50%; bottom: 150px; width: 120px; height: 60px;">
-        Down
-    </button>
+    <canvas id="Board"></canvas>
 
-    <script>
-        let image = document.getElementById ("black");
-
-        let Bwidth = image.width;
-        let Bheight = image.height;
-        image.style.left = `calc(50% - ${Bwidth / 2}px)`;
-        image.style.top = `calc(50% - ${Bheight / 2}px)`;
-
-        let picture = document.getElementById ("black");
-        let status = 0;
-        let up = 0, down = 0, left = 0, right = 0;
-        let x = 0, y = 0;
-        let velocity = 5, deacceleration = 0;
-        let w_timer = 0, s_timer = 0, a_timer = 0, d_timer = 0;
-
-        function stop(dir)
-        {
-            if (velocity > 0)
+    <body>
+        <script>
+            function game()
             {
+                const board = document.getElementById ("Board");
+                board.width = window.innerWidth;
+                board.height = window.innerHeight;
+                const maxVelocity = 30;
+                const acceleration = 0.4;
+                const friction = 0.99;
+                const staticFriction = 0.2;
+                const bounceForce = 1;
 
-                velocity -= deacceleration;
-                if (dir == "right")
+                const box = 
                 {
-                    x += velocity;
+                    width: 100,
+                    height: 100,
+                    x: board.width / 2 - 50,
+                    y: board.height / 2 - 50,
+                    vx: 0,
+                    vy: 0,
+                    image: new Image()
                 }
-                if (dir == "left")
+                box.image.src = "https://lienaed.github.io/Code/Images/black.jpg";
+
+                const keys = {};
+                document.addEventListener ("keydown", (event) => keys [event.key] = 1);
+                document.addEventListener ("keyup", (event) => keys [event.key] = 0);
+
+                function movement ()
                 {
-                    x -= velocity;
+                    if (keys ["w"] || keys[" "])
+                        box.vy -= acceleration;
+                    if (keys ["s"])
+                        box.vy += acceleration;
+                    if (keys ["a"])
+                        box.vx -= acceleration;
+                    if (keys ["d"])
+                        box.vx += acceleration;
+                    
+                    box.vx = Math.max (-maxVelocity, Math.min (maxVelocity, box.vx));
+                    box.vy = Math.max (-maxVelocity, Math.min (maxVelocity, box.vy));
+                    
+                    box.vx *= friction;
+                    box.vy *= friction;
+
+                    if (Math.sqrt ((Math.abs (box.vx))**2 + (Math.abs (box.vy))**2) < staticFriction)
+                    {
+                        box.vx = 0;
+                        box.vy = 0;
+                    }
+
+                    box.x += box.vx;
+                    box.y += box.vy;
+
+                   if (box.x <= 0) 
+                   {
+                        box.x = 0;
+                        box.vx = -box.vx * bounceForce;
+                    }
+                    if (box.x >= board.width - box.width) 
+                    {
+                        box.x = board.width - box.width;
+                        box.vx = -box.vx * bounceForce;
+                    }
+                    if (box.y <= 0) 
+                    {
+                        box.y = 0;
+                        box.vy = -box.vy * bounceForce;
+                    }
+                    if (box.y >= board.height - box.height) 
+                    {
+                        box.y = board.height - box.height;
+                        box.vy = -box.vy * bounceForce;
+                    }
+
                 }
-                if (dir == "up")
+
+                const draw = board.getContext ("2d");
+                function paint ()
                 {
-                    y -= velocity;
+                    draw.clearRect (0, 0, board.width, board.height);
+                    draw.drawImage (box.image, box.x, box.y, box.width, box.height);
                 }
-                if (dir == "down")
+                function loop ()
                 {
-                    y += velocity;
+                    movement();
+                    paint();
+                    requestAnimationFrame (loop);
                 }
-                picture.style.transform = `translate(${x}px, ${y}px)`;
-                requestAnimationFrame (function() {stop (dir)});
-            }
-        }
-        function set (s, dir)
-        {
-            if (dir == "right")
-                right = s;
-            else if (dir == "left")
-                left = s;
-            else if (dir == "up")
-                up = s;
-            else if (dir == "down")
-                down = s;
+                box.image.onload = () => 
+                {
+                    loop();
+                }
 
-            if (!right && !left && !up && !down)
-            {
-                velocity = 3;
-                if ((w_timer > 0) + (s_timer > 0) + (a_timer > 0) + (d_timer > 0) == 2)
-                    deacceleration = 0.05;
-                else
-                    deacceleration = 0.1;
-                if (w_timer > 0)
-                    stop ("up")
-                if (s_timer > 0)
-                    stop ("down")
-                if (a_timer > 0)
-                    stop ("left")
-                if (d_timer > 0)
-                    stop ("right")
             }
-        }
+            game();
+        </script>
+    </body>
 
-        function move ()
-        {
-            if (w_timer > 0)
-                w_timer--;
-            if (s_timer > 0)
-                s_timer--;
-            if (a_timer > 0)
-                a_timer--;
-            if (d_timer > 0)
-                d_timer--;
-
-            let speed = 4;
-            if (right)
-            {
-                x += speed;
-                d_timer = 4;
-                a_timer = 0;
-            }
-            if (left)
-            {
-                x -= speed;
-                a_timer = 4;
-                d_timer = 0;
-            }
-            if (up)
-            {
-                y -= speed;
-                w_timer = 4;
-                s_timer = 0;
-            }
-            if (down)
-            {
-                y += speed;
-                s_timer = 4;
-                w_timer = 0;
-            }
-            picture.style.transform = `translate(${x}px, ${y}px)`;
-            requestAnimationFrame (function() {move ()});
-        }
-        move();
-
-        document.addEventListener ("keydown", (event) => 
-        {
-            if (event.key == "ArrowRight" || event.key == "d" || event.key == "D")
-                document.getElementById ("right").onmousedown();
-            if (event.key == "ArrowLeft" || event.key == "a" || event.key == "A")
-                document.getElementById ("left").onmousedown();
-            if (event.key == "ArrowUp" || event.key == "w" || event.key == "W")
-                document.getElementById ("up").onmousedown();
-            if (event.key == "ArrowDown" || event.key == "s" || event.key == "S")
-                document.getElementById ("down").onmousedown();
-        })
-        document.addEventListener ("keyup", (event) => 
-        {
-            if (event.key == "ArrowRight" || event.key == "d" || event.key == "D")
-                document.getElementById ("right").onmouseup();
-            if (event.key == "ArrowLeft" || event.key == "a" || event.key == "A")
-                document.getElementById ("left").onmouseup();
-            if (event.key == "ArrowUp" || event.key == "w" || event.key == "W")
-                document.getElementById ("up").onmouseup();
-            if (event.key == "ArrowDown" || event.key == "s" || event.key == "S")
-                document.getElementById ("down").onmouseup();
-        })
-
-    </script>
-    </html>
+</html>
