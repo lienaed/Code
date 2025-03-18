@@ -17,9 +17,36 @@
         </style>
     </head>
 
-    <canvas id="Board"></canvas>
-
     <body>
+        <canvas id="Board"></canvas>
+
+        <input type = "radio" name = "Modes" id = "flat" checked>
+        <label for = "flat">Flat</label>
+        <input type = "radio" name = "Modes" id = "gravity">
+        <label for = "gravity">Gravity</label>
+
+        <style>
+            input[type="radio"] 
+            {
+                display: none; /* 隐藏 radio 按钮 */
+            }
+            label {
+                display: inline-block;
+                width: 100px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                margin: 5px;
+                border: 2px solid black;
+                cursor: pointer;
+                background-color: lightgray;
+            }
+            input[type="radio"]:checked + label {
+                background-color: yellow; /* 选中时变黄色 */
+            }
+        </style>
+
+
         <script>
             function game()
             {
@@ -48,9 +75,9 @@
                 document.addEventListener ("keydown", (event) => keys [event.key] = 1);
                 document.addEventListener ("keyup", (event) => keys [event.key] = 0);
 
-                function movement ()
+                function flat ()
                 {
-                    if (keys ["w"] || keys[" "])
+                                        if (keys ["w"] || keys[" "])
                         box.vy -= acceleration;
                     if (keys ["s"])
                         box.vy += acceleration;
@@ -71,28 +98,31 @@
                         box.vy = 0;
                     }
 
+                    if (box.x <= 0 || box.x >= board.width - box.width)
+                        box.vx = -box.vx * bounceForce;
+                    if (box.y <= 0 || box.y >= board.height - box.height)
+                        box.vy = -box.vy * bounceForce;
+                }
+                function movement ()
+                {
                     box.x += box.vx;
                     box.y += box.vy;
-
-                   if (box.x <= 0) 
-                   {
-                        box.x = 0;
-                        box.vx = -box.vx * bounceForce;
+                        
+                    if (box.x <= 0) 
+                    {
+                        box.x = 0;      
                     }
                     if (box.x >= board.width - box.width) 
                     {
                         box.x = board.width - box.width;
-                        box.vx = -box.vx * bounceForce;
                     }
                     if (box.y <= 0) 
                     {
                         box.y = 0;
-                        box.vy = -box.vy * bounceForce;
                     }
                     if (box.y >= board.height - box.height) 
                     {
                         box.y = board.height - box.height;
-                        box.vy = -box.vy * bounceForce;
                     }
 
                 }
@@ -105,6 +135,7 @@
                 }
                 function loop ()
                 {
+                    flat();
                     movement();
                     paint();
                     requestAnimationFrame (loop);
