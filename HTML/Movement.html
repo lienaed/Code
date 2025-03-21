@@ -119,25 +119,25 @@
         </div>
 
         <div id = "settingSelect">
-            <button id = "setting" class = "lab" style = "z-index: 2; position: absolute;"> Setting
-            <button id = "return" class = "lab" style = "z-index: 1; position: absolute;"> &#60
+            <button id = "setting" class = "lab" style = "z-index: 2; position: absolute;"> Setting </button>
+            <button id = "return" class = "lab" style = "z-index: 1; position: absolute;"> &#60 </button>
         </div>
 
         <div class = "menu">
             <label for = "setGravity"> Gravity: </label>
-            <input type = "number" id = setGravity style = "width: 160; height: 26;">
+            <input type = "number" id = setGravity value = 1.3 style = "width: 160; height: 26;">
             <label for = "setAcceleration"> Acceleration: </label>
-            <input type = "number" id = setAcceleration style = "width: 160; height: 26;">
+            <input type = "number" id = setAcceleration value = 0.4 style = "width: 160; height: 26;">
             <label for = "setFriction"> Friction: </label>
-            <input type = "number" id = setFriction style = "width: 160; height: 26;">
+            <input type = "number" id = setFriction value = 0.99 style = "width: 160; height: 26;">
             <label for = "setStaticFriction"> StaticFriction: </label>
-            <input type = "number" id = setStaticFriction style = "width: 160; height: 26;">
+            <input type = "number" id = setStaticFriction value = 0.2 style = "width: 160; height: 26;">
             <label for = "setMaxVelocity"> MaxVelocity: </label>
-            <input type = "number" id = setMaxVelocity style = "width: 160; height: 26;">
+            <input type = "number" id = setMaxVelocity value = 30 style = "width: 160; height: 26;">
             <label for = "setBounceForce"> BounceForce: </label>
-            <input type = "number" id = setBounceForce style = "width: 160; height: 26;">
+            <input type = "number" id = setBounceForce value = 1 style = "width: 160; height: 26;">
             <label for = "setJumpHeight"> JumpHeight: </label>
-            <input type = "number" id = setJumpHeight style = "width: 160; height: 26;">
+            <input type = "number" id = setJumpHeight value = 50 style = "width: 160; height: 26;">
             <button id = "apply" style = "margin-top: 5px; width: 50; height: 26;"> apply</button>
         </div>
 
@@ -155,7 +155,7 @@
                 var friction = 0.99;
                 var staticFriction = 0.2;
                 var bounceForce = 1;
-                var G = 1.3;
+                var gravityForce = 1.3;
                 var jumpA = 50;
 
                 //box
@@ -179,7 +179,6 @@
                 //Settings
                 var setting = document.getElementById ("setting");
                 var returnButton = document.getElementById ("return");
-                var menu = document.querySelector (".menu");
                 setting.addEventListener ("click", function ()
                 {
                     setting.style.zIndex = "1";
@@ -199,18 +198,30 @@
                     else
                         menu.style.visibility = "hidden";
                 }
+               
+                var menu = document.querySelector (".menu");
+                var apply = document.getElementById ("apply");
 
-
+                //Menu
+                apply.addEventListener ("click", function()
+                {
+                    gravityForce = parseFloat (document.getElementById ("setGravity").value);
+                    maxVelocity = parseFloat (document.getElementById ("setMaxVelocity").value);
+                    acceleration = parseFloat (document.getElementById ("setAcceleration").value);
+                    friction = parseFloat (document.getElementById ("setFriction").value);
+                    staticFriction = parseFloat (document.getElementById ("setStaticFriction").value);
+                    jumpA = parseFloat (document.getElementById ("setJumpHeight").value);
+                    bounceForce = parseFloat (document.getElementById ("setBounceForce").value);
+                })
 
                 //Gravity
                 function gravity ()
                 {
-                    box.vy += G;
+                    box.vy += gravityForce;
                     if (keys [" "] && box.y == board.height - box.height)
                         box.vy -= jumpA;
                     keys ["w"] = 0;
                     keys ["s"] = 0;
-                    acceleration = 0.65;
                 }
 
 
@@ -308,9 +319,7 @@
 
                     if (modeG == "gravity")
                         gravity();
-                    else
-                        acceleration = 0.4;
-                    
+                        
                     flat();
                     movement();
                     paint();
