@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <style>
             body 
             {
@@ -29,28 +30,15 @@
                 font-size: 19;
                 width: 100px;
                 height: 30px;
-                line-height: 30px;
+                line-height: 25px;
                 text-align: center;
                 margin: 5px;
                 border: 2px solid black;
                 cursor: pointer;
                 background-color: lightgray;
                 z-index: 2;
-            }
-            .lab2
-            {
-                position: absolute;
-                display: inline-block;
-                font-size: 19;
-                width: 100px;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                margin: 5px;
-                border: 2px solid black;
-                cursor: pointer;
-                background-color: lightgray;
-                z-index: 2;
+                padding: 0;
+                box-sizing: border-box;
             }
             
             input[type="radio"]:checked + label 
@@ -84,12 +72,16 @@
 
             #settingSelect
             {
-                margin: 10px;
+                z-index: 100;
+                padding: 10px;
+                border-radius: 5px; 
+                gap: 10px;
                 position: absolute;
                 top: 100px;
                 left: 10px;
-                width: 100px;
-                height: 30px;
+                width: 100;
+                height: 30;
+
             }   
 
             .menu
@@ -99,12 +91,12 @@
                 display: block;
                 padding: 5px;
                 margin: 15px;
-                width: 130;
-                height: 100;
+                width: 160;
+                height: 370;
                 top: 150px;
                 left: 10px;
                 opacity: 1;
-                visibility: visible;
+                visibility: hidden;
             }
         </style>
     </head>
@@ -127,17 +119,26 @@
         </div>
 
         <div id = "settingSelect">
-            <input type = "button" id = "setting">
-            <label for = "setting" class = "lab2" style = "z-index: 2;"> Setting</label>
-            <input type = "button" id = "return">
-            <label for = "return" class = "lab2" style = "z-index: 1;"> &#60 </label>
+            <button id = "setting" class = "lab" style = "z-index: 2; position: absolute;"> Setting
+            <button id = "return" class = "lab" style = "z-index: 1; position: absolute;"> &#60
         </div>
-，
+
         <div class = "menu">
-            <label for = "gravity"> Gravity: </label>
-            <input type = "number" id = gravity style = "width: 130; height: 26;">
-            <label for = "acceleration"> Acceleration: </label>
-            <input type = "number" id = acceleration style = "width: 130; height: 26;">
+            <label for = "setGravity"> Gravity: </label>
+            <input type = "number" id = setGravity style = "width: 160; height: 26;">
+            <label for = "setAcceleration"> Acceleration: </label>
+            <input type = "number" id = setAcceleration style = "width: 160; height: 26;">
+            <label for = "setFriction"> Friction: </label>
+            <input type = "number" id = setFriction style = "width: 160; height: 26;">
+            <label for = "setStaticFriction"> StaticFriction: </label>
+            <input type = "number" id = setStaticFriction style = "width: 160; height: 26;">
+            <label for = "setMaxVelocity"> MaxVelocity: </label>
+            <input type = "number" id = setMaxVelocity style = "width: 160; height: 26;">
+            <label for = "setBounceForce"> BounceForce: </label>
+            <input type = "number" id = setBounceForce style = "width: 160; height: 26;">
+            <label for = "setJumpHeight"> JumpHeight: </label>
+            <input type = "number" id = setJumpHeight style = "width: 160; height: 26;">
+            <button id = "apply" style = "margin-top: 5px; width: 50; height: 26;"> apply</button>
         </div>
 
 
@@ -145,17 +146,19 @@
         <script>
             function game()
             {
+                //Variable
                 const board = document.getElementById ("Board");
                 board.width = window.innerWidth;
                 board.height = window.innerHeight;
-                const maxVelocity = 30;
+                var maxVelocity = 30;
                 var acceleration = 0.4;
-                const friction = 0.99;
-                const staticFriction = 0.2;
-                const bounceForce = 1;
-                const G = 1.3;
-                const jumpA = 50;
+                var friction = 0.99;
+                var staticFriction = 0.2;
+                var bounceForce = 1;
+                var G = 1.3;
+                var jumpA = 50;
 
+                //box
                 const box = 
                 {
                     width: 100,
@@ -173,23 +176,33 @@
                 document.addEventListener ("keyup", (event) => keys [event.key] = 0);
 
 
-                var setting = document.querySelector ("label[for='setting']");
-                var returnButton = document.querySelector ("label[for='return']");
-                var settings = document.querySelector (".menu");
+                //Settings
+                var setting = document.getElementById ("setting");
+                var returnButton = document.getElementById ("return");
+                var menu = document.querySelector (".menu");
                 setting.addEventListener ("click", function ()
                 {
                     setting.style.zIndex = "1";
                     returnButton.style.zIndex = "2";
+                    setMenu (1);
                 })
                 returnButton.addEventListener ("click", function ()
                 {
                     setting.style.zIndex = "2";
                     returnButton.style.zIndex = "1"; 
+                    setMenu (0)
                 })
+                function setMenu(state)
+                {
+                    if (state)
+                        menu.style.visibility = "visible";
+                    else
+                        menu.style.visibility = "hidden";
+                }
 
 
 
-
+                //Gravity
                 function gravity ()
                 {
                     box.vy += G;
@@ -200,6 +213,8 @@
                     acceleration = 0.65;
                 }
 
+
+                //Flat Surface
                 function flat ()
                 {
                     if (keys ["w"])
@@ -222,10 +237,10 @@
                         box.vx = 0;
                         box.vy = 0;
                     }
-
-
                 }
 
+
+                //Bounce
                 function bounce ()
                 {
                     if (box.x <= 0 || box.x >= board.width - box.width)
@@ -241,6 +256,8 @@
                         box.vy = 0;
                 }
 
+
+                //Moving
                 function movement ()
                 {
                     box.x += box.vx;
@@ -266,6 +283,7 @@
                 }
 
 
+                //Draw
                 const draw = board.getContext ("2d");
                 function paint ()
                 {
@@ -277,10 +295,11 @@
                 var modeB = document.querySelector ("input[name='B']:checked").id
                 
 
+                //Loop
                 function loop ()
                 {
-                    var modeG = document.querySelector ("input[name='G']:checked").id
-                    var modeB = document.querySelector ("input[name='B']:checked").id
+                    modeG = document.querySelector ("input[name='G']:checked").id
+                    modeB = document.querySelector ("input[name='B']:checked").id
 
                     if (modeB == "enableBounce")
                         bounce();

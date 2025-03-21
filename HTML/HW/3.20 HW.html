@@ -26,7 +26,7 @@
             var BMI = weight / height**2;
             var status = "";
             BMI *= 10;
-            Math.round (BMI);
+            BMI = Math.round (BMI);
             BMI /= 10;
             if (BMI < 18.5)
                 status = "Underweight";

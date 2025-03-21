@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ball Game</title>
+    <style>
+        /* Add some basic styling to the game */
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="400" height="300" style="border:1px solid #000;"></canvas>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        // Ball properties
+
+        //draw function
+        function draw() {
+            //draw a ball
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(35, 173, 72)"
+
+        }
+        //update function
+        function update() {
+            //make the ball move
+        }
+        //render function
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            draw();
+            update();
+        }
+        // Main game loop
+        setInterval(render, 16);
+    </script>
+
+</body>
+
+</html>
