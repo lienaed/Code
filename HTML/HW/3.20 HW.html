@@ -1,0 +1,48 @@
+<html>
+    <body>
+        <script>
+            //BMI = bw / h^2
+            var weight;
+            var height;
+            function input()
+            {
+                weight = prompt ("Input Weight(KG):");
+                if (weight <= 0)
+                {
+                    window.alert ("Enter a positive value.")
+                    input();
+                    return;
+                }
+                height = prompt ("Input Height(M)");
+                if (weight <= 0)
+                {
+                    window.alert ("Enter a positive value.")
+                    input();
+                    return;
+                }
+            }
+            input();
+
+            var BMI = weight / height**2;
+            var status = "";
+            BMI *= 10;
+            Math.round (BMI);
+            BMI /= 10;
+            if (BMI < 18.5)
+                status = "Underweight";
+            else if (BMI <= 24.9)
+                status = "Normal Weight";
+            else if (BMI <= 29.9)
+                status = "Overweight";
+            else if (BMI <= 34.9)
+                status = "Obese class I";
+            else if (BMI <= 39.9)
+                status = "Obese class II";
+            else if (BMI >= 40.0)
+                status = "Obese class III";
+
+            document.write ("BMI: ", BMI, "<br>");
+            document.write ("Classification: ", status);
+        </script>
+    </body>
+</html>

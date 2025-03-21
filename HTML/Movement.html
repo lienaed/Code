@@ -16,21 +16,43 @@
             input[type="radio"] 
             {
                 display: none; 
+            }
+            
+            input[type = "button"]
+            {
+                display: none;
+            }
+
+            .lab 
+            {
+                display: inline-block;
+                font-size: 19;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                margin: 5px;
+                border: 2px solid black;
+                cursor: pointer;
+                background-color: lightgray;
                 z-index: 2;
             }
-            label 
+            .lab2
             {
-            display: inline-block;
-            width: 100px;
-            height: 30px;
-            line-height: 30px;
-            text-align: center;
-            margin: 5px;
-            border: 2px solid black;
-            cursor: pointer;
-            background-color: lightgray;
-            z-index: 2;
+                position: absolute;
+                display: inline-block;
+                font-size: 19;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                margin: 5px;
+                border: 2px solid black;
+                cursor: pointer;
+                background-color: lightgray;
+                z-index: 2;
             }
+            
             input[type="radio"]:checked + label 
             {
                 background-color: yellow; 
@@ -43,7 +65,6 @@
                 width: 300;
                 height: 100;
                 z-index: 100;
-                background: rgba(255, 255, 255, 0);
                 padding: 10px;
                 border-radius: 5px; 
                 gap: 10px;
@@ -57,8 +78,33 @@
 
             #bounceSelect
             {
-                top: 50px;
+                top: 55px;
                 left: 10px;
+            }
+
+            #settingSelect
+            {
+                margin: 10px;
+                position: absolute;
+                top: 100px;
+                left: 10px;
+                width: 100px;
+                height: 30px;
+            }   
+
+            .menu
+            {
+                position: absolute;
+                background-color: rgb(151, 151, 151);
+                display: block;
+                padding: 5px;
+                margin: 15px;
+                width: 130;
+                height: 100;
+                top: 150px;
+                left: 10px;
+                opacity: 1;
+                visibility: visible;
             }
         </style>
     </head>
@@ -68,17 +114,32 @@
 
         <div class = "button-container" id = "modeSelect">
             <input type = "radio" name = "G" id = "flat" checked>
-            <label for = "flat">Flat</label>
+            <label for = "flat" class = "lab">Flat</label>
             <input type = "radio" name = "G" id = "gravity">
-            <label for = "gravity">Gravity</label>
+            <label for = "gravity" class = "lab">Gravity</label>
         </div>
 
         <div class = "button-container" id = "bounceSelect">
             <input type = "radio" name = "B" id = "enableBounce" checked>
-            <label for = "enableBounce">Bounce</label>
+            <label for = "enableBounce" class = "lab">Bounce</label>
             <input type = "radio" name = "B" id = "disableBounce">
-            <label for = "disableBounce">NoBounce</label>
+            <label for = "disableBounce" class = "lab">NoBounce</label>
         </div>
+
+        <div id = "settingSelect">
+            <input type = "button" id = "setting">
+            <label for = "setting" class = "lab2" style = "z-index: 2;"> Setting</label>
+            <input type = "button" id = "return">
+            <label for = "return" class = "lab2" style = "z-index: 1;"> &#60 </label>
+        </div>
+，
+        <div class = "menu">
+            <label for = "gravity"> Gravity: </label>
+            <input type = "number" id = gravity style = "width: 130; height: 26;">
+            <label for = "acceleration"> Acceleration: </label>
+            <input type = "number" id = acceleration style = "width: 130; height: 26;">
+        </div>
+
 
 
         <script>
@@ -110,6 +171,24 @@
                 const keys = {};
                 document.addEventListener ("keydown", (event) => keys [event.key] = 1);
                 document.addEventListener ("keyup", (event) => keys [event.key] = 0);
+
+
+                var setting = document.querySelector ("label[for='setting']");
+                var returnButton = document.querySelector ("label[for='return']");
+                var settings = document.querySelector (".menu");
+                setting.addEventListener ("click", function ()
+                {
+                    setting.style.zIndex = "1";
+                    returnButton.style.zIndex = "2";
+                })
+                returnButton.addEventListener ("click", function ()
+                {
+                    setting.style.zIndex = "2";
+                    returnButton.style.zIndex = "1"; 
+                })
+
+
+
 
                 function gravity ()
                 {
@@ -186,6 +265,7 @@
 
                 }
 
+
                 const draw = board.getContext ("2d");
                 function paint ()
                 {
@@ -196,6 +276,7 @@
                 var modeG = document.querySelector ("input[name='G']:checked").id
                 var modeB = document.querySelector ("input[name='B']:checked").id
                 
+
                 function loop ()
                 {
                     var modeG = document.querySelector ("input[name='G']:checked").id
