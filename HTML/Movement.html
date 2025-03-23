@@ -214,6 +214,11 @@
                     bounceForce = parseFloat (document.getElementById ("setBounceForce").value);
                 })
 
+
+                var modeG = document.querySelector ("input[name='G']:checked").id
+                var modeB = document.querySelector ("input[name='B']:checked").id
+
+
                 //Gravity
                 function gravity ()
                 {
@@ -238,7 +243,8 @@
                         box.vx += acceleration;
                     
                     box.vx = Math.max (-maxVelocity, Math.min (maxVelocity, box.vx));
-                    box.vy = Math.max (-maxVelocity, Math.min (maxVelocity, box.vy));
+                    if (modeG != "gravity")
+                        box.vy = Math.max (-maxVelocity, Math.min (maxVelocity, box.vy));
                     
                     box.vx *= friction;
                     box.vy *= friction;
@@ -301,9 +307,6 @@
                     draw.clearRect (0, 0, board.width, board.height);
                     draw.drawImage (box.image, box.x, box.y, box.width, box.height);
                 }
-
-                var modeG = document.querySelector ("input[name='G']:checked").id
-                var modeB = document.querySelector ("input[name='B']:checked").id
                 
 
                 //Loop
