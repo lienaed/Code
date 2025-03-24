@@ -10,9 +10,9 @@ struct roads
 	roads(int u, int l, int c, int act) : end(u), l(l), c(c), act(act){};
 };
 
-vector <vector <int>> parent;
-vector < vector <roads>> map;
-vector <vector <int>> length;
+vector <vector <int> > parent;
+vector < vector <roads> > map;
+vector <vector <int> > length;
 vector <bool> enable;
 int n, m;
 int cost;
