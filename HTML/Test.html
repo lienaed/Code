@@ -1,59 +1,29 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .menu {
-            background: #f4f4f4;
-            padding: 10px;
-            width: 200px;
-            border-radius: 5px;
-        }
-        .settings {
-            display: none;
-            margin-top: 10px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .settings.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-</head>
-<body>
-    <div class="menu">
-        <button onclick="toggleSettings()">设置</button>
-        <div class="settings" id="settings">
-            <label>选项1: <input type="text"></label><br>
-            <label>选项2: <input type="number"></label><br>
-            <label>选项3: <input type="checkbox"></label>
-        </div>
-    </div>
-
-    <script>
-        function toggleSettings() {
-            var settings = document.getElementById("settings");
-            if (settings.classList.contains("show")) {
-                settings.style.opacity = "0";
-                settings.style.transform = "translateY(-10px)";
-                setTimeout(() => {
-                    settings.classList.remove("show");
-                    settings.style.display = "none";
-                }, 300);
-            } else {
-                settings.style.display = "block";
-                setTimeout(() => {
-                    settings.classList.add("show");
-                    settings.style.opacity = "1";
-                    settings.style.transform = "translateY(0)";
-                }, 10);
+<html>
+    <head>
+        <style>
+            body
+            {
+                margin: 0;
+                overflow: hidden;
+                background-color: #d4d4d4;
             }
-        }
-    </script>
-</body>
+            canvas
+            {
+                display: block;
+                z-index: 1;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <canvas id = board></canvas>
+
+        <script>
+            var board = document.getElementById ("board");
+            board.style.width = window.innerWidth;
+            board.style.height = window.innerHeight;
+        </script>
+    </body>
 </html>

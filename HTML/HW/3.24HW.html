@@ -1,0 +1,20 @@
+<html>
+    <body>
+        <script>
+            var award = parseFloat(prompt ("Award:"));
+            var average = parseFloat (prompt ("Average")) >= 90 ? 1 : 0;
+            function offer (average, award)
+            {
+                if (average && award)
+                    document.write ("You are accepted");
+                else if (average && !award)
+                    document.write ("Sorry, you need an award");
+                else if (!average && award)
+                    document.write ("Sorry, your average should be greater than 90");
+                else
+                    document.write ("Sorry, you need an award and your average should be greater than 90");
+            }
+            offer (average, award);
+        </script>
+    </body>
+</html>
