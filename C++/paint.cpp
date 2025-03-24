@@ -81,7 +81,7 @@ int main() {
         if (color[u] != color[v]) {
             // 若 u, v 颜色不同，则该边不影响二分图性质，可保持灰色
             edgeColor[i] = 'G';
-       2 } else {
+        } else {
             // 需要检查是否存在交替路径
             vector<bool> visited(n + 1, false);
             if (hasAlternatingPath(u, v, visited)) {

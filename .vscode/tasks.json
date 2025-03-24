@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build SDL2 Program",
+      "label": "Build SDL2 Program (Mac)",
       "type": "shell",
       "command": "clang++",
       "args": [
@@ -21,8 +21,29 @@
       },
       "group": {
         "kind": "build",
-        "isDefault": true
       },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Build SDL2 Program (Windows)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "${file}",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        "-std=c++17",
+        "-g",
+        "-IC:/SDL2/include",
+        "-LC:/SDL2/lib",
+        "-lmingw32",
+        "-lSDL2main",
+        "-lSDL2"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": "build",
       "problemMatcher": ["$gcc"]
     }
   ]

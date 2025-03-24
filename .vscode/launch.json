@@ -12,7 +12,7 @@
       "environment": [],
       "externalConsole": true,
       "MIMode": "lldb",
-      "preLaunchTask": "Build SDL2 Program",
+      "preLaunchTask": "Build SDL2 Program (Mac)",
       "setupCommands": [
         {
           "description": "为 LLDB 启用 pretty-printing",
@@ -20,6 +20,20 @@
           "ignoreFailures": true
         }
       ]
+    },
+    {
+      "name": "调试 SDL2 程序（Windows）",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb.exe",
+      "preLaunchTask": "Build SDL2 Program (Windows)"
     }
+    
   ]
 }
