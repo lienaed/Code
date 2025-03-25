@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ball Game</title>
+    <style>
+        /* Add some basic styling to the game */
+        body 
+        {
+            margin: 0;
+            overflow: hidden;
+            background-color: #ddd;
+        }
+
+        canvas 
+        {
+            border: 1px solid black;
+            display: block;
+            z-index: 1;
+        }
+
+        input[type="radio"] 
+        {
+            display: none; 
+        }
+        
+        input[type = "button"]
+        {
+            display: none;
+        }
+
+        .lab 
+        {
+            display: inline-block;
+            font-size: 19;
+            width: 100px;
+            height: 30px;
+            line-height: 25px;
+            text-align: center;
+            margin: 5px;
+            border: 2px solid black;
+            cursor: pointer;
+            background-color: lightgray;
+            z-index: 2;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        input[type="radio"]:checked + label 
+        {
+            background-color: yellow; 
+        }
+
+        .button-container 
+        {
+            display: flex;
+            position: absolute;
+            width: 300;
+            height: 100;
+            z-index: 100;
+            padding: 10px;
+            border-radius: 5px; 
+            gap: 10px;
+        }
+
+        #modeSelect
+        {
+            top: 10px;
+            left: 10px;
+        }
+
+        #bounceSelect
+        {
+            top: 55px;
+            left: 10px;
+        }
+
+        #settingSelect
+        {
+            z-index: 100;
+            padding: 10px;
+            border-radius: 5px; 
+            gap: 10px;
+            position: absolute;
+            top: 100px;
+            left: 10px;
+            width: 100;
+            height: 30;
+
+        }   
+
+        .menu
+        {
+            position: absolute;
+            background-color: rgb(151, 151, 151);
+            display: block;
+            padding: 5px;
+            margin: 15px;
+            width: 160;
+            height: 420;
+            top: 150px;
+            left: 10px;
+            opacity: 1;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" style="border:1px solid #000;"></canvas>
+    <div class = "button-container" id = "modeSelect">
+        <input type = "radio" name = "G" id = "flat" checked>
+        <label for = "flat" class = "lab">Flat</label>
+        <input type = "radio" name = "G" id = "gravity">
+        <label for = "gravity" class = "lab">Gravity</label>
+    </div>
+
+    <div class = "button-container" id = "bounceSelect">
+        <input type = "radio" name = "B" id = "enableBounce" checked>
+        <label for = "enableBounce" class = "lab">Bounce</label>
+        <input type = "radio" name = "B" id = "disableBounce">
+        <label for = "disableBounce" class = "lab">NoBounce</label>
+    </div>
+
+    <div id = "settingSelect">
+        <button id = "setting" class = "lab" style = "z-index: 2; position: absolute;"> Setting </button>
+        <button id = "return" class = "lab" style = "z-index: 1; position: absolute;"> &#60 </button>
+    </div>
+
+    <div class = "menu">
+        <label for = "setGravity"> Gravity: </label>
+        <input type = "number" id = setGravity value = 1.3 style = "width: 160; height: 26;">
+        <label for = "setAcceleration"> Acceleration: </label>
+        <input type = "number" id = setAcceleration value = 0.4 style = "width: 160; height: 26;">
+        <label for = "setFriction"> Friction: </label>
+        <input type = "number" id = setFriction value = 0.99 style = "width: 160; height: 26;">
+        <label for = "setStaticFriction"> StaticFriction: </label>
+        <input type = "number" id = setStaticFriction value = 0.2 style = "width: 160; height: 26;">
+        <label for = "setMaxVelocity"> MaxVelocity: </label>
+        <input type = "number" id = setMaxVelocity value = 30 style = "width: 160; height: 26;">
+        <label for = "setBounceForce"> BounceForce: </label>
+        <input type = "number" id = setBounceForce value = 1 style = "width: 160; height: 26;">
+        <label for = "setJumpHeight"> JumpHeight: </label>
+        <input type = "number" id = setJumpHeight value = 20 style = "width: 160; height: 26;">
+        <label for = "setBuffer"> JumpBuffer: </label>
+        <input type = "number" id = setBuffer value = 5 style = "width: 160; height: 26;">
+        <button id = "apply" style = "margin-top: 5px; width: 50; height: 26;"> apply</button>
+    </div>
+
+
+    <script>
+        //Variable
+        var canvas = document.getElementById ("myCanvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var maxVelocity = 30;
+        var acceleration = 0.4;
+        var friction = 0.99;
+        var staticFriction = 0.2;
+        var bounceForce = 1;
+        var gravityForce = 1.3;
+        var jumpHeight = 20;
+        var enableJump;
+        var setBuffer = 5;
+        var jumpBuffer = 0;
+
+        //box
+        const box = 
+        {
+            width: 100,
+            height: 100,
+            x: canvas.width / 2 - 50,
+            y: canvas.height / 2 - 50,
+            vx: 0,
+            vy: 0,
+            image: new Image()
+        }
+        box.image.src = "https://lienaed.github.io/Code/Images/black.jpg";
+
+        const keys = {};
+        document.addEventListener ("keydown", (event) => keys [event.key] = 1);
+        document.addEventListener ("keyup", (event) => keys [event.key] = 0);
+
+        //Settings
+        var setting = document.getElementById ("setting");
+        var returnButton = document.getElementById ("return");
+        setting.addEventListener ("click", function ()
+        {
+            setting.style.zIndex = "1";
+            returnButton.style.zIndex = "2";
+            setMenu (1);
+        })
+        returnButton.addEventListener ("click", function ()
+        {
+            setting.style.zIndex = "2";
+            returnButton.style.zIndex = "1"; 
+            setMenu (0)
+        })
+        function setMenu(state)
+        {
+            if (state)
+                menu.style.visibility = "visible";
+            else
+                menu.style.visibility = "hidden";
+        }
+        
+        var menu = document.querySelector (".menu");
+        var apply = document.getElementById ("apply");
+
+        //Menu
+        apply.addEventListener ("click", function()
+        {
+            gravityForce = parseFloat (document.getElementById ("setGravity").value);
+            maxVelocity = parseFloat (document.getElementById ("setMaxVelocity").value);
+            acceleration = parseFloat (document.getElementById ("setAcceleration").value);
+            friction = parseFloat (document.getElementById ("setFriction").value);
+            staticFriction = parseFloat (document.getElementById ("setStaticFriction").value);
+            jumpHeight = parseFloat (document.getElementById ("setJumpHeight").value);
+            bounceForce = parseFloat (document.getElementById ("setBounceForce").value);
+            setBuffer = parseFloat (document.getElementById ("setBuffer").value);
+        })
+
+        var modeG = document.querySelector ("input[name='G']:checked").id
+        var modeB = document.querySelector ("input[name='B']:checked").id
+
+        // Ball properties
+        function detectJump()
+        {
+            if (keys[" "])
+                jumpBuffer = setBuffer;
+            jumpBuffer--;
+
+            if (jumpBuffer > 0)
+                return 1;
+            else
+                return 0;
+        }
+
+
+        //Gravity
+        function gravity ()
+        {
+            box.vy += gravityForce;
+            if (enableJump && box.y == canvas.height - box.height)
+                box.vy -= jumpHeight;
+            keys ["w"] = 0;
+            keys ["s"] = 0;
+        }
+
+
+        //Flat Surface
+        function flat ()
+        {
+            if (keys ["w"])
+                box.vy -= acceleration;
+            if (keys ["s"])
+                box.vy += acceleration;
+            if (keys ["a"])
+                box.vx -= acceleration;
+            if (keys ["d"])
+                box.vx += acceleration;
+            
+            box.vx = Math.max (-maxVelocity, Math.min (maxVelocity, box.vx));
+            if (modeG != "gravity")
+                box.vy = Math.max (-maxVelocity, Math.min (maxVelocity, box.vy));
+            
+            box.vx *= friction;
+            box.vy *= friction;
+
+            if (Math.sqrt ((Math.abs (box.vx))**2 + (Math.abs (box.vy))**2) < staticFriction)
+            {
+                box.vx = 0;
+                box.vy = 0;
+            }
+        }
+
+
+        //Bounce
+        function bounce ()
+        {
+            if (box.x <= 0 || box.x >= canvas.width - box.width)
+                box.vx = -box.vx * bounceForce;
+            if (box.y <= 0 || box.y >= canvas.height - box.height)
+                box.vy = -box.vy * bounceForce;
+        }
+        function bounceless ()
+        {
+            if (box.x <= 0 || box.x >= canvas.width - box.width)
+                box.vx = 0;
+            if (box.y <= 0 || box.y >= canvas.height - box.height)
+                box.vy = 0;
+        }
+
+
+        //Moving
+        function movement ()
+        {
+            box.x += box.vx;
+            box.y += box.vy;
+                
+            if (box.x <= 0) 
+            {
+                box.x = 0;
+            }
+            if (box.x >= canvas.width - box.width) 
+            {
+                box.x = canvas.width - box.width;
+            }
+            if (box.y <= 0) 
+            {
+                box.y = 0;
+            }
+            if (box.y >= canvas.height - box.height) 
+            {
+                box.y = canvas.height - box.height;
+            }
+        }
+
+        //draw function
+        function draw() {
+            //draw a ball
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(35, 173, 72)"
+            ctx.drawImage (box.image, box.x, box.y, box.width, box.height);
+
+        }
+
+        //update function
+        function update() {
+            //make the ball move
+            modeG = document.querySelector ("input[name='G']:checked").id
+            modeB = document.querySelector ("input[name='B']:checked").id
+
+            if (modeB == "enableBounce")
+                bounce();
+            else
+                bounceless();
+
+            if (modeG == "gravity")
+            {
+                enableJump = detectJump();
+                gravity();
+            }
+
+            flat();
+            movement();
+        }
+        //render function
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            update();
+            draw();
+        }
+        // Main game loop
+        box.image.onload = () =>
+        {
+            setInterval(render, 16);
+        }
+    </script>
+
+</body>
+
+</html>

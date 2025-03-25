@@ -13,5 +13,6 @@
         "memory": "cpp",
         "string": "cpp",
         "unordered_map": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/Users/fengyibo/program/Code/SDL2"
 }

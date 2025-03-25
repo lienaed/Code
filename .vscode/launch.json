@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "调试 SDL2 程序",
+      "name": "Debug SDL2 program (Mac)",
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "name": "调试 SDL2 程序（Windows）",
+      "name": "Debug SDL2 program (Windows)",
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",

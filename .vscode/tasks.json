@@ -1,50 +1,69 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Build SDL2 Program (Mac)",
-      "type": "shell",
-      "command": "clang++",
-      "args": [
-        "-v",
-        "-g0",
-        "${file}",
-        "-o",
-        "${fileDirname}/${fileBasenameNoExtension}",
-        "-I/opt/homebrew/include",
-        "-I/opt/homebrew/include/SDL2",
-        "-L/opt/homebrew/lib",
-        "-lSDL2"
-      ],
-      "options": {
-        "cwd": "${fileDirname}"
-      },
-      "group": {
-        "kind": "build",
-      },
-      "problemMatcher": ["$gcc"]
-    },
-    {
-      "label": "Build SDL2 Program (Windows)",
-      "type": "shell",
-      "command": "g++",
-      "args": [
-        "${file}",
-        "-o",
-        "${fileDirname}\\${fileBasenameNoExtension}.exe",
-        "-std=c++17",
-        "-g",
-        "-IC:/SDL2/include",
-        "-LC:/SDL2/lib",
-        "-lmingw32",
-        "-lSDL2main",
-        "-lSDL2"
-      ],
-      "options": {
-        "cwd": "${fileDirname}"
-      },
-      "group": "build",
-      "problemMatcher": ["$gcc"]
-    }
-  ]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build SDL2 Program (Mac)",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "-v",
+                "-g0",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I/opt/homebrew/include",
+                "-I/opt/homebrew/include/SDL2",
+                "-L/opt/homebrew/lib",
+                "-lSDL2"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build SDL2 Program (Windows)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-std=c++17",
+                "-g",
+                "-IC:/SDL2/include",
+                "-LC:/SDL2/lib",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Commit changes",
+            "type": "shell",
+            "command": "${workspaceFolder}/upload.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
 }
