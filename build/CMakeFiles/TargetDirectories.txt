@@ -1,0 +1,3 @@
+/Users/fengyibo/program/Code/build/CMakeFiles/game.dir
+/Users/fengyibo/program/Code/build/CMakeFiles/edit_cache.dir
+/Users/fengyibo/program/Code/build/CMakeFiles/rebuild_cache.dir
