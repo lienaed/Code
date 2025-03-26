@@ -2,6 +2,7 @@
 #define Game_hpp
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 class Game
@@ -22,7 +23,10 @@ class Game
         }
 
     private:
+        int count = 0;
         bool isRunning;
+        int moveState = 1;
+        int winW;
         SDL_Window *window;
         SDL_Renderer *renderer;
 };

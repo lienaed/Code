@@ -72,24 +72,10 @@ include CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/codegen:
 .PHONY : CMakeFiles/game.dir/codegen
 
-CMakeFiles/game.dir/1.cpp.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/1.cpp.o: /Users/fengyibo/program/Code/SDL2/1.cpp
-CMakeFiles/game.dir/1.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/game.dir/1.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/1.cpp.o -MF CMakeFiles/game.dir/1.cpp.o.d -o CMakeFiles/game.dir/1.cpp.o -c /Users/fengyibo/program/Code/SDL2/1.cpp
-
-CMakeFiles/game.dir/1.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/1.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/1.cpp > CMakeFiles/game.dir/1.cpp.i
-
-CMakeFiles/game.dir/1.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/1.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/1.cpp -o CMakeFiles/game.dir/1.cpp.s
-
 CMakeFiles/game.dir/Game.cpp.o: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/Game.cpp.o: /Users/fengyibo/program/Code/SDL2/Game.cpp
 CMakeFiles/game.dir/Game.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/Game.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/game.dir/Game.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/Game.cpp.o -MF CMakeFiles/game.dir/Game.cpp.o.d -o CMakeFiles/game.dir/Game.cpp.o -c /Users/fengyibo/program/Code/SDL2/Game.cpp
 
 CMakeFiles/game.dir/Game.cpp.i: cmake_force
@@ -100,16 +86,30 @@ CMakeFiles/game.dir/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/Game.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/Game.cpp -o CMakeFiles/game.dir/Game.cpp.s
 
+CMakeFiles/game.dir/Test.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/Test.cpp.o: /Users/fengyibo/program/Code/SDL2/Test.cpp
+CMakeFiles/game.dir/Test.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/Test.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/Test.cpp.o -MF CMakeFiles/game.dir/Test.cpp.o.d -o CMakeFiles/game.dir/Test.cpp.o -c /Users/fengyibo/program/Code/SDL2/Test.cpp
+
+CMakeFiles/game.dir/Test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/Test.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/Test.cpp > CMakeFiles/game.dir/Test.cpp.i
+
+CMakeFiles/game.dir/Test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/Test.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/Test.cpp -o CMakeFiles/game.dir/Test.cpp.s
+
 # Object files for target game
 game_OBJECTS = \
-"CMakeFiles/game.dir/1.cpp.o" \
-"CMakeFiles/game.dir/Game.cpp.o"
+"CMakeFiles/game.dir/Game.cpp.o" \
+"CMakeFiles/game.dir/Test.cpp.o"
 
 # External object files for target game
 game_EXTERNAL_OBJECTS =
 
-game: CMakeFiles/game.dir/1.cpp.o
 game: CMakeFiles/game.dir/Game.cpp.o
+game: CMakeFiles/game.dir/Test.cpp.o
 game: CMakeFiles/game.dir/build.make
 game: CMakeFiles/game.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable game"

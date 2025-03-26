@@ -9,5 +9,5 @@ link_directories(/opt/homebrew/lib)
 file(GLOB SOURCES "*.cpp")
 
 add_executable(game ${SOURCES})
-target_link_libraries(game SDL2)
+target_link_libraries(game SDL2 SDL2_image)
 

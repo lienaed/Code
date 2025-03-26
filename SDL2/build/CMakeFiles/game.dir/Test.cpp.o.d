@@ -1,5 +1,5 @@
-CMakeFiles/game.dir/Game.cpp.o: \
-  /Users/fengyibo/program/Code/SDL2/Game.cpp \
+CMakeFiles/game.dir/Test.cpp.o: \
+  /Users/fengyibo/program/Code/SDL2/Test.cpp \
   /Users/fengyibo/program/Code/SDL2/Game.hpp \
   /opt/homebrew/include/SDL2/SDL.h /opt/homebrew/include/SDL2/SDL_main.h \
   /opt/homebrew/include/SDL2/SDL_stdinc.h \
