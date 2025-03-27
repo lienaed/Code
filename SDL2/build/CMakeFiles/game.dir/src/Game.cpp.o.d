@@ -1,5 +1,6 @@
-CMakeFiles/game.dir/1.cpp.o: /Users/fengyibo/program/code/SDL2/1.cpp \
-  /Users/fengyibo/program/code/SDL2/Game.hpp \
+CMakeFiles/game.dir/src/Game.cpp.o: \
+  /Users/fengyibo/program/code/SDL2/src/Game.cpp \
+  /Users/fengyibo/program/code/SDL2/src/Game.hpp \
   /opt/homebrew/include/SDL2/SDL.h /opt/homebrew/include/SDL2/SDL_main.h \
   /opt/homebrew/include/SDL2/SDL_stdinc.h \
   /opt/homebrew/include/SDL2/SDL_config.h \
@@ -337,6 +338,7 @@ CMakeFiles/game.dir/1.cpp.o: /Users/fengyibo/program/code/SDL2/1.cpp \
   /opt/homebrew/include/SDL2/SDL_version.h \
   /opt/homebrew/include/SDL2/SDL_locale.h \
   /opt/homebrew/include/SDL2/SDL_misc.h \
+  /opt/homebrew/include/SDL2/SDL_image.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__fwd/ios.h \
@@ -882,4 +884,6 @@ CMakeFiles/game.dir/1.cpp.o: /Users/fengyibo/program/code/SDL2/1.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/nl_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_types/_nl_item.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__locale_dir/locale_base_api/bsd_locale_defaults.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstdarg
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstdarg \
+  /Users/fengyibo/program/code/SDL2/src/TextureManager.hpp \
+  /Users/fengyibo/program/code/SDL2/src/GameObject.hpp

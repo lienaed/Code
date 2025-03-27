@@ -26,8 +26,9 @@ class Game
         int count = 0;
         bool isRunning;
         int moveState = 1;
-        int winW;
+        int winW, winH;
         SDL_Window *window;
         SDL_Renderer *renderer;
+
 };
 #endif

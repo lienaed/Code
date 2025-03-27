@@ -1,6 +1,7 @@
-CMakeFiles/game.dir/Test.cpp.o: \
-  /Users/fengyibo/program/Code/SDL2/Test.cpp \
-  /Users/fengyibo/program/Code/SDL2/Game.hpp \
+CMakeFiles/game.dir/src/TextureManager.cpp.o: \
+  /Users/fengyibo/program/code/SDL2/src/TextureManager.cpp \
+  /Users/fengyibo/program/code/SDL2/src/TextureManager.hpp \
+  /Users/fengyibo/program/code/SDL2/src/Game.hpp \
   /opt/homebrew/include/SDL2/SDL.h /opt/homebrew/include/SDL2/SDL_main.h \
   /opt/homebrew/include/SDL2/SDL_stdinc.h \
   /opt/homebrew/include/SDL2/SDL_config.h \

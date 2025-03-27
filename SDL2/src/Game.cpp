@@ -1,11 +1,11 @@
 #include "Game.hpp"
+#include "TextureManager.hpp"
+#include "GameObject.hpp"
 
-SDL_Texture *character;
-SDL_Rect srcR, destR = {100, 100, 200, 200};
+GameObject* player;
 
 Game::Game()
 {
-
 }
 
 Game::~Game()
@@ -23,13 +23,13 @@ void Game::init (const char* title, int x, int y, int width, int height, bool fu
     if (SDL_Init (SDL_INIT_EVERYTHING) == 0)
     {
         std::cout << "Subsystem initialised." << std::endl;
-
+        //Create window
         window = SDL_CreateWindow (title, x, y, width, height, flags);
         if (window)
             std::cout << "Window created." << std::endl;
         else
             std::cout << "Window creating failed." << std::endl;
-
+        //Create renderer
         renderer = SDL_CreateRenderer (window, -1, 0);
         if (renderer)
         {
@@ -47,13 +47,11 @@ void Game::init (const char* title, int x, int y, int width, int height, bool fu
         isRunning = 0;
     }
 
-    SDL_Surface* tmpSurface = IMG_Load ("assets/Knight.png");
-    if (!tmpSurface)
-        std::cout << "Image loading failed." << std::endl;
-    character = SDL_CreateTextureFromSurface (renderer, tmpSurface);
-    SDL_FreeSurface (tmpSurface);
+    //Load Image
+    player = new GameObject ("assets/knight.png", renderer, 0, 0);
 
-    SDL_GetWindowSize (window, &winW, NULL);
+    //Get window Size
+    SDL_GetWindowSize (window, &winW, &winH);
 }
 
 void Game::events()
@@ -65,7 +63,6 @@ void Game::events()
         case SDL_QUIT:
             isRunning = 0;
             break;
-        
         default:
             break;
     }
@@ -73,28 +70,21 @@ void Game::events()
 
 void Game::update()
 {
-    count++;
-    if (destR.x >= winW - destR.w)
-        moveState = 0;
-    if (destR.x <= 0)
-        moveState = 1;
-    destR.x = moveState ? destR.x + 1 : destR.x - 1;
+    player -> update(winW, winH);
 }
 
 void Game::render()
 {
     SDL_RenderClear (renderer);
-    
-    SDL_RenderCopy (renderer, character, NULL, &destR);
+    player -> render();
     SDL_RenderPresent (renderer);
-
 }
 
 void Game::clean()
 {
     SDL_DestroyWindow (window);
     SDL_DestroyRenderer (renderer);
-    SDL_DestroyTexture (character);
+    player -> clean();
     SDL_Quit();
     std::cout << "Process cleared." << std::endl;
 }
