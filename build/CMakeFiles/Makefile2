@@ -63,11 +63,11 @@ CMAKE_BINARY_DIR = /Users/fengyibo/program/Code/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/game.dir/all
+all: CMakeFiles/Project.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/game.dir/codegen
+codegen: CMakeFiles/Project.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,40 +75,40 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/game.dir/clean
+clean: CMakeFiles/Project.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/game.dir
+# Target rules for target CMakeFiles/Project.dir
 
 # All Build rule for target.
-CMakeFiles/game.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=1,2,3 "Built target game"
-.PHONY : CMakeFiles/game.dir/all
+CMakeFiles/Project.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target Project"
+.PHONY : CMakeFiles/Project.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/game.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/fengyibo/program/Code/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/game.dir/all
+CMakeFiles/Project.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/fengyibo/program/Code/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Project.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/fengyibo/program/Code/build/CMakeFiles 0
-.PHONY : CMakeFiles/game.dir/rule
+.PHONY : CMakeFiles/Project.dir/rule
 
 # Convenience name for target.
-game: CMakeFiles/game.dir/rule
-.PHONY : game
+Project: CMakeFiles/Project.dir/rule
+.PHONY : Project
 
 # codegen rule for target.
-CMakeFiles/game.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=1,2,3 "Finished codegen for target game"
-.PHONY : CMakeFiles/game.dir/codegen
+CMakeFiles/Project.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target Project"
+.PHONY : CMakeFiles/Project.dir/codegen
 
 # clean rule for target.
-CMakeFiles/game.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/clean
-.PHONY : CMakeFiles/game.dir/clean
+CMakeFiles/Project.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/clean
+.PHONY : CMakeFiles/Project.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

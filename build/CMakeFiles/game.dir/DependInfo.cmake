@@ -9,7 +9,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/fengyibo/program/Code/SDL2/src/Game.cpp" "CMakeFiles/game.dir/src/Game.cpp.o" "gcc" "CMakeFiles/game.dir/src/Game.cpp.o.d"
-  "/Users/fengyibo/program/Code/SDL2/src/Test.cpp" "CMakeFiles/game.dir/src/Test.cpp.o" "gcc" "CMakeFiles/game.dir/src/Test.cpp.o.d"
+  "/Users/fengyibo/program/Code/SDL2/src/GameObject.cpp" "CMakeFiles/game.dir/src/GameObject.cpp.o" "gcc" "CMakeFiles/game.dir/src/GameObject.cpp.o.d"
+  "/Users/fengyibo/program/Code/SDL2/src/Main.cpp" "CMakeFiles/game.dir/src/Main.cpp.o" "gcc" "CMakeFiles/game.dir/src/Main.cpp.o.d"
+  "/Users/fengyibo/program/Code/SDL2/src/Map.cpp" "CMakeFiles/game.dir/src/Map.cpp.o" "gcc" "CMakeFiles/game.dir/src/Map.cpp.o.d"
+  "/Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp" "CMakeFiles/game.dir/src/TextureManager.cpp.o" "gcc" "CMakeFiles/game.dir/src/TextureManager.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

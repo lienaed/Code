@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "game"
+			"path" : "Project"
 		}
 	],
 	"backtrace" : 1,
@@ -92,11 +92,14 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				2,
+				3,
+				4
 			]
 		}
 	],
-	"id" : "game::@6890427a1f51a3e7e1df",
+	"id" : "Project::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -131,8 +134,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "game",
-	"nameOnDisk" : "game",
+	"name" : "Project",
+	"nameOnDisk" : "Project",
 	"paths" : 
 	{
 		"build" : ".",
@@ -145,7 +148,10 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				2,
+				3,
+				4
 			]
 		}
 	],
@@ -160,7 +166,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Test.cpp",
+			"path" : "src/GameObject.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Map.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/TextureManager.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

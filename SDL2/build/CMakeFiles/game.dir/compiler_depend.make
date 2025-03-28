@@ -1781,7 +1781,7 @@ CMakeFiles/game.dir/src/GameObject.cpp.o: /Users/fengyibo/program/code/SDL2/src/
   /opt/homebrew/include/SDL2/begin_code.h \
   /opt/homebrew/include/SDL2/close_code.h
 
-CMakeFiles/game.dir/src/Test.cpp.o: /Users/fengyibo/program/code/SDL2/src/Test.cpp \
+CMakeFiles/game.dir/src/Main.cpp.o: /Users/fengyibo/program/code/SDL2/src/Main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternalLegacy.h \
@@ -3559,7 +3559,7 @@ CMakeFiles/game.dir/src/TextureManager.cpp.o: /Users/fengyibo/program/code/SDL2/
   /opt/homebrew/include/SDL2/close_code.h
 
 
-/Users/fengyibo/program/code/SDL2/src/Test.cpp:
+/Users/fengyibo/program/code/SDL2/src/Main.cpp:
 
 /opt/homebrew/include/SDL2/close_code.h:
 

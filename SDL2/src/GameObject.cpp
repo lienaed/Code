@@ -2,10 +2,9 @@
 #include "TextureManager.hpp"
 #include "Game.hpp"
 
-GameObject::GameObject (const char* texturesheet, SDL_Renderer* ren, int xpos, int ypos)
+GameObject::GameObject (const char* texturesheet, int xpos, int ypos)
 {
-    renderer = ren;
-    objTexture = TextureManager::LoadTexture (texturesheet, ren);
+    objTexture = TextureManager::LoadTexture (texturesheet);
 
     x = xpos;
     y = ypos;
@@ -20,25 +19,25 @@ GameObject::GameObject (const char* texturesheet, SDL_Renderer* ren, int xpos, i
 
 void GameObject::update(int winW, int winH)
 {
-    if (x >= winW - srcRect.x)
+    if (x >= winW - destRect.w)
         xstatus = 1;
     if (x <= 0)
         xstatus = 0;
     
-    if (y >= winH - srcRect.y)
+    if (y >= winH - destRect.h)
         ystatus = 1;
     if (y <= 0)
         ystatus = 0;
     
     if (xstatus)
-        x++;
-    else
         x--;
+    else
+        x++;
 
     if (ystatus)
-        y++;
-    else
         y--;
+    else
+        y++;
 
     destRect.x = x;
     destRect.y = y;
@@ -47,7 +46,7 @@ void GameObject::update(int winW, int winH)
 
 void GameObject::render()
 {
-    SDL_RenderCopy (renderer, objTexture, &srcRect, &destRect);
+    SDL_RenderCopy (Game::renderer, objTexture, &srcRect, &destRect);
 }
 
 void GameObject::clean()

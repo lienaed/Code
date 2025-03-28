@@ -86,33 +86,81 @@ CMakeFiles/game.dir/src/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Game.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/src/Game.cpp -o CMakeFiles/game.dir/src/Game.cpp.s
 
-CMakeFiles/game.dir/src/Test.cpp.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/src/Test.cpp.o: /Users/fengyibo/program/Code/SDL2/src/Test.cpp
-CMakeFiles/game.dir/src/Test.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/src/Test.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Test.cpp.o -MF CMakeFiles/game.dir/src/Test.cpp.o.d -o CMakeFiles/game.dir/src/Test.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Test.cpp
+CMakeFiles/game.dir/src/GameObject.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/GameObject.cpp.o: /Users/fengyibo/program/Code/SDL2/src/GameObject.cpp
+CMakeFiles/game.dir/src/GameObject.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/src/GameObject.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/GameObject.cpp.o -MF CMakeFiles/game.dir/src/GameObject.cpp.o.d -o CMakeFiles/game.dir/src/GameObject.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/GameObject.cpp
 
-CMakeFiles/game.dir/src/Test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Test.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/src/Test.cpp > CMakeFiles/game.dir/src/Test.cpp.i
+CMakeFiles/game.dir/src/GameObject.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/GameObject.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/src/GameObject.cpp > CMakeFiles/game.dir/src/GameObject.cpp.i
 
-CMakeFiles/game.dir/src/Test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Test.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/src/Test.cpp -o CMakeFiles/game.dir/src/Test.cpp.s
+CMakeFiles/game.dir/src/GameObject.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/GameObject.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/src/GameObject.cpp -o CMakeFiles/game.dir/src/GameObject.cpp.s
+
+CMakeFiles/game.dir/src/Main.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/Main.cpp.o: /Users/fengyibo/program/Code/SDL2/src/Main.cpp
+CMakeFiles/game.dir/src/Main.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/src/Main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Main.cpp.o -MF CMakeFiles/game.dir/src/Main.cpp.o.d -o CMakeFiles/game.dir/src/Main.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Main.cpp
+
+CMakeFiles/game.dir/src/Main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Main.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/src/Main.cpp > CMakeFiles/game.dir/src/Main.cpp.i
+
+CMakeFiles/game.dir/src/Main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Main.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/src/Main.cpp -o CMakeFiles/game.dir/src/Main.cpp.s
+
+CMakeFiles/game.dir/src/Map.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/Map.cpp.o: /Users/fengyibo/program/Code/SDL2/src/Map.cpp
+CMakeFiles/game.dir/src/Map.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/src/Map.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Map.cpp.o -MF CMakeFiles/game.dir/src/Map.cpp.o.d -o CMakeFiles/game.dir/src/Map.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Map.cpp
+
+CMakeFiles/game.dir/src/Map.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Map.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/src/Map.cpp > CMakeFiles/game.dir/src/Map.cpp.i
+
+CMakeFiles/game.dir/src/Map.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Map.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/src/Map.cpp -o CMakeFiles/game.dir/src/Map.cpp.s
+
+CMakeFiles/game.dir/src/TextureManager.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/TextureManager.cpp.o: /Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp
+CMakeFiles/game.dir/src/TextureManager.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/src/TextureManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/TextureManager.cpp.o -MF CMakeFiles/game.dir/src/TextureManager.cpp.o.d -o CMakeFiles/game.dir/src/TextureManager.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp
+
+CMakeFiles/game.dir/src/TextureManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/TextureManager.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp > CMakeFiles/game.dir/src/TextureManager.cpp.i
+
+CMakeFiles/game.dir/src/TextureManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/TextureManager.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp -o CMakeFiles/game.dir/src/TextureManager.cpp.s
 
 # Object files for target game
 game_OBJECTS = \
 "CMakeFiles/game.dir/src/Game.cpp.o" \
-"CMakeFiles/game.dir/src/Test.cpp.o"
+"CMakeFiles/game.dir/src/GameObject.cpp.o" \
+"CMakeFiles/game.dir/src/Main.cpp.o" \
+"CMakeFiles/game.dir/src/Map.cpp.o" \
+"CMakeFiles/game.dir/src/TextureManager.cpp.o"
 
 # External object files for target game
 game_EXTERNAL_OBJECTS =
 
 game: CMakeFiles/game.dir/src/Game.cpp.o
-game: CMakeFiles/game.dir/src/Test.cpp.o
+game: CMakeFiles/game.dir/src/GameObject.cpp.o
+game: CMakeFiles/game.dir/src/Main.cpp.o
+game: CMakeFiles/game.dir/src/Map.cpp.o
+game: CMakeFiles/game.dir/src/TextureManager.cpp.o
 game: CMakeFiles/game.dir/build.make
 game: CMakeFiles/game.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable game"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/fengyibo/program/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable game"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/game.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

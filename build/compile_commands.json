@@ -1,14 +1,32 @@
 [
 {
   "directory": "/Users/fengyibo/program/Code/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/game.dir/src/Game.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Game.cpp",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/Project.dir/src/Game.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Game.cpp",
   "file": "/Users/fengyibo/program/Code/SDL2/src/Game.cpp",
-  "output": "CMakeFiles/game.dir/src/Game.cpp.o"
+  "output": "CMakeFiles/Project.dir/src/Game.cpp.o"
 },
 {
   "directory": "/Users/fengyibo/program/Code/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/game.dir/src/Test.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Test.cpp",
-  "file": "/Users/fengyibo/program/Code/SDL2/src/Test.cpp",
-  "output": "CMakeFiles/game.dir/src/Test.cpp.o"
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/Project.dir/src/GameObject.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/GameObject.cpp",
+  "file": "/Users/fengyibo/program/Code/SDL2/src/GameObject.cpp",
+  "output": "CMakeFiles/Project.dir/src/GameObject.cpp.o"
+},
+{
+  "directory": "/Users/fengyibo/program/Code/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/Project.dir/src/Main.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Main.cpp",
+  "file": "/Users/fengyibo/program/Code/SDL2/src/Main.cpp",
+  "output": "CMakeFiles/Project.dir/src/Main.cpp.o"
+},
+{
+  "directory": "/Users/fengyibo/program/Code/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/Project.dir/src/Map.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/Map.cpp",
+  "file": "/Users/fengyibo/program/Code/SDL2/src/Map.cpp",
+  "output": "CMakeFiles/Project.dir/src/Map.cpp.o"
+},
+{
+  "directory": "/Users/fengyibo/program/Code/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/opt/homebrew/include -I/opt/homebrew/include/SDL2 -I/Users/fengyibo/program/Code/SDL2/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -mmacosx-version-min=14.1 -o CMakeFiles/Project.dir/src/TextureManager.cpp.o -c /Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp",
+  "file": "/Users/fengyibo/program/Code/SDL2/src/TextureManager.cpp",
+  "output": "CMakeFiles/Project.dir/src/TextureManager.cpp.o"
 }
 ]

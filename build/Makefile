@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named game
+# Target rules for targets named Project
 
 # Build rule for target.
-game: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game
-.PHONY : game
+Project: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Project
+.PHONY : Project
 
 # fast build rule for target.
-game/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/build
-.PHONY : game/fast
+Project/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/build
+.PHONY : Project/fast
 
 src/Game.o: src/Game.cpp.o
 .PHONY : src/Game.o
 
 # target to build an object file
 src/Game.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/src/Game.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Game.cpp.o
 .PHONY : src/Game.cpp.o
 
 src/Game.i: src/Game.cpp.i
@@ -142,7 +142,7 @@ src/Game.i: src/Game.cpp.i
 
 # target to preprocess a source file
 src/Game.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/src/Game.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Game.cpp.i
 .PHONY : src/Game.cpp.i
 
 src/Game.s: src/Game.cpp.s
@@ -150,32 +150,104 @@ src/Game.s: src/Game.cpp.s
 
 # target to generate assembly for a file
 src/Game.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/src/Game.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Game.cpp.s
 .PHONY : src/Game.cpp.s
 
-src/Test.o: src/Test.cpp.o
-.PHONY : src/Test.o
+src/GameObject.o: src/GameObject.cpp.o
+.PHONY : src/GameObject.o
 
 # target to build an object file
-src/Test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/src/Test.cpp.o
-.PHONY : src/Test.cpp.o
+src/GameObject.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/GameObject.cpp.o
+.PHONY : src/GameObject.cpp.o
 
-src/Test.i: src/Test.cpp.i
-.PHONY : src/Test.i
+src/GameObject.i: src/GameObject.cpp.i
+.PHONY : src/GameObject.i
 
 # target to preprocess a source file
-src/Test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/src/Test.cpp.i
-.PHONY : src/Test.cpp.i
+src/GameObject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/GameObject.cpp.i
+.PHONY : src/GameObject.cpp.i
 
-src/Test.s: src/Test.cpp.s
-.PHONY : src/Test.s
+src/GameObject.s: src/GameObject.cpp.s
+.PHONY : src/GameObject.s
 
 # target to generate assembly for a file
-src/Test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/src/Test.cpp.s
-.PHONY : src/Test.cpp.s
+src/GameObject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/GameObject.cpp.s
+.PHONY : src/GameObject.cpp.s
+
+src/Main.o: src/Main.cpp.o
+.PHONY : src/Main.o
+
+# target to build an object file
+src/Main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Main.cpp.o
+.PHONY : src/Main.cpp.o
+
+src/Main.i: src/Main.cpp.i
+.PHONY : src/Main.i
+
+# target to preprocess a source file
+src/Main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Main.cpp.i
+.PHONY : src/Main.cpp.i
+
+src/Main.s: src/Main.cpp.s
+.PHONY : src/Main.s
+
+# target to generate assembly for a file
+src/Main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Main.cpp.s
+.PHONY : src/Main.cpp.s
+
+src/Map.o: src/Map.cpp.o
+.PHONY : src/Map.o
+
+# target to build an object file
+src/Map.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Map.cpp.o
+.PHONY : src/Map.cpp.o
+
+src/Map.i: src/Map.cpp.i
+.PHONY : src/Map.i
+
+# target to preprocess a source file
+src/Map.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Map.cpp.i
+.PHONY : src/Map.cpp.i
+
+src/Map.s: src/Map.cpp.s
+.PHONY : src/Map.s
+
+# target to generate assembly for a file
+src/Map.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/Map.cpp.s
+.PHONY : src/Map.cpp.s
+
+src/TextureManager.o: src/TextureManager.cpp.o
+.PHONY : src/TextureManager.o
+
+# target to build an object file
+src/TextureManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/TextureManager.cpp.o
+.PHONY : src/TextureManager.cpp.o
+
+src/TextureManager.i: src/TextureManager.cpp.i
+.PHONY : src/TextureManager.i
+
+# target to preprocess a source file
+src/TextureManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/TextureManager.cpp.i
+.PHONY : src/TextureManager.cpp.i
+
+src/TextureManager.s: src/TextureManager.cpp.s
+.PHONY : src/TextureManager.s
+
+# target to generate assembly for a file
+src/TextureManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project.dir/build.make CMakeFiles/Project.dir/src/TextureManager.cpp.s
+.PHONY : src/TextureManager.cpp.s
 
 # Help Target
 help:
@@ -185,13 +257,22 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... game"
+	@echo "... Project"
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
-	@echo "... src/Test.o"
-	@echo "... src/Test.i"
-	@echo "... src/Test.s"
+	@echo "... src/GameObject.o"
+	@echo "... src/GameObject.i"
+	@echo "... src/GameObject.s"
+	@echo "... src/Main.o"
+	@echo "... src/Main.i"
+	@echo "... src/Main.s"
+	@echo "... src/Map.o"
+	@echo "... src/Map.i"
+	@echo "... src/Map.s"
+	@echo "... src/TextureManager.o"
+	@echo "... src/TextureManager.i"
+	@echo "... src/TextureManager.s"
 .PHONY : help
 
 

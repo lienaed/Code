@@ -100,19 +100,19 @@ CMakeFiles/game.dir/src/GameObject.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/GameObject.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/code/SDL2/src/GameObject.cpp -o CMakeFiles/game.dir/src/GameObject.cpp.s
 
-CMakeFiles/game.dir/src/Test.cpp.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/src/Test.cpp.o: /Users/fengyibo/program/code/SDL2/src/Test.cpp
-CMakeFiles/game.dir/src/Test.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/code/SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/src/Test.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Test.cpp.o -MF CMakeFiles/game.dir/src/Test.cpp.o.d -o CMakeFiles/game.dir/src/Test.cpp.o -c /Users/fengyibo/program/code/SDL2/src/Test.cpp
+CMakeFiles/game.dir/src/Main.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/Main.cpp.o: /Users/fengyibo/program/code/SDL2/src/Main.cpp
+CMakeFiles/game.dir/src/Main.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/fengyibo/program/code/SDL2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/src/Main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/Main.cpp.o -MF CMakeFiles/game.dir/src/Main.cpp.o.d -o CMakeFiles/game.dir/src/Main.cpp.o -c /Users/fengyibo/program/code/SDL2/src/Main.cpp
 
-CMakeFiles/game.dir/src/Test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Test.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/code/SDL2/src/Test.cpp > CMakeFiles/game.dir/src/Test.cpp.i
+CMakeFiles/game.dir/src/Main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/Main.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/fengyibo/program/code/SDL2/src/Main.cpp > CMakeFiles/game.dir/src/Main.cpp.i
 
-CMakeFiles/game.dir/src/Test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Test.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/code/SDL2/src/Test.cpp -o CMakeFiles/game.dir/src/Test.cpp.s
+CMakeFiles/game.dir/src/Main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/Main.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/fengyibo/program/code/SDL2/src/Main.cpp -o CMakeFiles/game.dir/src/Main.cpp.s
 
 CMakeFiles/game.dir/src/TextureManager.cpp.o: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/TextureManager.cpp.o: /Users/fengyibo/program/code/SDL2/src/TextureManager.cpp
@@ -132,7 +132,7 @@ CMakeFiles/game.dir/src/TextureManager.cpp.s: cmake_force
 game_OBJECTS = \
 "CMakeFiles/game.dir/src/Game.cpp.o" \
 "CMakeFiles/game.dir/src/GameObject.cpp.o" \
-"CMakeFiles/game.dir/src/Test.cpp.o" \
+"CMakeFiles/game.dir/src/Main.cpp.o" \
 "CMakeFiles/game.dir/src/TextureManager.cpp.o"
 
 # External object files for target game
@@ -140,7 +140,7 @@ game_EXTERNAL_OBJECTS =
 
 game: CMakeFiles/game.dir/src/Game.cpp.o
 game: CMakeFiles/game.dir/src/GameObject.cpp.o
-game: CMakeFiles/game.dir/src/Test.cpp.o
+game: CMakeFiles/game.dir/src/Main.cpp.o
 game: CMakeFiles/game.dir/src/TextureManager.cpp.o
 game: CMakeFiles/game.dir/build.make
 game: CMakeFiles/game.dir/link.txt

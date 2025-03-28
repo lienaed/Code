@@ -1,8 +1,12 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 #include "GameObject.hpp"
+#include "Map.hpp"
 
 GameObject* player;
+Map* map;
+
+SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game()
 {
@@ -23,12 +27,14 @@ void Game::init (const char* title, int x, int y, int width, int height, bool fu
     if (SDL_Init (SDL_INIT_EVERYTHING) == 0)
     {
         std::cout << "Subsystem initialised." << std::endl;
+
         //Create window
         window = SDL_CreateWindow (title, x, y, width, height, flags);
         if (window)
             std::cout << "Window created." << std::endl;
         else
             std::cout << "Window creating failed." << std::endl;
+
         //Create renderer
         renderer = SDL_CreateRenderer (window, -1, 0);
         if (renderer)
@@ -38,7 +44,6 @@ void Game::init (const char* title, int x, int y, int width, int height, bool fu
         }
         else
             std::cout << "Renderer creating failed." << std::endl;
-        
         isRunning = 1;
     }
     else
@@ -48,10 +53,13 @@ void Game::init (const char* title, int x, int y, int width, int height, bool fu
     }
 
     //Load Image
-    player = new GameObject ("assets/knight.png", renderer, 0, 0);
+    player = new GameObject ("assets/knight.png", 1, 1);
 
     //Get window Size
     SDL_GetWindowSize (window, &winW, &winH);
+
+    //Initialize Map
+    map = new Map();
 }
 
 void Game::events()
@@ -76,6 +84,7 @@ void Game::update()
 void Game::render()
 {
     SDL_RenderClear (renderer);
+    map -> drawMap();
     player -> render();
     SDL_RenderPresent (renderer);
 }

@@ -2,4 +2,4 @@
 cd "$(dirname "$0")/build"
 cmake ..
 cmake --build .
-./game
+./Project

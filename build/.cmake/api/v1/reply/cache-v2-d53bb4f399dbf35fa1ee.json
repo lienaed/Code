@@ -835,7 +835,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "MySDLGame"
+			"value" : "SDLProject"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1134,7 +1134,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "MySDLGame_BINARY_DIR",
+			"name" : "SDLProject_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1146,7 +1146,7 @@
 			"value" : "/Users/fengyibo/program/Code/build"
 		},
 		{
-			"name" : "MySDLGame_IS_TOP_LEVEL",
+			"name" : "SDLProject_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1158,7 +1158,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "MySDLGame_SOURCE_DIR",
+			"name" : "SDLProject_SOURCE_DIR",
 			"properties" : 
 			[
 				{

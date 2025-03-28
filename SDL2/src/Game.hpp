@@ -16,11 +16,11 @@ class Game
         void render();
         void update();
         void clean();
-
         bool running()
         {
             return isRunning;
         }
+        static SDL_Renderer *renderer;
 
     private:
         int count = 0;
@@ -28,7 +28,5 @@ class Game
         int moveState = 1;
         int winW, winH;
         SDL_Window *window;
-        SDL_Renderer *renderer;
-
 };
 #endif
