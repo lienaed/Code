@@ -1,0 +1,48 @@
+<html>
+    <body>
+        <table style="width: 500">
+            <tr>
+                <th>name</th>
+                <th>gross Pay</th>
+                <th>net Pay</th>
+            </tr>
+
+            <tr>
+                <td>Harvey Hardy</td>
+                <td id = "grossPay1"></td>
+                <td id = "netPay1"></td>
+            </tr>
+
+            <tr>
+                <td>Louisa Lee</td>
+                <td id = "grossPay2"></td>
+                <td id = "netPay2"></td>
+            </tr>
+
+            <tr>
+                <td>Elmer Erkenheimer</td>
+                <td id = "grossPay3"></td>
+                <td id = "netPay3"></td>
+            </tr>
+
+            <tr>
+                <td>Millicent Murgatroyd</td>
+                <td id = "grossPay4"></td>
+                <td id = "netPay4"></td>
+            </tr>
+        </table>
+        <script>
+            var grossPay = 0;
+            var netPay = 0;
+            for (var i = 0; i < 4; i++)
+            {
+                grossPay = parseFloat(prompt ("Gross Pay " + i+1 + " Input:"));
+                netPay = parseFloat(prompt ("Net Pay " + i+1 + " Input:"));
+                grossPay.toFixed (2);
+                netPay.toFixed (2);
+                document.getElementById("grossPay" + (i + 1)).innerHTML = grossPay;
+                document.getElementById("netPay" + (i + 1)).innerHTML = netPay;
+            }
+        </script>
+    </body>
+</html>
