@@ -318,6 +318,31 @@
             }
         }
 
+        function Auto()
+        {
+            if (box.vx >= 0)
+            {
+                keys["d"] = 1;
+                keys["a"] = 0;
+            }
+            else
+            {
+                keys["a"] = 1;
+                keys["d"] = 0;
+            }
+            if (box.vy >= 0)
+            {
+                keys["s"] = 1;
+                keys["w"] = 0;
+            }
+            else
+            {
+                keys["w"] = 1;
+                keys["s"] = 0;
+            }
+
+        }
+
         //draw function
         function draw() {
             //draw a ball
@@ -344,9 +369,11 @@
                 gravity();
             }
 
+            Auto();
             flat();
             movement();
         }
+
         //render function
         function render() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
