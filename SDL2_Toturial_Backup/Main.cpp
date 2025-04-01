@@ -18,7 +18,7 @@ int main ()
         frameStart = SDL_GetTicks();
 
         game -> events();
-        game -> update();
+        game -> update();   
         game -> render();
 
         frameTime = SDL_GetTicks() - frameStart;
