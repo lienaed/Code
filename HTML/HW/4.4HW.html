@@ -1,0 +1,100 @@
+<html>
+    <script>
+        document.write("Q16: b<br>");
+            var x = 5, y = 1;
+            while(x > y) {
+                alert("good morning!");
+                x--;
+            }
+        document.write("<br>");
+
+        document.write("Q17: d<br>");
+            x = 5; y = 1;
+            while(x < y) {
+                alert("good morning!");
+                x--;
+            }
+        document.write("<br>");
+
+        document.write("Q18: c<br>");
+            x = 5; y = 1;
+            do {
+                alert("good morning!");
+                x--;
+            } while(x < y);
+        document.write("<br>");
+
+        document.write("Q19: b<br>");
+            x = 1; y = 5;
+            do {
+                alert("good morning!");
+                x++;
+            } while(x < y);
+        document.write("<br>");
+        document.write("Q20: <br>");
+            var w = 5, x = 5, y = 5, z = 5;
+            document.write("a) w++<br>");
+            document.write("b) x-=2<br>");
+            document.write("c) y*=5<br>");
+            document.write("d) z--<br>");
+        document.write("<br>");
+
+        document.write("Q21: R = 9, S = 8<br>");
+            var R = 8;
+            var S = R++;
+        document.write("<br>");
+
+        document.write("Q23: 11<br>");
+            var city = "Los Angeles";
+            var myCity = city.length;
+        document.write("<br>");
+
+        document.write("Q24: <br>");
+            for (var m = 1; m < 20; m++) {
+                alert("Hi, friend");
+            }
+        document.write("<br>");
+
+        document.write("Q25: <br>");
+            for (var p = 100; p >= 0; p -= 5) {
+                alert("Counting down in…" + p + " seconds!");
+            }
+        document.write("<br>");
+
+        document.write("Q26: <br>");
+            var purchase = parseFloat(prompt("How many do you want?"));
+            var check = purchase % 1;
+            while (check != 0) {
+                purchase = parseFloat(prompt("Please enter an integer:"));
+                check = purchase % 1;
+            }
+            document.write("purchase = " + purchase + "<br>");
+        document.write("<br>");
+
+        document.write("Q27: <br>");
+            var myNumber = parseInt(prompt("Enter a whole number:"));
+            var check = myNumber % 2;
+            if (check == 0)
+                alert("Even number");
+            else
+                alert("Odd number");
+        document.write("<br>");
+
+        document.write("Q28: <br>");
+            var myNumber = parseInt(prompt("Enter a whole number:"));
+            var check = myNumber % 2;
+            if (check != 0)
+                alert("Odd number");
+            else
+                alert("Even number");
+        document.write("<br>");
+
+        document.write("Q29: <br>");
+            var myName = "M. Nguyen III";
+            document.write("a) " + myName.charAt(3) + "<br>");
+            document.write("b) " + myName.charAt(10) + "<br>");
+        document.write("<br>");
+
+
+    </script>
+</html>

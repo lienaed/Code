@@ -27,6 +27,22 @@
             ]
         },
         {
+            "label": "Commit Changes",
+            "type": "shell",
+            "command": "${workspaceFolder}/upload.bat",
+            "problemMatcher": [],
+            "group": {
+              "kind": "build",
+              "isDefault": false
+            },
+            "presentation": {
+              "echo": true,
+              "reveal": "always",
+              "focus": false,
+              "panel": "shared"
+            }
+        },
+        {
             "label": "Build SDL2 Program (Windows)",
             "type": "shell",
             "command": "g++",
