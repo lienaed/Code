@@ -1,0 +1,19 @@
+<html>
+    <script>
+        var input = prompt("Enter an integer:");
+        input = parseInt (input);
+        var count = 0;
+        for (var i = 1; i <= input; i++)
+        {
+            if (input % i == 0)
+            {
+                document.write (i, "<br>");
+                count++;
+            }
+        }
+        if (count <= 2)
+            document.write ("Prime Number")
+        else
+            document.write ("Composite Number");
+    </script>
+</html>
