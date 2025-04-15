@@ -1,0 +1,254 @@
+<html>
+    <script>
+        document.write("Q1: d<br>");
+            var num = 5.423;
+            var result = Math.ceil(num);
+        document.write("<br>");
+
+        document.write("Q2: a<br>");
+            for (var i = 0; i < 5; i++) {
+                if (i == 2) continue;
+            }
+        document.write("<br>");
+
+        document.write("Q3: d<br>");
+        document.write("<br>");
+
+        document.write("Q4: a<br>");
+            var m = 0, k = 0, p = 0;
+            while (m < 3) {
+                k = m;
+                for (p = 1; p < 6; p += 3) {
+                    k = k + p;
+                    document.write(k + " ");
+                }
+                document.write("<br>");
+                m++;
+            }
+        document.write("<br>");
+
+        document.write("Q5: a<br>");
+            var sum = 0;
+            for (var i = 1; i < 11; i++) sum += i;
+        document.write("<br>");
+
+        document.write("Q6: d<br>");
+            var teabags = 5;
+            teabags = teabags % 2;
+        document.write("<br>");
+
+        document.write("Q7: d<br>");
+            var sodapop = 47.33;
+            sodapop = Math.round(sodapop + 0.4);
+            document.write("<br>");
+
+        document.write("Q8: c<br>");
+            var num = 2, sum = 0, average = 0;
+            for (var count = 0; count < 3; count++) {
+                sum += num;
+                num++;
+            }
+            average = parseInt(sum / count);
+        document.write("<br>");
+
+        document.write("Q9: a<br>");
+        document.write("<br>");
+
+        document.write("Q10: b<br>");
+        document.write("<br>");
+
+        document.write("Q11: d<br>");
+            var num = 4;
+            if (num % 2 == 0) document.write("Even");
+        document.write("<br>");
+
+        document.write("Q12: d<br>");
+            var eights = 16;
+            if ((eights / 8) == parseInt(eights / 8)) document.write("Divisible");
+        document.write("<br>");
+
+        document.write("Q13: a<br>");
+            var rand = Math.floor(Math.random() * 4);
+        document.write("<br>");
+
+        document.write("Q17: F<br>");
+        document.write("Q18: T<br>");
+        document.write("Q19: T<br>");
+        document.write("Q20: T<br>");
+        document.write("Q21: F<br>");
+        document.write("Q22: T<br>");
+        document.write("Q23: accumulator<br>");
+        document.write("Q24: Math.round<br>");
+        document.write("Q25: continue<br>");
+        document.write("Q26: inner<br>");
+        document.write("Q27: T<br>");
+        document.write("Q28: F<br>");
+        document.write("Q29: F<br>");
+        document.write("Q30: T<br>");
+        document.write("Q31: F<br>");
+
+        document.write("Q32: <br>");
+            function add() {
+                var sum = 0;
+                for (var i = 1; i < 11; i++) sum += i;
+                document.write(sum);
+            }
+            add();
+        document.write("<br>");
+
+        document.write("Q33: <br>");
+            function average() {
+                var sum = 0, num = 0;
+                for (var i = 1; i <= 6; i++) {
+                    num = parseFloat(prompt("Enter a number:"));
+                    sum += num;
+                }
+                document.write(sum / 6);
+            }
+            average();
+        document.write("<br>");
+
+        document.write("Q34: <br>");
+            function evenOdd() {
+                var num = 0, again = "";
+                while (again != "n") {
+                    num = parseInt(prompt("Enter a number:"));
+                    if (num % 2 == 0)
+                        document.write(num + " is even<br>");
+                    else
+                        document.write(num + " is odd<br>");
+                    again = prompt("Go again? y/n");
+                }
+            }
+            evenOdd();
+        document.write("<br>");
+
+        document.write("Q35: <br>");
+            var num = parseFloat(prompt("Enter a number or 999999 to quit:"));
+            while (num != 999999) {
+                if (num > 0)
+                    document.write(num + " is positive<br>");
+                else if (num < 0)
+                    document.write(num + " is negative<br>");
+                else
+                    document.write(num + " is 0<br>");
+                num = parseFloat(prompt("Enter a number or 999999 to quit:"));
+            }
+        document.write("<br>");
+
+        document.write("Q36: <br>");
+            var x = parseFloat(prompt("Enter a number or 0 to stop"));
+            while (x != 0) {
+                var y = x % 1;
+                if (y > 0.6) document.write(Math.round(x) + "<br>");
+                else {
+                    x -= 0.11;
+                    document.write(Math.round(x) + "<br>");
+                }
+                x = parseFloat(prompt("Enter a number or 0 to stop"));
+            }
+        document.write("<br>");
+
+        document.write("Q37: <br>");
+            for (var i = 1; i <= 500; i++) {
+                if (i % 7 == 0) document.write(i + " ");
+            }
+        document.write("<br>");
+
+        document.write("Q38: <br>");
+            for (var i = 0; i < 3; i++) {
+                var x = i;
+                for (var j = 1; j < 5; j++) {
+                    x = x * j;
+                    document.write(x + " ");
+                }
+                document.write("<br>");
+            }
+        document.write("<br>");
+
+        document.write("Q39: <br>");
+            var k = 0, m = 0, p = 0;
+            while (k < 6) {
+                m = k;
+                for (p = 0; p < 4; p++) {
+                    m = m + p;
+                    document.write(m);
+                }
+                document.write("<br>");
+                k += 2;
+            }
+        document.write("<br>");
+
+        document.write("Q40: <br>");
+            var i = 0, j = 0, x = 0;
+            do {
+                x = i;
+                j = 1;
+                while (j < 5) {
+                    x = x * j;
+                    document.write(x + " ");
+                    j++;
+                }
+                document.write("<br>");
+                i++;
+            } while (i < 3);
+        document.write("<br>");
+
+        document.write("Q41: <br>");
+            for (var k = 0; k < 6; k += 2) {
+                var m = k, p = 0;
+                while (p < 4) {
+                    m = m + p;
+                    document.write(m + " ");
+                    p++;
+                }
+                document.write("<br>");
+            }
+        document.write("<br>");
+
+        document.write("Q42: <br>");
+            for (var i = 0; i < 6; i++) {
+                for (var j = 3; j < 12; j++) {
+                    document.write("Ooopsi <br>");
+                }
+            }
+
+        document.write("Q43: <br>");
+            var x = 0, y = 0;
+            while (x < 3) {
+                y = 1;
+                while (y < 2) {
+                    document.write("Hello there <br>");
+                    y++;
+                }
+                x++;
+            }
+        document.write("<br>");
+
+        document.write("Q44: <br>");
+            for (var i = 1; i <= 10; i++) document.write("*");
+            document.write("<br>*");
+            for (var i = 1; i <= 16; i++) document.write("&nbsp");
+            document.write("*<br>");
+            for (var i = 1; i <= 10; i++) document.write("*");
+            document.write("<br>*");
+            for (var i = 1; i <= 16; i++) document.write("&nbsp");
+            document.write("*<br>");
+            for (var i = 1; i <= 10; i++) document.write("*");
+        document.write("<br>");
+
+        document.write("Q45: <br>");
+            for (var i = 1; i <= 7; i++) document.write("*");
+            document.write("<br>");
+            for (var j = 1; j <= 5; j++) {
+                document.write("*");
+                for (var i = 1; i <= 4; i++) document.write("&nbsp");
+                document.write("*");
+                for (var i = 1; i <= 4; i++) document.write("&nbsp");
+                document.write("*<br>");
+            }
+            for (var i = 1; i <= 7; i++) document.write("*");
+        document.write("<br>");
+    </script>
+
+</html>
