@@ -1,15 +1,14 @@
-<html>
-    <head>
-        <script>
-            let num = true;
-            function a ()
-            {
-                let num = false;
-                document.write (num);
-            }
-            a();
-            document.write (num);
+<!DOCTYPE html>
 
-        </script>
-    </body>
+    <div id="Score">分数</div>
+
+
+    <script>
+        let scoreValue = 0;
+        const score = document.getElementById("Score");
+        score.innerText = "分数：" + scoreValue;
+
+    </script>
+
+</body>
 </html>

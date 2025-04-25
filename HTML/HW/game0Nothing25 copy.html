@@ -105,6 +105,7 @@
             opacity: 1;
             visibility: hidden;
         }
+
     </style>
 </head>
 
@@ -149,6 +150,10 @@
         <button id = "apply" style = "margin-top: 5px; width: 50; height: 26;"> apply</button>
     </div>
 
+    <div id="Score" style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%); font-size: 32px;">0</div>
+
+
+
 
     <script>
         //Variable
@@ -166,38 +171,15 @@
         var enableJump;
         var setBuffer = 5;
         var jumpBuffer = 0;
+        var score = 0;
 
-        //Box Class
-        class box
-        {
-            constructor (width, height, x, y, vx, vy)
-            {
-                this.width = width,
-                this.height = height,
-                this.x = x,
-                this.y = y,
-                this.vx = vx,
-                this.vy = vy,
-                this.image = new Image()
-            }
-
-        }
-        //Initialize Boxes
-        const black = new box (100, 100, canvas.width / 2 - 50, canvas.height / 2 - 50, 0, 0);
-        const red = new box (100, 100, 0, 0, 0, 0);
-
-        black.image.src = "https://lienaed.github.io/Code/Images/black.jpg";
-        red.image.src = "";
-
-        const keys = {};
-        document.addEventListener ("keydown", (event) => keys [event.key] = 1);
-        document.addEventListener ("keyup", (event) => keys [event.key] = 0);
-
+        
         //Settings
         var setting = document.getElementById ("setting");
         var returnButton = document.getElementById ("return");        
         var menu = document.querySelector (".menu");
         var apply = document.getElementById ("apply");
+        var scoreValue = document.getElementById ("Score");
 
         setting.addEventListener ("click", function ()
         {
@@ -235,9 +217,42 @@
         var modeG = document.querySelector ("input[name='G']:checked").id
         var modeB = document.querySelector ("input[name='B']:checked").id
 
-        // Ball properties
-        function detectJump()
+
+        //box Class
+        class box
         {
+            constructor (width, height, x, y, vx, vy)
+            {
+                this.width = width,
+                this.height = height,
+                this.x = x,
+                this.y = y,
+                this.vx = vx,
+                this.vy = vy,
+                this.image = new Image()
+                this.keys = {};
+            }
+
+        }
+        //Initialize boxes
+        const black = new box (100, 100, canvas.width / 2 - 50, canvas.height / 2 - 50, 0, 0);
+        const red = new box (100, 100, 0, 0, 0, 0);
+
+        black.image.src = "https://lienaed.github.io/Code/Images/Black.jpg";
+        red.image.src = "https://lienaed.github.io/Code/Images/Red.png";
+
+        document.addEventListener ("keydown", (event) => black.keys [event.key] = 1);
+        document.addEventListener ("keyup", (event) => black.keys [event.key] = 0);
+
+        document.addEventListener ("keydown", (event) => red.keys [event.key] = 1);
+        document.addEventListener ("keyup", (event) => red.keys [event.key] = 0);
+
+
+        // Ball properties
+        function detectJump(object)
+        {
+            const keys = object.keys;
+
             if (keys[" "])
                 jumpBuffer = setBuffer;
             jumpBuffer--;
@@ -250,87 +265,93 @@
 
 
         //Gravity
-        function gravity ()
+        function gravity (object)
         {
-            box.vy += gravityForce;
-            if (enableJump && box.y == canvas.height - box.height)
-                box.vy -= jumpHeight;
+            const keys = object.keys;
+
+            object.vy += gravityForce;
+            if (enableJump && object.y == canvas.height - object.height)
+                object.vy -= jumpHeight;
             keys ["w"] = 0;
             keys ["s"] = 0;
         }
 
 
         //Flat Surface
-        function flat ()
+        function flat (object)
         {
-            if (keys ["w"])
-                box.vy -= acceleration;
-            if (keys ["s"])
-                box.vy += acceleration;
-            if (keys ["a"])
-                box.vx -= acceleration;
-            if (keys ["d"])
-                box.vx += acceleration;
-            
-            box.vx = Math.max (-maxVelocity, Math.min (maxVelocity, box.vx));
-            if (modeG != "gravity")
-                box.vy = Math.max (-maxVelocity, Math.min (maxVelocity, box.vy));
-            
-            box.vx *= friction;
-            box.vy *= friction;
+            const keys = object.keys;
 
-            if (Math.sqrt ((Math.abs (box.vx))**2 + (Math.abs (box.vy))**2) < staticFriction)
+            if (keys ["w"])
+                object.vy -= acceleration;
+            if (keys ["s"])
+                object.vy += acceleration;
+            if (keys ["a"])
+                object.vx -= acceleration;
+            if (keys ["d"])
+                object.vx += acceleration;
+            
+            object.vx = Math.max (-maxVelocity, Math.min (maxVelocity, object.vx));
+            if (modeG != "gravity")
+                object.vy = Math.max (-maxVelocity, Math.min (maxVelocity, object.vy));
+            
+            object.vx *= friction;
+            object.vy *= friction;
+
+            if (Math.sqrt ((Math.abs (object.vx))**2 + (Math.abs (object.vy))**2) < staticFriction)
             {
-                box.vx = 0;
-                box.vy = 0;
+                object.vx = 0;
+                object.vy = 0;
             }
         }
 
 
         //Bounce
-        function bounce ()
+        function bounce (object)
         {
-            if (box.x <= 0 || box.x >= canvas.width - box.width)
-                box.vx = -box.vx * bounceForce;
-            if (box.y <= 0 || box.y >= canvas.height - box.height)
-                box.vy = -box.vy * bounceForce;
+            if (object.x <= 0 || object.x >= canvas.width - object.width)
+                object.vx = -object.vx * bounceForce;
+            if (object.y <= 0 || object.y >= canvas.height - object.height)
+                object.vy = -object.vy * bounceForce;
         }
-        function bounceless ()
+        function bounceless (object)
         {
-            if (box.x <= 0 || box.x >= canvas.width - box.width)
-                box.vx = 0;
-            if (box.y <= 0 || box.y >= canvas.height - box.height)
-                box.vy = 0;
+            if (object.x <= 0 || object.x >= canvas.width - object.width)
+                object.vx = 0;
+            if (object.y <= 0 || object.y >= canvas.height - object.height)
+                object.vy = 0;
         }
 
 
         //Moving
-        function movement ()
+        function movement (object)
         {
-            box.x += box.vx;
-            box.y += box.vy;
+            object.x += object.vx;
+            object.y += object.vy;
                 
-            if (box.x <= 0) 
+            if (object.x <= 0) 
             {
-                box.x = 0;
+                object.x = 0;
             }
-            if (box.x >= canvas.width - box.width) 
+            if (object.x >= canvas.width - object.width) 
             {
-                box.x = canvas.width - box.width;
+                object.x = canvas.width - object.width;
             }
-            if (box.y <= 0) 
+            if (object.y <= 0) 
             {
-                box.y = 0;
+                object.y = 0;
             }
-            if (box.y >= canvas.height - box.height) 
+            if (object.y >= canvas.height - object.height) 
             {
-                box.y = canvas.height - box.height;
+                object.y = canvas.height - object.height;
             }
         }
 
-        function Auto()
+        function Auto(object)
         {
-            if (box.vx >= 0)
+            const keys = object.keys;
+
+            if (object.vx >= 0)
             {
                 keys["d"] = 1;
                 keys["a"] = 0;
@@ -340,7 +361,7 @@
                 keys["a"] = 1;
                 keys["d"] = 0;
             }
-            if (box.vy >= 0)
+            if (object.vy >= 0)
             {
                 keys["s"] = 1;
                 keys["w"] = 0;
@@ -353,48 +374,82 @@
 
         }
 
+        function Collision (box1, box2)
+        {
+            if (box1.x < box2.x + box2.width && box1.x + box1.width > box2.x && box1.y < box2.y + box2.height && 
+            box1.y + box1.height > box2.y)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //update function
-        function update() {
+        function update(object, auto) {
             //make the ball move
             modeG = document.querySelector ("input[name='G']:checked").id
             modeB = document.querySelector ("input[name='B']:checked").id
 
             if (modeB == "enableBounce")
-                bounce();
+                bounce(object);
             else
-                bounceless();
+                bounceless(object);
 
             if (modeG == "gravity")
             {
-                enableJump = detectJump();
-                gravity();
+                enableJump = detectJump(object);
+                gravity(object);
             }
+            if (auto)
+                Auto(object);
 
-            //Auto();
-            flat();
-            movement();
+            flat(object);
+            movement(object);
         }
 
         //draw function
-        function draw() {
+        function draw(object) {
             //draw a ball
             ctx.beginPath();
             ctx.fillStyle = "rgb(35, 173, 72)"
-            ctx.drawImage (box.image, box.x, box.y, box.width, box.height);
+            ctx.drawImage (object.image, object.x, object.y, object.width, object.height);
 
         }
 
         //render function
-        function render() {
+        function renderer() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            update();
-            draw();
+
+            update(black, 0);
+            draw(black);
+
+            if (Collision (black, red))
+            {
+                red.x = Math.random() * 1600;
+                red.y = Math.random() * 900;
+                score++;
+                scoreValue.innerText = score;
+            }
+            update (red, 1);
+            draw (red);
+
+            requestAnimationFrame (renderer);
         }
         // Main game loop
-        box.image.onload = () =>
+        var count = 0;
+        function checkLoad()
         {
-            setInterval(render, 16);
+            count++;
+            if (count == 2)
+                renderer();
         }
+        black.image.onload = checkLoad;
+        red.image.onload = checkLoad;
+
+
     </script>
 
 </body>
