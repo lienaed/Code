@@ -1,0 +1,220 @@
+<html>
+    <script>
+        document.write("Q1: a<br>");
+        document.write("<br>");
+
+        document.write("Q2: a<br>");
+        document.write("<br>");
+
+        document.write("Q3: b<br>");
+        document.write("<br>");
+
+        document.write("Q4: c<br>");
+        document.write("<br>");
+
+        document.write("Q5: b<br>");
+        document.write("<br>");
+
+        document.write("Q6: c<br>");
+        document.write("<br>");
+
+        document.write("Q7: c<br>");
+        document.write("<br>");
+
+        document.write("Q8: d<br>");
+        document.write("<br>");
+
+        document.write("Q9: d<br>");
+        document.write("<br>");
+
+        document.write("Q10: c<br>");
+        document.write("<br>");
+
+        document.write("Q11: a<br>");
+        document.write("<br>");
+
+        document.write("Q12: b<br>");
+        document.write("<br>");
+
+        document.write("Q13: b<br>");
+        document.write("<br>");
+
+        document.write("Q14: a<br>");
+        document.write("<br>");
+
+        document.write("Q15: d<br>");
+        document.write("<br>");
+
+        document.write("Q16: T<br>");
+        document.write("<br>");
+
+        document.write("Q17: F<br>");
+        document.write("<br>");
+
+        document.write("Q18: T<br>");
+        document.write("<br>");
+
+        document.write("Q19: T<br>");
+        document.write("<br>");
+
+        document.write("Q20: T<br>");
+        document.write("<br>");
+
+        document.write("Q21: T<br>");
+        document.write("<br>");
+
+        document.write("Q22: T<br>");
+        document.write("<br>");
+
+        document.write("Q23: F<br>");
+        document.write("<br>");
+
+        document.write("Q24: F<br>");
+        document.write("<br>");
+
+        document.write("Q1: library<br>");
+        document.write("<br>");
+
+        document.write("Q2: scope<br>");
+        document.write("<br>");
+
+        document.write("Q3: parameters<br>");
+        document.write("<br>");
+
+        document.write("Q4: variables<br>");
+        document.write("<br>");
+
+        document.write("Q5: value<br>");
+        document.write("<br>");
+
+        document.write("Q6: T<br>");
+        document.write("<br>");
+
+        document.write("Q7: F<br>");
+        document.write("<br>");
+
+        document.write("Q8: T<br>");
+        document.write("<br>");
+
+        document.write("Q9: F<br>");
+        document.write("<br>");
+
+        document.write("Q10: F<br>");
+        document.write("<br>");
+
+        document.write("Q11: T<br>");
+        document.write("<br>");
+
+        document.write("Q12: F<br>");
+        document.write("<br>");
+
+        document.write("Q13: T<br>");
+        document.write("<br>");
+
+        document.write("Q14: F<br>");
+        document.write("<br>");
+
+        document.write("Q15: F<br>");
+        document.write("<br>");
+
+        document.write("Q16: c<br>");
+        document.write("<br>");
+
+        document.write("Q17: <br>");
+            function subtract(x, y) {
+                return y - x;
+            }
+        document.write("<br>");
+
+        document.write("Q18: <br>");
+            function apples() {
+                var number = 0;
+                number = 5;
+                oranges();	
+                document.write("You have" + number + " apples <br/>");
+
+                function oranges() {
+                    number = 12;
+                    document.write("You have" + number + " oranges <br/>");
+                }
+            }
+            apples();
+        document.write("<br>");
+
+        document.write("Q19: <br>");
+            function apples() {
+                var number = 0;
+                oranges();	
+                number = 5;
+                document.write("You have" + number + " apples <br/>");
+
+                function oranges() {
+                    var number = 12;
+                    document.write("You have" + number + " oranges <br/>");
+                }
+            }
+            apples();
+        document.write("<br>");
+
+        document.write("Q20: reference<br>");
+        document.write("<br>");
+
+        document.write("Q21: <br>");
+            var sandwich = "tuna";
+            var drink = "iced tea";
+            var meal = menu(sandwich, drink);
+            document.write(meal);
+
+            function menu(a, b) {
+                menu = "Lunch is a " + a + " sandwich," + b + ", and chips.";
+                return menu;
+            }
+        document.write("<br>");
+
+        document.write("Q22: Lunch is a tuna sandwich,iced tea, and chips.<br>");
+        document.write("<br>");
+
+        document.write("Q23: <br>");
+            var result = new Boolean();
+        document.write("<br>");
+
+        document.write("Q24: <br>");
+            var longAgo = new Date();
+            longAgo.setFullYear(1725, 3, 23);
+        document.write("<br>");
+
+        document.write("Q25: 3 seconds<br>");
+        document.write("<br>");
+
+        document.write("Q26: <br>");
+            function product(x, y) {
+                return x * y;
+            }
+            function sum(x, y) {
+                return x + y;
+            }
+        document.write("<br>");
+
+        document.write("Q27: <br>");
+            document.write("Display: Your exam is in room 9 am at N-215<br>");
+            document.write("Fix: change showIt(time, room) to showIt(room, time)<br>");
+        document.write("<br>");
+
+        document.write("Q28: Should contain <html> tag");
+        document.write("<br>");
+
+        document.write("Q30: <br>");
+            function examTime() {
+                var time = "9 am";
+                var room = "N-215";
+                showIt(room, time);
+            }
+
+            function showIt(a, b) {
+                document.write("Your exam is in room " + a + " at " + b);
+            }
+
+            examTime();
+        document.write("<br>");
+    </script>
+</html>

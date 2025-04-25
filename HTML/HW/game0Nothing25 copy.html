@@ -94,7 +94,8 @@
         {
             position: absolute;
             background-color: rgb(151, 151, 151);
-            display: block;
+            display: flex;
+            flex-direction: column;
             padding: 5px;
             margin: 15px;
             width: 160;
@@ -166,18 +167,27 @@
         var setBuffer = 5;
         var jumpBuffer = 0;
 
-        //box
-        const box = 
+        //Box Class
+        class box
         {
-            width: 100,
-            height: 100,
-            x: canvas.width / 2 - 50,
-            y: canvas.height / 2 - 50,
-            vx: 0,
-            vy: 0,
-            image: new Image()
+            constructor (width, height, x, y, vx, vy)
+            {
+                this.width = width,
+                this.height = height,
+                this.x = x,
+                this.y = y,
+                this.vx = vx,
+                this.vy = vy,
+                this.image = new Image()
+            }
+
         }
-        box.image.src = "https://lienaed.github.io/Code/Images/black.jpg";
+        //Initialize Boxes
+        const black = new box (100, 100, canvas.width / 2 - 50, canvas.height / 2 - 50, 0, 0);
+        const red = new box (100, 100, 0, 0, 0, 0);
+
+        black.image.src = "https://lienaed.github.io/Code/Images/black.jpg";
+        red.image.src = "";
 
         const keys = {};
         document.addEventListener ("keydown", (event) => keys [event.key] = 1);
@@ -185,7 +195,10 @@
 
         //Settings
         var setting = document.getElementById ("setting");
-        var returnButton = document.getElementById ("return");
+        var returnButton = document.getElementById ("return");        
+        var menu = document.querySelector (".menu");
+        var apply = document.getElementById ("apply");
+
         setting.addEventListener ("click", function ()
         {
             setting.style.zIndex = "1";
@@ -205,9 +218,6 @@
             else
                 menu.style.visibility = "hidden";
         }
-        
-        var menu = document.querySelector (".menu");
-        var apply = document.getElementById ("apply");
 
         //Menu
         apply.addEventListener ("click", function()
@@ -343,15 +353,6 @@
 
         }
 
-        //draw function
-        function draw() {
-            //draw a ball
-            ctx.beginPath();
-            ctx.fillStyle = "rgb(35, 173, 72)"
-            ctx.drawImage (box.image, box.x, box.y, box.width, box.height);
-
-        }
-
         //update function
         function update() {
             //make the ball move
@@ -372,6 +373,15 @@
             //Auto();
             flat();
             movement();
+        }
+
+        //draw function
+        function draw() {
+            //draw a ball
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(35, 173, 72)"
+            ctx.drawImage (box.image, box.x, box.y, box.width, box.height);
+
         }
 
         //render function
