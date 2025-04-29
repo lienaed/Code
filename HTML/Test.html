@@ -6,64 +6,9 @@
         }
     </style>
     <body>
-        <center>
-            <script>
-                function triangle (h, tex, slope)
-                {
-                    for (var i = 0; i < h; i+=slope)
-                    {
-                        document.write (" ");
-                        for (var u = 0; u <= i; u++)
-                        {
-                            document.write (tex);
-                        }
-                        document.write ("<br>");
-                    }
-                }
-
-                function rectangle (w, h, tex)
-                {
-                    for (var i = 0; i < h; i++)
-                    {
-                        for (var u = 0; u < w; u++)
-                        {
-                            document.write (tex);
-                        }
-                        document.write ("<br>");
-                    }
-                }
-                function wall (W, H, winW, winH)
-                {
-                    rectangle (W, (H - winH)/2, "{}");
-
-                    for (var i = 0; i < winH; i++)
-                    {
-                        for (var u = 0; u < (W - winW)/2; u++)
-                        {
-                            document.write ("[]");
-                        }
-                        for (var u = 0; u < winW; u++)
-                        {
-                            document.write ("&nbsp&nbsp");
-                        }
-                        for (var u = 0; u < (W - winW)/2; u++)
-                        {
-                            document.write ("[]");
-                        }
-
-                        document.write ("<br>");
-                    }
-
-                    rectangle (W, (H - winH)/2, "{}");
-
-                }
-                triangle (12, "##", 2);
-                wall (12, 12, 4, 5);
-                wall (12, 17, 4, 5);
-                wall (12, 17, 4, 5);
-                rectangle (17, 9, "##");
-            </script>
-        </center>
+        <script>
+            
+        </script>
     </body>
 
 </html>
