@@ -247,9 +247,9 @@
 
 
         // Ball properties
-        function detectJump(object)
+        function detectJump(box)
         {
-            const keys = object.keys;
+            const keys = box.keys;
 
             if (keys[" "])
                 jumpBuffer = setBuffer;
@@ -263,93 +263,93 @@
 
 
         //Gravity
-        function gravity (object)
+        function gravity (box)
         {
-            const keys = object.keys;
+            const keys = box.keys;
 
-            object.vy += gravityForce;
-            if (enableJump && object.y == canvas.height - object.height)
-                object.vy -= jumpHeight;
+            box.vy += gravityForce;
+            if (enableJump && box.y == canvas.height - box.height)
+                box.vy -= jumpHeight;
             keys ["w"] = 0;
             keys ["s"] = 0;
         }
 
 
         //Flat Surface
-        function flat (object)
+        function flat (box)
         {
-            const keys = object.keys;
+            const keys = box.keys;
 
             if (keys ["w"])
-                object.vy -= acceleration;
+                box.vy -= acceleration;
             if (keys ["s"])
-                object.vy += acceleration;
+                box.vy += acceleration;
             if (keys ["a"])
-                object.vx -= acceleration;
+                box.vx -= acceleration;
             if (keys ["d"])
-                object.vx += acceleration;
+                box.vx += acceleration;
             
-            object.vx = Math.max (-maxVelocity, Math.min (maxVelocity, object.vx));
+            box.vx = Math.max (-maxVelocity, Math.min (maxVelocity, box.vx));
             if (modeG != "gravity")
-                object.vy = Math.max (-maxVelocity, Math.min (maxVelocity, object.vy));
+                box.vy = Math.max (-maxVelocity, Math.min (maxVelocity, box.vy));
             
-            object.vx *= friction;
-            object.vy *= friction;
+            box.vx *= friction;
+            box.vy *= friction;
 
-            if (Math.sqrt ((Math.abs (object.vx))**2 + (Math.abs (object.vy))**2) < staticFriction)
+            if (Math.sqrt ((Math.abs (box.vx))**2 + (Math.abs (box.vy))**2) < staticFriction)
             {
-                object.vx = 0;
-                object.vy = 0;
+                box.vx = 0;
+                box.vy = 0;
             }
         }
 
 
         //Bounce
-        function bounce (object)
+        function bounce (box)
         {
-            if (object.x <= 0 || object.x >= canvas.width - object.width)
-                object.vx = -object.vx * bounceForce;
-            if (object.y <= 0 || object.y >= canvas.height - object.height)
-                object.vy = -object.vy * bounceForce;
+            if (box.x <= 0 || box.x >= canvas.width - box.width)
+                box.vx = -box.vx * bounceForce;
+            if (box.y <= 0 || box.y >= canvas.height - box.height)
+                box.vy = -box.vy * bounceForce;
         }
-        function bounceless (object)
+        function bounceless (box)
         {
-            if (object.x <= 0 || object.x >= canvas.width - object.width)
-                object.vx = 0;
-            if (object.y <= 0 || object.y >= canvas.height - object.height)
-                object.vy = 0;
+            if (box.x <= 0 || box.x >= canvas.width - box.width)
+                box.vx = 0;
+            if (box.y <= 0 || box.y >= canvas.height - box.height)
+                box.vy = 0;
         }
 
 
         //Moving
-        function movement (object)
+        function movement (box)
         {
-            object.x += object.vx;
-            object.y += object.vy;
+            box.x += box.vx;
+            box.y += box.vy;
                 
-            if (object.x <= 0) 
+            if (box.x <= 0) 
             {
-                object.x = 0;
+                box.x = 0;
             }
-            if (object.x >= canvas.width - object.width) 
+            if (box.x >= canvas.width - box.width) 
             {
-                object.x = canvas.width - object.width;
+                box.x = canvas.width - box.width;
             }
-            if (object.y <= 0) 
+            if (box.y <= 0) 
             {
-                object.y = 0;
+                box.y = 0;
             }
-            if (object.y >= canvas.height - object.height) 
+            if (box.y >= canvas.height - box.height) 
             {
-                object.y = canvas.height - object.height;
+                box.y = canvas.height - box.height;
             }
         }
 
-        function Auto(object)
+        function Auto(box)
         {
-            const keys = object.keys;
+            const keys = box.keys;
 
-            if (object.vx >= 0)
+            if (box.vx >= 0)
             {
                 keys["d"] = 1;
                 keys["a"] = 0;
@@ -359,7 +359,7 @@
                 keys["a"] = 1;
                 keys["d"] = 0;
             }
-            if (object.vy >= 0)
+            if (box.vy >= 0)
             {
                 keys["s"] = 1;
                 keys["w"] = 0;
@@ -386,34 +386,34 @@
         }
 
         //update function
-        function update(object, auto) {
+        function update(box, auto) {
             //make the ball move
             modeG = document.querySelector ("input[name='G']:checked").id
             modeB = document.querySelector ("input[name='B']:checked").id
 
             if (modeB == "enableBounce")
-                bounce(object);
+                bounce(box);
             else
-                bounceless(object);
+                bounceless(box);
 
             if (modeG == "gravity")
             {
-                enableJump = detectJump(object);
-                gravity(object);
+                enableJump = detectJump(box);
+                gravity(box);
             }
             if (auto)
-                Auto(object);
+                Auto(box);
 
-            flat(object);
-            movement(object);
+            flat(box);
+            movement(box);
         }
 
         //draw function
-        function draw(object) {
+        function draw(box) {
             //draw a ball
             ctx.beginPath();
             ctx.fillStyle = "rgb(35, 173, 72)"
-            ctx.drawImage (object.image, object.x, object.y, object.width, object.height);
+            ctx.drawImage (box.image, box.x, box.y, box.width, box.height);
 
         }
 
@@ -421,7 +421,7 @@
         function renderer() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            update(black, 0);
+            update(black, 0); 
             draw(black);
 
             if (Collision (black, red))
@@ -436,6 +436,7 @@
 
             requestAnimationFrame (renderer);
         }
+
         // Main game loop
         var count = 0;
         function checkLoad()
@@ -446,8 +447,6 @@
         }
         black.image.onload = checkLoad;
         red.image.onload = checkLoad;
-
-
     </script>
 
 </body>
