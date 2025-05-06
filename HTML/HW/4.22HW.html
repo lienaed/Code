@@ -1,0 +1,85 @@
+<html>
+    <script>
+        function input()
+        {
+            var type = parseInt (prompt ("1: Addition 2: Subtraction 3: Multiplication 4: Division 0: Exit"));
+            switch (type)
+            {
+                case 1:
+                    add();
+                    break;
+                case 2:
+                    sub();
+                    break;
+                case 3:
+                    time();
+                    break;
+                case 4:
+                    div();
+                    break;
+                case 0:
+                    return;
+                default:
+                    alert("Wrong Input.");
+                    input();
+                    break;
+            }
+        }
+
+        function add()
+        {
+            var a = Math.floor (Math.random() * 11);
+            var b = Math.floor (Math.random() * 11);
+            var result = a + b;
+            var userResult = prompt (a + " + " + b + " = ?");
+            if (userResult == result)
+                correct();
+            else
+                incorrect();
+        }
+        function sub()
+        {
+            var a = Math.floor (Math.random() * 11);
+            var b = Math.floor (Math.random() * 11);
+            var result = a - b;
+            var userResult = prompt (a + " - " + b + " = ?");
+            if (userResult == result)
+                correct();
+            else
+                incorrect();
+        }
+        function time()
+        {
+            var a = Math.floor (Math.random() * 11);
+            var b = Math.floor (Math.random() * 11);
+            var result = a * b;
+            var userResult = prompt (a + " * " + b + " = ?");
+            if (userResult == result)
+                correct();
+            else
+                incorrect();
+        }
+        function div()
+        {
+            var a = Math.floor (Math.random() * 11);
+            var b = Math.floor (Math.random() * 11);
+            var result = a / b;
+            var userResult = prompt (a + " / " + b + " = ?");
+            if (userResult == result)
+                correct();
+            else
+                incorrect();
+        }
+
+        function correct ()
+        {
+            alert ("Correct.");
+        }
+        function incorrect ()
+        {
+            alert ("Incorrect.");
+        }
+
+        input();
+    </script>
+</html>
