@@ -92,7 +92,7 @@
                 padding: 5px;
                 margin: 15px;
                 width: 160;
-                height: 420;
+                height: 470;
                 top: 150px;
                 left: 10px;
                 opacity: 1;
@@ -133,14 +133,18 @@
             <label for = "setStaticFriction"> StaticFriction: </label>
             <input type = "number" id = setStaticFriction value = 0.2 style = "width: 160; height: 26;">
             <label for = "setMaxVelocity"> MaxVelocity: </label>
-            <input type = "number" id = setMaxVelocity value = 30 style = "width: 160; height: 26;">
+            <input type = "number" id = setMaxVelocity value = 15 style = "width: 160; height: 26;">
             <label for = "setBounceForce"> BounceForce: </label>
             <input type = "number" id = setBounceForce value = 1 style = "width: 160; height: 26;">
             <label for = "setJumpHeight"> JumpHeight: </label>
             <input type = "number" id = setJumpHeight value = 20 style = "width: 160; height: 26;">
             <label for = "setBuffer"> JumpBuffer: </label>
             <input type = "number" id = setBuffer value = 5 style = "width: 160; height: 26;">
+            <label for = "launchForce"> launchForce: </label>
+            <input type = "number" id = launchForce value = 10 style = "width: 160; height: 26;">
+
             <button id = "apply" style = "margin-top: 5px; width: 50; height: 26;"> apply</button>
+            
         </div>
 
         <div id="Score" style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%); font-size: 32px;">0</div>
@@ -164,6 +168,7 @@
                 var setBuffer = 5;
                 var jumpBuffer = 0;
                 var score = 0;
+                var launchForce = 10;
 
 
                 //Settings
@@ -191,10 +196,10 @@
                 }
                
 
+                //Menu
                 var menu = document.querySelector (".menu");
                 var apply = document.getElementById ("apply");
 
-                //Menu
                 apply.addEventListener ("click", function()
                 {
                     gravityForce = parseFloat (document.getElementById ("setGravity").value);
@@ -205,35 +210,58 @@
                     jumpHeight = parseFloat (document.getElementById ("setJumpHeight").value);
                     bounceForce = parseFloat (document.getElementById ("setBounceForce").value);
                     setBuffer = parseFloat (document.getElementById ("setBuffer").value);
+                    launchForce = parseFloat (document.getElementById ("launchForce"));
                 })
 
                 //Other Initialization
                 var modeG = document.querySelector ("input[name='G']:checked").id
                 var modeB = document.querySelector ("input[name='B']:checked").id
                 var scoreValue = document.getElementById ("Score");
+                var mouseX = 0, mouseY = 0;
+
+                var keys = {};
+                document.addEventListener ("keydown", (event) => keys [event.key] = 1);
+                document.addEventListener ("keyup", (event) => keys [event.key] = 0);
+                document.addEventListener ("mousemove", function (event)
+                {
+                    mouseX = parseFloat (event.clientX);
+                    mouseY = parseFloat (event.clientY);
+                })
 
                 //box
                 class box
                 {
-                    constructor (width, height, x, y)
+                    constructor (width, height, x, y, label)
                     {
-                        this.width = width,
-                        this.height = height,
-                        this.x = x,
-                        this.y = y,
-                        this.vx = 0,
-                        this.vy = 0,
-                        this.image = new Image()
+                        this.width = width;
+                        this.height = height;
+                        this.x = x;
+                        this.y = y;
+                        this.vx = 0;
+                        this.vy = 0;
+                        this.image = new Image();
+                        this.label = label;
+                        this.launchState = 0;
+                        this.launchDX = 0;
+                        this.launchDY = 0;
+                        this.launchGradient = 0;
+                        this.currentForce = 0;
+                        this.w = 0;
+                        this.s = 0;
+                        this.a = 0;
+                        this.d = 0;
+                    }
 
-                        this.keys = {};
-                        document.addEventListener ("keydown", (event) => this.keys [event.key] = 1);
-                        document.addEventListener ("keyup", (event) => this.keys [event.key] = 0);
+                    //Gravity
+                    gravity ()
+                    {
+                        this.vy += gravityForce;
+                        if (enableJump && this.y == board.height - this.height && this.label == 1)
+                            this.vy -= jumpHeight;
                     }
 
                     detectJump() 
                     {
-                        if (this.keys[" "])
-                            jumpBuffer = setBuffer;
                         jumpBuffer--;
 
                         if (jumpBuffer > 0)
@@ -242,24 +270,16 @@
                             return 0;
                     }
 
-                    //Gravity
-                    gravity ()
+                    //Control Move
+                    move (w, s, a, d)
                     {
-                        this.vy += gravityForce;
-                        if (enableJump && this.y == board.height - this.height)
-                            this.vy -= jumpHeight;
-                    }
-
-                    //control Surface
-                    control ()
-                    {
-                        if (this.keys ["w"])
+                        if (w)
                             this.vy -= acceleration;
-                        if (this.keys ["s"])
+                        if (s)
                             this.vy += acceleration;
-                        if (this.keys ["a"])
+                        if (a)
                             this.vx -= acceleration;
-                        if (this.keys ["d"])
+                        if (d)
                             this.vx += acceleration;
                         
                         this.vx = Math.max (-maxVelocity, Math.min (maxVelocity, this.vx));
@@ -292,8 +312,44 @@
                             this.vy = 0;
                     }
 
+                    launch ()
+                    {
+                        if (!this.launchState)
+                            this.currentForce = parseFloat (launchForce);
+
+                        if (keys["AltLeft"] || keys["Meta"])
+                        {
+                            console.log ("Alt");
+                            this.launchState = 1;
+                            this.vx *= 0.55;
+                            this.vy *= 0.55;
+                            this.currentForce += 1;
+                            this.launchDX = parseFloat (mouseX - this.x + this.width / 2);
+                            this.launchDY = parseFloat (mouseY - this.y + this.height / 2);
+                        }
+
+                        if ((!keys["AltLeft"] && !keys["Meta"]) && this.launchState)
+                        {
+                            console.log ("ReleaseAlt");
+                            this.launchState = 0;
+                            this.launchGradient = Math.sqrt (this.launchDX ** 2 + this.launchDY ** 2);
+                            if (this.launchGradient > 0)
+                            {
+                                this.vx = (this.launchDX / this.launchGradient) * this.currentForce;
+                                this.vy = (this.launchDY / this.launchGradient) * this.currentForce;
+                            }  
+                                                  
+                            keys["w"] = 0;
+                            keys["s"] = 0;
+                            keys["a"] = 0;
+                            keys["d"] = 0;
+                        }
+
+
+                    }
+
                     //Moving
-                    movement ()
+                    applyMove ()
                     {
                         this.x += this.vx;
                         this.y += this.vy;
@@ -318,28 +374,51 @@
 
                     auto()
                     {
-                        const keys = this.keys;
 
                         if (this.vx >= 0)
                         {
-                            this.keys["d"] = 1;
-                            this.keys["a"] = 0;
+                            this.d = 1;
+                            this.a = 0;
                         }
                         else
                         {
-                            this.keys["a"] = 1;
-                            this.keys["d"] = 0;
+                            this.a = 1;
+                            this.d = 0;
                         }
                         if (this.vy >= 0)
                         {
-                            this.keys["s"] = 1;
-                            this.keys["w"] = 0;
+                            this.s = 1;
+                            this.w = 0;
                         }
                         else
                         {
-                            this.keys["w"] = 1;
-                            this.keys["s"] = 0;
+                            this.w = 1;
+                            this.s = 0;
                         }
+                    }
+
+                    inputManager()
+                    {
+                        if (keys[" "])
+                            jumpBuffer = setBuffer;
+                        enableJump = this.detectJump();
+
+                        if (keys["w"])
+                            this.w = 1;
+                        else
+                            this.w = 0;
+                        if (keys["s"])
+                            this.s = 1;
+                        else
+                            this.s = 0;
+                        if (keys["a"])
+                            this.a = 1;
+                        else
+                            this.a = 0;
+                        if (keys["d"])
+                            this.d = 1;
+                        else
+                            this.d = 0;
                     }
                     
                     render ()
@@ -347,38 +426,54 @@
                         draw.drawImage (this.image, this.x, this.y, this.width, this.height);
                     }
 
-                    update(Auto)
-                    {
+                    update()
+                    {                            
                         modeG = document.querySelector ("input[name='G']:checked").id
                         modeB = document.querySelector ("input[name='B']:checked").id
 
-                        if (modeB == "enableBounce")
-                            this.bounce();
-                        else
-                            this.bounceless();
-
-                        if (modeG == "gravity")
+                        if (this.label == 1)
                         {
-                            enableJump = this.detectJump();
-                            this.gravity();
-                        }
-                        if (Auto)
-                            this.auto();
+                            if (modeB == "enableBounce")
+                                this.bounce();
+                            else
+                                this.bounceless();
 
-                        this.control();
-                        this.movement();
-                        this.render();
+                            if (modeG == "gravity")
+                            {
+                                enableJump = this.detectJump();
+                                this.gravity();
+                            }
+
+                            this.inputManager();
+                            this.move(this.w, this.s, this.a, this.d);
+                            this.launch();
+                            this.applyMove();
+                            this.render();
+                            
+                            console.log (this.x, " ", this.y);
+                        }
+
+                        else if (this.label == 2)
+                        {
+                            if (modeB == "enableBounce")
+                                this.bounce();
+                            else
+                                this.bounceless();
+
+                            if (modeG == "gravity")
+                            {
+                                this.gravity();
+                            }
+
+                            this.auto();
+                            this.move(this.w, this.s, this.a, this.d);
+                            this.applyMove();
+                            this.render();
+                        }
+
                     }
                 }
                 
-                //Object Initialization
-                const draw = board.getContext ("2d");
-
-                const black = new box (100, 100, board.width / 2 - 50, board.height / 2 - 50);
-                const red = new box (100, 100, 0, 0);
-                black.image.src = "https://lienaed.github.io/Code/Images/Black.jpg";
-                red.image.src = "https://lienaed.github.io/Code/Images/Red.png";
-
                 //Managers
                 function Collision (a, b)
                 {
@@ -390,11 +485,20 @@
                     );
                 }
 
+                //Object Initialization
+                const draw = board.getContext ("2d");
+
+                const black = new box (100, 100, board.width / 2 - 50, board.height / 2 - 50, 1);
+                const red = new box (100, 100, 0, 0, 2);
+                black.image.src = "https://lienaed.github.io/Code/Images/Black.jpg";
+                red.image.src = "https://lienaed.github.io/Code/Images/Red.png";
+
+
                 //Loop
                 function loop ()
                 {
                     draw.clearRect (0, 0, board.width, board.height);
-                    black.update(0);
+                    black.update();
 
                     if (Collision (black, red))
                     {
@@ -404,7 +508,7 @@
                         scoreValue.innerText = score;
                     }
 
-                    red.update(1);
+                    red.update();
                     requestAnimationFrame (loop);
                 }
 
