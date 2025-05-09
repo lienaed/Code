@@ -317,7 +317,7 @@
                         if (!this.launchState)
                             this.currentForce = parseFloat (launchForce);
 
-                        if (keys["AltLeft"] || keys["Meta"])
+                        if (keys["altKey"] || keys["Meta"])
                         {
                             console.log ("Alt");
                             this.launchState = 1;
@@ -328,7 +328,7 @@
                             this.launchDY = parseFloat (mouseY - this.y + this.height / 2);
                         }
 
-                        if ((!keys["AltLeft"] && !keys["Meta"]) && this.launchState)
+                        if ((!keys["altKey"] && !keys["Meta"]) && this.launchState)
                         {
                             console.log ("ReleaseAlt");
                             this.launchState = 0;
