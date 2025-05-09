@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id = 'text'></p>
+        <p id = 'hotter'>Hotter: <br></p>
+        <p id = 'colder'>Colder: <br></p>
+
+        <script>
+            var temp = [9.8, 13.0, 14.8, 15.7, 22.9, 18.0, 13.3, 19.0, 20.3, 27.2, 12.8, 10.3, 20.3, 11.0, 14.5];
+            var date = new Date(2025, 3, 20);
+            var sum = 0;
+            var average = document.getElementById ("text");
+            var hotter = document.getElementById ("hotter");
+            var colder = document.getElementById ("colder");
+
+            for (let i of temp)
+            {
+                sum += i;
+            }
+            var avg = sum / 15;
+            average.innerHTML += "Average Temperature: " + avg;
+
+            for (var i = 0; i < 15; i++)
+            {
+                let current = new Date(date);
+
+                if (temp[i] > avg)
+                    hotter.innerHTML += date.toLocaleDateString() + "<br>";
+                else if (temp[i] < avg)
+                    colder.innerHTML += date.toLocaleDateString() + "<br>";
+
+                date.setDate(date.getDate() + 1);
+            }
+
+
+        </script>
+    </body>
+</html>
