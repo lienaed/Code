@@ -1,0 +1,16 @@
+<html>
+    <script>
+        var array1 = ["apple", "banana", "cherry"];
+        var array2 = ["date", "fig", "grape"];
+        array1.push ("kiwi");
+        array2.pop();
+        array1.unshift ("apricot");
+        var combineArray = array1.concat (array2);
+        combineArray.sort();
+        combineArray.reverse();
+        combineArray.splice (2, 2, "mango", "nectarine");
+        var result = combineArray.join (" - ");
+        document.write (array1.toString());
+        console.log (result);
+    </script>
+</html>
