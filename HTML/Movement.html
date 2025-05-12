@@ -137,7 +137,7 @@
             <input type = "number" id = setStaticFriction value = 0.2 style = "width: 160; height: 26;">
 
             <label for = "setMaxVelocity"> MaxVelocity: </label>
-            <input type = "number" id = setMaxVelocity value = 15 style = "width: 160; height: 26;">
+            <input type = "number" id = setMaxVelocity value = 30 style = "width: 160; height: 26;">
 
             <label for = "setBounceForce"> BounceForce: </label>
             <input type = "number" id = setBounceForce value = 1 style = "width: 160; height: 26;">
@@ -171,7 +171,7 @@
                 const board = document.getElementById ("Board");
                 board.width = window.innerWidth;
                 board.height = window.innerHeight;
-                var maxVelocity = 15;
+                var maxVelocity = 30;
                 var acceleration = 0.4;
                 var friction = 0.99;
                 var staticFriction = 0.2;
@@ -345,8 +345,8 @@
                         if (this.launchState == 2)
                         {
                             console.log ("Launching");
-                            this.vx *= 0.55;
-                            this.vy *= 0.55;
+                            this.vx *= 0.85;
+                            this.vy *= 0.85;
                             this.currentForce += 1;
                             this.launchDX = parseFloat (mouseX - this.x + this.width / 2);
                             this.launchDY = parseFloat (mouseY - this.y + this.height / 2);
