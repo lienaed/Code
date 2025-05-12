@@ -1,0 +1,124 @@
+<html>
+    <script>
+        document.write("Q16: <br>");
+            var colors = ["black", "white", "teal", "mauve"];
+            document.write("colors[3] = " + colors[3] + "<br>");
+        document.write("<br>");
+
+        document.write("Q17: <br>");
+            var chips = ["onion", "barbecue", "salt", "cheese"];
+            document.write("There are" + chips.length + 1 + " types of chips<br>");
+        document.write("<br>");
+
+        document.write("Q18: <br>");
+            var numbers = [2, 3, 5, 7, 11];
+            var adding = numbers[1] + numbers[2] + numbers[4];
+            var divide = (numbers[1] + numbers[3]) / numbers[0];
+            document.write("adding = " + adding + "<br>");
+            document.write("divide = " + divide + "<br>");
+        document.write("<br>");
+
+        document.write("Q19: <br>");
+            var threes = [];
+            for (var i = 0; i < 5; i++) {
+                threes[i] = 3 * (i + 1);
+            }
+            document.write(threes + "<br>");
+        document.write("<br>");
+
+        document.write("Q20: <br>");
+            var usernames = [];
+            var num = 300;
+            for (var i = 0; i < 100; i++) {
+                usernames[i] = "college" + num;
+                num++;
+            }
+            document.write(usernames + "<br>");
+        document.write("<br>");
+
+        document.write("Q21: <br>");
+            var employees = [], hours = [], i = 0;
+            var inputNames = ["Alice", "Bob", "done"];
+            var inputHours = [40, 36];
+            var index = 0;
+            var worker = inputNames[index++];
+            while (worker != "done") {
+                employees[i] = worker;
+                hours[i] = inputHours[i];
+                i++;
+                worker = inputNames[index++];
+            }
+            document.write("Employees: " + employees + "<br>");
+            document.write("Hours: " + hours + "<br>");
+        document.write("<br>");
+
+        document.write("Q22: <br>");
+            var items = ["ring", "necklace", "bracelet"];
+            var prices = [199.99, 349.50, 129.00];
+            var stocks = [10, 5, 8];
+            var categories = ["gold", "silver", "platinum"];
+            document.write("items: " + items + "<br>");
+            document.write("prices: " + prices + "<br>");
+            document.write("stocks: " + stocks + "<br>");
+            document.write("categories: " + categories + "<br>");
+        document.write("<br>");
+
+        document.write("Q23: <br>");
+            var snow = [6, 8, 12, 21, 15, 7, 8, 10, 15, 19];
+            var year = 2000;
+            for (var i = 0; i < 10; i++) {
+                document.write("Snowfall for the year " + year + " is " + snow[i] + " inches<br>");
+                year++;
+            }
+        document.write("<br>");
+
+        document.write("Q24: <br>");
+            var snow = [6, 8, 12, 21, 15, 7, 8, 10, 15, 19];
+            var year = 2000;
+            var max = snow[0], min = snow[0];
+            var maxYear = 2000, minYear = 2000;
+            for (var i = 1; i < snow.length; i++) {
+                if (snow[i] > max) {
+                    max = snow[i];
+                    maxYear = 2000 + i;
+                }
+                if (snow[i] < min) {
+                    min = snow[i];
+                    minYear = 2000 + i;
+                }
+            }
+        document.write("<br>");
+
+        document.write("Q25: <br>");
+            var sum = 0;
+            for (var i = 0; i < 10; i++) sum += snow[i];
+            var avg = sum / 10;
+            document.write("Average snowfall: " + avg + "<br>");
+        document.write("<br>");
+
+        document.write("Q26: <br>");
+            var aboveAvg = 0;
+            for (var i = 0; i < 10; i++) {
+                if (snow[i] > avg) aboveAvg++;
+            }
+            document.write("Years above average: " + aboveAvg + "<br>");
+        document.write("<br>");
+
+        document.write("Q27: <br>");
+            var nearAvg = 0;
+            for (var i = 0; i < 10; i++) {
+                if (Math.abs(snow[i] - avg) <= 2) nearAvg++;
+            }
+            document.write("Years within ±2 inches of average: " + nearAvg + "<br>");
+        document.write("<br>");
+
+        document.write("Q30: <br>");
+            var numbers = new Array (8);
+            for (var i = 0; i < 8; i++)
+            {
+                numbers[i] = i*i+1;
+            }
+            document.write (numbers);
+        document.write("<br>");
+    </script>
+</html>

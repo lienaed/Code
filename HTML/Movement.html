@@ -92,7 +92,7 @@
                 padding: 5px;
                 margin: 15px;
                 width: 160;
-                height: 470;
+                height: 565;
                 top: 150px;
                 left: 10px;
                 opacity: 1;
@@ -126,22 +126,36 @@
         <div class = "menu">
             <label for = "setGravity"> Gravity: </label>
             <input type = "number" id = setGravity value = 1.3 style = "width: 160; height: 26;">
+
             <label for = "setAcceleration"> Acceleration: </label>
             <input type = "number" id = setAcceleration value = 0.4 style = "width: 160; height: 26;">
+
             <label for = "setFriction"> Friction: </label>
             <input type = "number" id = setFriction value = 0.99 style = "width: 160; height: 26;">
+
             <label for = "setStaticFriction"> StaticFriction: </label>
             <input type = "number" id = setStaticFriction value = 0.2 style = "width: 160; height: 26;">
+
             <label for = "setMaxVelocity"> MaxVelocity: </label>
             <input type = "number" id = setMaxVelocity value = 15 style = "width: 160; height: 26;">
+
             <label for = "setBounceForce"> BounceForce: </label>
             <input type = "number" id = setBounceForce value = 1 style = "width: 160; height: 26;">
+
             <label for = "setJumpHeight"> JumpHeight: </label>
             <input type = "number" id = setJumpHeight value = 20 style = "width: 160; height: 26;">
+
             <label for = "setBuffer"> JumpBuffer: </label>
-            <input type = "number" id = setBuffer value = 5 style = "width: 160; height: 26;">
+            <input type = "number" id = setBuffer value = 2 style = "width: 160; height: 26;">
+
             <label for = "launchForce"> launchForce: </label>
             <input type = "number" id = launchForce value = 10 style = "width: 160; height: 26;">
+
+            <label for = "launchBuffer"> launchBuffer: </label>
+            <input type = "number" id = launchBuffer value = 120 style = "width: 160; height: 26;">
+
+            <label for = "maxLaunchForce"> maxLaunchForce: </label>
+            <input type = "number" id = maxLaunchForce value = 100 style = "width: 160; height: 26;">
 
             <button id = "apply" style = "margin-top: 5px; width: 50; height: 26;"> apply</button>
             
@@ -153,7 +167,7 @@
         <script>
             function game()
             {
-                //Variable
+                //Variables
                 const board = document.getElementById ("Board");
                 board.width = window.innerWidth;
                 board.height = window.innerHeight;
@@ -164,11 +178,13 @@
                 var bounceForce = 1;
                 var gravityForce = 1.3;
                 var jumpHeight = 20;
-                var enableJump;
-                var setBuffer = 5;
+                var enableJump = 0;
+                var setBuffer = 2;
                 var jumpBuffer = 0;
                 var score = 0;
                 var launchForce = 10;
+                var launchBuffer = 120;
+                var maxLaunchForce = 100;
 
 
                 //Settings
@@ -210,7 +226,9 @@
                     jumpHeight = parseFloat (document.getElementById ("setJumpHeight").value);
                     bounceForce = parseFloat (document.getElementById ("setBounceForce").value);
                     setBuffer = parseFloat (document.getElementById ("setBuffer").value);
-                    launchForce = parseFloat (document.getElementById ("launchForce"));
+                    launchForce = parseFloat (document.getElementById ("launchForce").value);
+                    launchBuffer = parseFloat (document.getElementById ("launchBuffer").value);
+                    maxLaunchForce = parseFloat (document.getElementById ("maxLaunchForce").value);
                 })
 
                 //Other Initialization
@@ -220,6 +238,7 @@
                 var mouseX = 0, mouseY = 0;
 
                 var keys = {};
+                var prevKeys = {};
                 document.addEventListener ("keydown", (event) => keys [event.key] = 1);
                 document.addEventListener ("keyup", (event) => keys [event.key] = 0);
                 document.addEventListener ("mousemove", function (event)
@@ -246,6 +265,7 @@
                         this.launchDY = 0;
                         this.launchGradient = 0;
                         this.currentForce = 0;
+                        this.launchTimer = 0;
                         this.w = 0;
                         this.s = 0;
                         this.a = 0;
@@ -314,24 +334,32 @@
 
                     launch ()
                     {
+                        console.log (this.launchTimer);
                         if (!this.launchState)
-                            this.currentForce = parseFloat (launchForce);
-
-                        if (keys["AltLeft"] || keys["Meta"])
                         {
-                            console.log ("Alt");
-                            this.launchState = 1;
+                            this.currentForce = parseFloat (launchForce);
+                            this.launchTimer = launchBuffer;
+                        }
+
+
+                        if (this.launchState == 2)
+                        {
+                            console.log ("Launching");
                             this.vx *= 0.55;
                             this.vy *= 0.55;
                             this.currentForce += 1;
                             this.launchDX = parseFloat (mouseX - this.x + this.width / 2);
                             this.launchDY = parseFloat (mouseY - this.y + this.height / 2);
+
+                            this.launchTimer--;
+                            if (this.launchTimer <= 0)
+                                this.launchState = 3;
                         }
 
-                        if ((!keys["AltLeft"] && !keys["Meta"]) && this.launchState)
+                        if (this.launchState == 3)
                         {
-                            console.log ("ReleaseAlt");
-                            this.launchState = 0;
+                            console.log ("Launched");
+
                             this.launchGradient = Math.sqrt (this.launchDX ** 2 + this.launchDY ** 2);
                             if (this.launchGradient > 0)
                             {
@@ -343,6 +371,7 @@
                             keys["s"] = 0;
                             keys["a"] = 0;
                             keys["d"] = 0;
+                            this.launchState = 0;
                         }
 
 
@@ -399,9 +428,19 @@
 
                     inputManager()
                     {
+                        if (keys[" "] && !prevKeys[" "])
+                            this.launchState = 1;
+
+                        if (keys[" "] && this.launchState)
+                        {
+                            this.launchState = 2;
+                        }
+                        if (!keys[" "] && prevKeys[" "] && this.launchState)
+                            this.launchState = 3;
+
                         if (keys[" "])
                             jumpBuffer = setBuffer;
-                        enableJump = this.detectJump();
+                        enableJump = this.detectJump();                        
 
                         if (keys["w"])
                             this.w = 1;
@@ -419,6 +458,8 @@
                             this.d = 1;
                         else
                             this.d = 0;
+
+                        prevKeys = Object.assign ({}, keys);
                     }
                     
                     render ()
@@ -433,6 +474,9 @@
 
                         if (this.label == 1)
                         {
+                            this.inputManager();
+                            this.move(this.w, this.s, this.a, this.d);
+
                             if (modeB == "enableBounce")
                                 this.bounce();
                             else
@@ -440,13 +484,13 @@
 
                             if (modeG == "gravity")
                             {
-                                enableJump = this.detectJump();
                                 this.gravity();
                             }
+                            else
+                            {
+                                this.launch();
+                            }
 
-                            this.inputManager();
-                            this.move(this.w, this.s, this.a, this.d);
-                            this.launch();
                             this.applyMove();
                             this.render();
                             
@@ -463,6 +507,10 @@
                             if (modeG == "gravity")
                             {
                                 this.gravity();
+                            }
+                            else
+                            {
+                                this.launch();
                             }
 
                             this.auto();
