@@ -50,8 +50,8 @@
             {
                 display: flex;
                 position: absolute;
-                width: 300;
-                height: 100;
+                width: 300px;
+                height: 100px;
                 z-index: 100;
                 padding: 10px;
                 border-radius: 5px; 
@@ -324,12 +324,12 @@
                         if (this.y <= 0 || this.y >= board.height - this.height)
                             this.vy = -this.vy * bounceForce;
                     }
-                    bounceless ()
+                    bounceless() 
                     {
-                        if (this.x <= 0 || this.x >= board.width - this.width)
-                            this.vx = 0;
-                        if (this.y <= 0 || this.y >= board.height - this.height)
-                            this.vy = 0;
+                        if (this.x <= 0 && this.vx < 0) this.vx = 0;
+                        if (this.x >= board.width - this.width && this.vx > 0) this.vx = 0;
+                        if (this.y <= 0 && this.vy < 0) this.vy = 0;
+                        if (this.y >= board.height - this.height && this.vy > 0) this.vy = 0;
                     }
 
                     launch ()
@@ -536,8 +536,8 @@
                 //Object Initialization
                 const draw = board.getContext ("2d");
 
-                const black = new box (100, 100, board.width / 2 - 50, board.height / 2 - 50, 1);
-                const red = new box (100, 100, 0, 0, 2);
+                const black = new box (50, 50, board.width / 2 - 50, board.height / 2 - 50, 1);
+                const red = new box (50, 50, 0, 0, 2);
                 black.image.src = "https://lienaed.github.io/Code/Images/Black.jpg";
                 red.image.src = "https://lienaed.github.io/Code/Images/Red.png";
 
