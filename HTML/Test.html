@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shortcut Intercept</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    #log {
+      white-space: pre-line;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body tabindex="0">
+
+  <h2>按下键查看输出（支持 Cmd/Ctrl + W、Shift、Alt 等）</h2>
+  <div id="log"></div>
+
+  <script>
+    const log = document.getElementById("log");
+
+    function writeLog(msg) {
+      const time = new Date().toLocaleTimeString();
+      log.textContent += `[${time}] ${msg}\n`;
+      log.scrollTop = log.scrollHeight;
+    }
+
+    document.addEventListener("keydown", function(event) {
+      // 组合键检测
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "w") {
+        event.preventDefault();  // 防止浏览器关闭标签页
+        writeLog(event.key);
+      }
+      else if (event.key === "Shift") {
+        event.preventDefault();
+        writeLog(event.key);
+      }
+      else if (event.altKey) {
+        writeLog(event.key);
+      } else {
+        writeLog("Key: " + event.key);
+      }
+    });
+  </script>
+
+</body>
+</html>

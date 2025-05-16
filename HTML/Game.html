@@ -213,14 +213,21 @@
                     maxLaunchForce = parseFloat (document.getElementById ("maxLaunchForce").value);
                 })
 
-                //Other Initialization
+                //Keys Initialization
                 var mouseX = 0, mouseY = 0;
-
                 var keys = {};
-                var prevKeys = {};
-                document.addEventListener ("keydown", (event) => keys [event.key] = 1);
-                document.addEventListener ("keyup", (event) => keys [event.key] = 0);
-                document.addEventListener ("mousemove", function (event)
+                var prevKeys = {}; 
+                window.addEventListener ("keydown", function (event) 
+                {
+                    keys[event.code] = 1;
+                    if (event.shiftKey || event.ctrlKey)
+                        event.preventDefault();
+                });
+                window.addEventListener ("keyup", function (event) 
+                {
+                    keys[event.code] = 0;
+                });
+                window.addEventListener ("mousemove", function (event)
                 {
                     mouseX = parseFloat (event.clientX);
                     mouseY = parseFloat (event.clientY);
@@ -240,6 +247,8 @@
                     this.y = y;
                     this.vx = 0;
                     this.vy = 0;
+                    this.faceX = 0;
+                    this.faceY = 0;
                     this.image = new Image();
                     this.label = label;
 
@@ -251,6 +260,9 @@
                     this.currentForce = 0;
 
                     this.dashState = 0;
+                    this.dashTimer = 0;
+                    this.dashTime = 6;
+                    this.dashSpeed = 160;
 
                     this.w = 0;
                     this.s = 0;
@@ -288,9 +300,12 @@
                     if (d)
                         this.vx += acceleration;
                     
-                    this.vx = Math.max (-maxVelocity, Math.min (maxVelocity, this.vx));
-                    this.vy = Math.max (-maxVelocity, Math.min (maxVelocity, this.vy));
-                    
+                    if (!this.launchState && !this.dashState)
+                    {
+                        this.vx = Math.max (-maxVelocity, Math.min (maxVelocity, this.vx));
+                        this.vy = Math.max (-maxVelocity, Math.min (maxVelocity, this.vy));
+                    }
+
                     this.vx *= friction;
                     this.vy *= friction;
 
@@ -344,11 +359,7 @@
                             this.vx = (this.launchDX / this.launchGradient) * this.currentForce;
                             this.vy = (this.launchDY / this.launchGradient) * this.currentForce;
                         }  
-                                                
-                        keys["w"] = 0;
-                        keys["s"] = 0;
-                        keys["a"] = 0;
-                        keys["d"] = 0;
+
                         this.launchState = 0;
                     }
                 }
@@ -356,7 +367,24 @@
                 //Dash
                 dash()
                 {
-                    console.log ("1");
+                    if (this.dashState)
+                    {
+                        if (this.dashTimer > this.dashTime * 0.4)
+                            this.vy = 0;
+                        
+                        if (this.dashTimer == this.dashTime - 1)
+                        this.vx = this.faceX ? this.dashSpeed : -this.dashSpeed;
+                        this.vx *= 0.7;
+
+
+                        this.dashTimer--;
+                        if (!this.dashTimer)
+                            this.dashState = 0;
+                    }
+                    else
+                    {
+                        this.dashTimer = this.dashTime;
+                    }
                 }
 
                 //Moving
@@ -410,39 +438,45 @@
 
                 inputManager()
                 {
-                    if (keys["g"] && !prevKeys["g"])
+                    if (keys["KeyG"] && !prevKeys["KeyG"])
                         this.launchState = 1;
 
-                    if (keys["g"] && this.launchState)
+                    if (keys["KeyG"] && this.launchState)
                     {
                         this.launchState = 2;
                     }
-                    if (!keys["g"] && prevKeys["g"] && this.launchState)
+                    if (!keys["KeyG"] && prevKeys["KeyG"] && this.launchState)
                         this.launchState = 3;
 
-                    if (keys["Shift"])
+                    if (keys["ShiftLeft"])
                     {
                         this.dashState = 1;
                     }
 
-                    if (keys[" "])
+                    if (keys["Space"])
                         jumpBuffer = setBuffer;
                     enableJump = this.detectJump();                        
 
-                    if (keys["w"])
+                    if (keys["KeyW"])
                         this.w = 1;
                     else
                         this.w = 0;
-                    if (keys["s"])
+                    if (keys["KeyS"])
                         this.s = 1;
                     else
                         this.s = 0;
-                    if (keys["a"])
+                    if (keys["KeyA"])
+                    {
                         this.a = 1;
+                        this.faceX = 0;
+                    }
                     else
                         this.a = 0;
-                    if (keys["d"])
+                    if (keys["KeyD"])
+                    {
                         this.d = 1;
+                        this.faceX = 1;
+                    }
                     else
                         this.d = 0;
 
@@ -457,18 +491,21 @@
 
                 update()
                 {
-
+                    console.log (this.dashState, this.launchState, this.dashTimer);
                     if (this.label == 1)
                     {
                         this.inputManager();
-                        this.move(this.w, this.s, this.a, this.d);
-                        this.borderDetect();
+
+                        this.launch();
+                        this.dash();
+
+                        if (!this.launchState && !this.dashState)
+                            this.move(this.w, this.s, this.a, this.d);
                         if (!this.launchState)
                             this.gravity();
 
-                        this.launch();
-
                         this.applyMove();
+                        this.borderDetect();
                         this.render();
                     }
                 }
@@ -491,9 +528,7 @@
             const draw = board.getContext ("2d");
 
             const black = new box (50, 50, board.width / 2 - 50, board.height / 2 - 50, 1);
-            const red = new box (50, 50, 0, 0, 2);
             black.image.src = "https://lienaed.github.io/Code/Images/Black.jpg";
-            red.image.src = "https://lienaed.github.io/Code/Images/Red.png";
 
 
             //Loop
@@ -501,16 +536,6 @@
             {
                 draw.clearRect (0, 0, board.width, board.height);
                 black.update();
-
-                if (Collision (black, red))
-                {
-                    red.x = Math.random() * 1600;
-                    red.y = Math.random() * 900;
-                    score++;
-                    scoreValue.innerText = score;
-                }
-
-                red.update();
                 requestAnimationFrame (loop);
             }
 
@@ -519,11 +544,10 @@
             {
                 console.log ("Image Loaded.");
                 count++;
-                if (count == 2)
+                if (count == 1)
                     loop();
             }
             black.image.onload = checkLoad;
-            red.image.onload = checkLoad;
         </script>
     </body>
 

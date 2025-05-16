@@ -1,3 +1,32 @@
+KeyCode:
+Enter
+    Enter
+Escape
+    Escape
+Backspace
+    Backspace
+Tab
+    Tab
+Caps Lock
+    CapsLock
+Shift (左)
+    ShiftLeft
+Shift (右)
+    ShiftRight
+Ctrl (左)
+    ControlLeft
+Ctrl (右)
+    ControlRight
+Alt (左)
+    AltLeft
+Alt (右)
+    AltRight
+Meta (Cmd)
+    MetaLeft
+Space
+    Space
+
+
 Disable Browser hotkeys
 Adjust constants
 Dash
