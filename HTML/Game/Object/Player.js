@@ -29,9 +29,9 @@ class Player extends Character
 
         this.attackState = 0;
         this.attackDamage = 20;
-        this.attackFrame = 20;
+        this.attackFrame = 15;
+        this.attackCooldown = 4;
         this.attackTimer = 0;
-        this.attackIndex = 0;
     }
 
     gravity()
@@ -134,18 +134,18 @@ class Player extends Character
         else if (this.attackState == 1)
         {
             this.attackIndex = objects.length;
-            objects.push (new Attack (50, 20, this.x, this.y, this, this.faceX, imageList["Attack"]));
+            objects.push (new Attack (100, 50, this.x, this.y, this, this.faceX, imageList["Attack"]));
             this.attackState = 2;
         }
         else if (this.attackState == 2)
         {
             this.attackTimer--;
             if (this.attackTimer <= 0)
-            {
-                objects.splice (this.attackIndex, 1);
                 this.attackState = 0;
+            else if (this.attackTimer <= this.attackCooldown)
+            {
+                objects = objects.filter (obj => obj.label !== -1);
             }
-
         }
     }
 
