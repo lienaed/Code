@@ -19,7 +19,7 @@ function checkLoad()
 function imageLoad()
 {
     imageSRC["Player"] = "https://lienaed.github.io/Code/Images/Black.jpg";
-    imageSRC["Attack"] = "https://lienaed.github.io/Code/Images/Attack.png";
+    imageSRC["Attack"] = "https://lienaed.github.io/Code/Images/Attack3.png";
 
     for (let i in imageSRC)
     {
