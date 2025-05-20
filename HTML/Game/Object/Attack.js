@@ -19,14 +19,14 @@ class Attack extends Character
     {
         if (this.dir)
         {
-            draw.drawImage (this.image, 0, 0, 62, 37, this.x, this.y, this.width, this.height);
+            draw.drawImage (this.image, 0, 0, 61, 37, this.x, this.y, this.width, this.height);
         }
         else
         {
             draw.save ();
             draw.translate (this.x + this.width / 2, this.y);
             draw.scale (-1, 1);
-            draw.drawImage (this.image, 0, 0, 62, 37, 0, 0, this.width, this.height);
+            draw.drawImage (this.image, 0, 0, 61, 37, 0, 0, this.width, this.height);
             draw.restore ();
         }
     }

@@ -32,6 +32,8 @@ class Player extends Character
         this.attackFrame = 15;
         this.attackCooldown = 4;
         this.attackTimer = 0;
+        this.attackBuffer = 0;
+        this.setAttackBuffer = 7;
     }
 
     gravity()
@@ -127,12 +129,16 @@ class Player extends Character
     attack()
     {
         console.log (this.attackState, this.attackTimer);
-        if (!this.attackState)
+        this.attackBuffer--;
+        if (this.attackBuffer > 0 && !this.attackState)
+        {
+            this.attackState = 1;
+            this.attackBuffer = 0;
+        }
+
+        if (this.attackState == 1)
         {
             this.attackTimer = this.attackFrame;
-        }
-        else if (this.attackState == 1)
-        {
             this.attackIndex = objects.length;
             objects.push (new Attack (100, 50, this.x, this.y, this, this.faceX, imageList["Attack"]));
             this.attackState = 2;
@@ -145,6 +151,11 @@ class Player extends Character
             else if (this.attackTimer <= this.attackCooldown)
             {
                 objects = objects.filter (obj => obj.label !== -1);
+            }
+            if (this.attackTimer > 0 && this.y < board.height - this.height)
+            {
+                this.vx = this.faceX ? 1 : -1;
+                this.vy = Math.abs (this.vy) > 1 ? this.vy * 0.7 : 1;
             }
         }
     }
@@ -179,7 +190,7 @@ class Player extends Character
         //Attack
         if (keys["Mouse0"] && !prevKeys["Mouse0"] && !this.attackState)
         {
-            this.attackState = 1;
+            this.attackBuffer = this.setAttackBuffer;
         }
 
         //Move
