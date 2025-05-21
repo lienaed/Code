@@ -24,11 +24,6 @@ class Character
         this.d = 0;
         this.hitbox = {};
     }
-    
-    render()
-    {
-        draw.drawImage (this.image, this.x, this.y, this.width, this.height);
-    }
 
     move (w, s, a, d)
     {
@@ -77,4 +72,16 @@ class Character
         if (this.y <= 0 && this.vy < 0) this.vy = 0;
         if (this.y >= board.height - this.height && this.vy > 0) this.vy = 0;
     }
+
+    onCollision()
+    {
+    }
+    
+    render()
+    {
+        draw.drawImage (this.image, this.x, this.y, this.width, this.height);
+    }
+
+    update ()
+    {}
 }

@@ -7,6 +7,7 @@ class Attack extends Character
         this.dir = dir;
         this.host = host;
         this.image = src;
+        this.onHit = 0;
     }
 
     update ()

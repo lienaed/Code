@@ -5,6 +5,9 @@ class Player extends Character
         super (width, height, x, y, 0);
         this.image = src;
 
+        this.Hp = 100;
+        this.maxHp = 100;
+
         this.initJumpForce = 20;
         this.jumpForce = 0;
         this.jumpState = 0;
@@ -218,6 +221,11 @@ class Player extends Character
             this.d = 0;
 
         prevKeys = Object.assign ({}, keys);
+    }
+
+    onCollision()
+    {
+///////////////////////////////////////////////////////////////////////
     }
 
     update()
