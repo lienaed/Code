@@ -33,7 +33,7 @@ class Player extends Character
         this.attackCooldown = 4;
         this.attackTimer = 0;
         this.attackBuffer = 0;
-        this.setAttackBuffer = 7;
+        this.setAttackBuffer = 10;
     }
 
     gravity()
