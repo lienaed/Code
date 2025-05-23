@@ -9,18 +9,18 @@ class Boss extends Character
         this.barW = 1000;
         this.barH = 30;
         this.barX = board.width / 2 - 500;
-        this.barY = 20;
+        this.barY = board.height - 50;
     }
 
     HpBar()
     {
-        var Bar = (this.Hp / this.maxHp) * this.barW;
+        var bar = (this.Hp / this.maxHp) * this.barW;
 
         draw.fillStyle = "#444";
         draw.fillRect (this.barX, this.barY, this.barW, this.barH);
 
         draw.fillStyle = "#f11";
-        draw.fillRect (this.barX, this.barY, Bar, this.barH);
+        draw.fillRect (this.barX, this.barY, bar, this.barH);
     }
 
     onCollision()
@@ -34,7 +34,6 @@ class Boss extends Character
         if (this.Hp <= 0)
         {
             this.hp = 0;
-
         }
     }
 }
