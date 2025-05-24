@@ -28,6 +28,7 @@ class Player extends Character
         this.enableJump = 0;
         this.setJumpBuffer = 2;
         this.jumpBuffer = 0;
+        this.jumpEnergy = 6;
 
         this.launchForce = 20;
         this.launchBuffer = 80;
@@ -38,11 +39,13 @@ class Player extends Character
         this.launchGradient = 0;
         this.launchTimer = 0;
         this.currentForce = 0;
+        this.launchEnergy = 25;
 
         this.dashState = 0;
         this.dashTimer = 0;
         this.dashTime = 6;
         this.dashSpeed = 160;
+        this.dashEnergy = 10;
 
         this.attackState = 0;
         this.attackDamage = 20;
@@ -51,6 +54,7 @@ class Player extends Character
         this.attackTimer = 0;
         this.attackBuffer = 0;
         this.setAttackBuffer = 10;
+        this.attackEnergy = 5;
     }
 
     gravity()
@@ -183,8 +187,13 @@ class Player extends Character
             this.enableJump = 1;
         else
             this.enableJump = 0;
-        if (keys["Space"] && !prevKeys["Space"])
+        if (keys["Space"] && !prevKeys["Space"] && this.energy >= this.jumpEnergy)
+        {
             this.enableJump = 2;
+            if (this.jumpState == 1)
+                this.energy -= this.jumpEnergy;
+        }
+
 
         //Launch
         if ((keys["KeyG"] || keys["Mouse3"]) && (!prevKeys["KeyG"] && !prevKeys["Mouse3"]))
@@ -198,15 +207,17 @@ class Player extends Character
             this.launchState = 3;
 
         //Dash
-        if (keys["ShiftLeft"] || keys["Mouse4"])
+        if ((keys["ShiftLeft"] || keys["Mouse4"]) && !this.dashState && this.energy >= this.dashEnergy)
         {
             this.dashState = 1;
+            this.energy -= this.dashEnergy;
         }
 
         //Attack
-        if (keys["Mouse0"] && !prevKeys["Mouse0"] && !this.attackState)
+        if (keys["Mouse0"] && !prevKeys["Mouse0"] && !this.attackState && this.energy >= this.attackEnergy)
         {
             this.attackBuffer = this.setAttackBuffer;
+            this.energy -= this.attackEnergy;
         }
 
         //Move
