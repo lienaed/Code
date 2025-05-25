@@ -275,7 +275,6 @@ class Player extends Character
 
     energyRefill()
     {
-        console.log (this.refillBuffer, ui.energy, ui.prevEnergy);
         if (ui.energy < ui.prevEnergy)
         {
             this.refillBuffer = this.setRefillBuffer;
