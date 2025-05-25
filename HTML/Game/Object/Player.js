@@ -41,8 +41,8 @@ class Player extends Character
         this.setAttackBuffer = 10;
         this.attackEnergy = 5;
 
-        this.refillBuffer = 200;
-        this.setRefillBuffer = 200;
+        this.refillBuffer = 150;
+        this.setRefillBuffer = 150;
     }
 
     gravity()
@@ -319,5 +319,10 @@ class Player extends Character
         this.applyMove();
         this.borderDetect();
         this.render();
+    }
+
+    render()
+    {
+        
     }
 }

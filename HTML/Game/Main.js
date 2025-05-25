@@ -21,7 +21,7 @@ function checkLoad()
 }
 function imageLoad()
 {
-    imageSRC["Player"] = "https://lienaed.github.io/Code/Images/Black.jpg";
+    imageSRC["Player"] = "https://lienaed.github.io/Code/Images/Ghost.png";
     imageSRC["Attack"] = "https://lienaed.github.io/Code/Images/Attack4.png";
     imageSRC["Boss"] = "https://lienaed.github.io/Code/Images/Red.png"
 
@@ -73,12 +73,12 @@ function loop ()
     draw.clearRect (0, 0, board.width, board.height);
     objects.sort ((a, b) => b.label - a.label);
 
+    ui.update();
     for (var i of objects)
     {
         i.update();
         i.render();
     }
-    ui.update();
 
     var b = objects.find (obj => obj.label == 1);
     var a = objects.find (obj => obj.label == -1);
