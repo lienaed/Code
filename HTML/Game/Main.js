@@ -5,6 +5,7 @@ board.height = window.innerHeight;
 const draw = board.getContext ("2d");
 
 var objects = new Array();
+var ui = new UI();
 var freezeFrame = 0;
 
 //Images Initialization
@@ -77,6 +78,7 @@ function loop ()
         i.update();
         i.render();
     }
+    ui.update();
 
     var b = objects.find (obj => obj.label == 1);
     var a = objects.find (obj => obj.label == -1);

@@ -5,21 +5,6 @@ class Player extends Character
         super (width, height, x, y, 0);
         this.image = src;
 
-        this.Hp = 100;
-        this.maxHp = 100;
-        this.HpBarW = 200;
-        this.HpBarH = 20;
-        this.HpBarX = 20;
-        this.HpBarY = 20;
-        this.invincible = 0;
-
-        this.energy = 100;
-        this.maxEnergy = 100;
-        this.energyBarW = 200;
-        this.energyBarH = 20;
-        this.energyBarX = 20;
-        this.energyBarY = 50;
-
         this.disableControl = 0;
 
         this.initJumpForce = 20;
@@ -55,12 +40,16 @@ class Player extends Character
         this.attackBuffer = 0;
         this.setAttackBuffer = 10;
         this.attackEnergy = 5;
+
+        this.refillBuffer = 200;
+        this.setRefillBuffer = 200;
     }
 
     gravity()
     {
         this.vy += this.gravityForce;
     }
+
 
     jump()
     {
@@ -130,12 +119,21 @@ class Player extends Character
     {
         if (this.dashState)
         {
+            if (this.invincible <= 0)
+                this.invincible = 1;
+
             if (this.dashTimer > this.dashTime * 0.4)
                 this.vy = 0;
             
             if (this.dashTimer == this.dashTime - 1)
-                this.vx = this.faceX ? this.dashSpeed : -this.dashSpeed;
-            this.vx *= 0.7;
+            {
+                if (this.faceX == 1)
+                    this.vx = this.dashSpeed;
+                else if (this.faceX == -1)
+                    this.vx = -this.dashSpeed;
+            }
+                
+            this.vx *= 0.6;
 
             this.dashTimer--;
             if (this.dashTimer <= 0)
@@ -160,21 +158,23 @@ class Player extends Character
         {
             this.attackTimer = this.attackFrame;
             this.attackIndex = objects.length;
-            objects.push (new Attack (100, 50, this.x, this.y, this, this.faceX, imageList["Attack"]));
+            objects.push (new Attack (100, 50, this.x, this.y, this, this.faceX, this.faceY, imageList["Attack"]));
             this.attackState = 2;
         }
         else if (this.attackState == 2)
         {
             this.attackTimer--;
+            
             if (this.attackTimer <= 0)
                 this.attackState = 0;
             else if (this.attackTimer <= this.attackCooldown)
             {
                 objects = objects.filter (obj => obj.label !== -1);
             }
-            if (this.attackTimer > 0 && this.y < board.height - this.height)
+
+            if (this.attackTimer > 0 && this.y < board.height - this.height && this.faceY == 0)
             {
-                this.vx = this.faceX ? 1 : -1;
+                this.vx = this.faceX;
                 this.vy = Math.abs (this.vy) > 1 ? this.vy * 0.7 : 1;
             }
         }
@@ -187,13 +187,12 @@ class Player extends Character
             this.enableJump = 1;
         else
             this.enableJump = 0;
-        if (keys["Space"] && !prevKeys["Space"] && this.energy >= this.jumpEnergy)
+        if (keys["Space"] && !prevKeys["Space"] && ui.energy >= this.jumpEnergy)
         {
             this.enableJump = 2;
             if (this.jumpState == 1)
-                this.energy -= this.jumpEnergy;
+                ui.energy -= this.jumpEnergy;
         }
-
 
         //Launch
         if ((keys["KeyG"] || keys["Mouse3"]) && (!prevKeys["KeyG"] && !prevKeys["Mouse3"]))
@@ -207,42 +206,37 @@ class Player extends Character
             this.launchState = 3;
 
         //Dash
-        if ((keys["ShiftLeft"] || keys["Mouse4"]) && !this.dashState && this.energy >= this.dashEnergy)
+        if ((keys["ShiftLeft"] || keys["Mouse4"]) && (!prevKeys["ShiftLeft"] && !prevKeys["Mouse4"]) && !this.dashState && ui.energy >= this.dashEnergy)
         {
             this.dashState = 1;
-            this.energy -= this.dashEnergy;
+            ui.energy -= this.dashEnergy;
         }
 
         //Attack
-        if (keys["Mouse0"] && !prevKeys["Mouse0"] && !this.attackState && this.energy >= this.attackEnergy)
+        if (keys["Mouse0"] && !prevKeys["Mouse0"] && !this.attackState && ui.energy >= this.attackEnergy)
         {
             this.attackBuffer = this.setAttackBuffer;
-            this.energy -= this.attackEnergy;
+            ui.energy -= this.attackEnergy;
         }
 
         //Move
-        if (keys["KeyW"])
-            this.w = 1;
-        else
-            this.w = 0;
-        if (keys["KeyS"])
-            this.s = 1;
-        else
-            this.s = 0;
+        this.w = keys["KeyW"] ? 1 : 0;
+        this.s = keys["KeyS"] ? 1 : 0;
+
+        if (this.w) 
+            this.faceY = 1;
+        else if (this.s) 
+            this.faceY = -1;
+        else 
+            this.faceY = 0;
+
+        this.a = keys["KeyA"] ? 1 : 0;
+        this.d = keys["KeyD"] ? 1 : 0;
+
         if (keys["KeyA"])
-        {
-            this.a = 1;
-            this.faceX = 0;
-        }
-        else
-            this.a = 0;
-        if (keys["KeyD"])
-        {
-            this.d = 1;
+            this.faceX = -1;
+        else if (keys["KeyD"])
             this.faceX = 1;
-        }
-        else
-            this.d = 0;
 
         prevKeys = Object.assign ({}, keys);
     }
@@ -250,7 +244,7 @@ class Player extends Character
     onCollision(targetX, targetY, targetW, targetH)
     {
         if (this.invincible <= 0)
-            this.Hp -= 10;
+            ui.Hp -= 10;
         this.invincible = 50;
         freezeFrame = 2;
 
@@ -279,37 +273,29 @@ class Player extends Character
         this.disableControl = 20;
     }
 
-    HpBar()
+    energyRefill()
     {
-        if (this.Hp < 0)
-            this.Hp = 0;
+        console.log (this.refillBuffer, ui.energy, ui.prevEnergy);
+        if (ui.energy < ui.prevEnergy)
+        {
+            this.refillBuffer = this.setRefillBuffer;
+        }
+        else
+        {
+            this.refillBuffer--;
+        }
 
-        var bar = (this.Hp / this.maxHp) * this.HpBarW;
-                
-        draw.fillStyle = "#444";
-        draw.fillRect (this.HpBarX, this.HpBarY, this.HpBarW, this.HpBarH);
-
-        draw.fillStyle = "#f11";
-        draw.fillRect (this.HpBarX, this.HpBarY, bar, this.HpBarH);
+        if (this.refillBuffer < 0)
+        {
+            ui.energy += 0.5;
+        }
     }
 
-    energyBar()
-    {
-        if (this.energy < 0)
-            this.energy = 0;
-
-        var bar = (this.energy / this.maxEnergy) * this.energyBarW;
-        
-        draw.fillStyle = "#444";
-        draw.fillRect (this.energyBarX, this.energyBarY, this.energyBarW, this.energyBarH);
-
-        draw.fillStyle = "#1f1";
-        draw.fillRect (this.energyBarX, this.energyBarY, bar, this.energyBarH);
-    }
 
     update()
     {
         this.invincible--;
+        
 
         if (this.disableControl > 0)
         {
@@ -329,10 +315,9 @@ class Player extends Character
         this.dash();
         this.attack();
 
+        this.energyRefill();
         this.applyMove();
         this.borderDetect();
         this.render();
-        this.HpBar();
-        this.energyBar();
     }
 }
