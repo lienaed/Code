@@ -42,8 +42,8 @@ class Player extends Character
         this.attackEnergy = 5;
 
         this.arrowState = 0;
-        this.setArrowCharge = 30;
-        this.arrowCharge = 30;
+        this.setArrowCharge = 60;
+        this.arrowCharge = 60;
         this.arrowLaunch = 0;
         this.arrowEnergy = 7;
 
@@ -188,20 +188,27 @@ class Player extends Character
 
     arrow()
     {
-        if (this.arrowState == 1 || this.arrowCharge <= 0)
+        if (this.arrowState == 0)
         {
+            this.arrowCharge = this.setArrowCharge;
+        }
+
+        else if (this.arrowState == 1 || this.arrowCharge <= 0)
+        {
+            console.log ("release")
             this.arrowLaunch = 1;
             this.arrowState = 0;
         }
 
         if (this.arrowState == 3)
         {
-            objects.push (new Arrow (50, 50, this.x, this.y, this, imageSRC["Arrow"]));
-            this.arrowState = 2;
-            this.arrowCharge = this.setArrowCharge;
+            console.log ("new arrow")
+            objects.push (new Arrow (50, 50, this.x, this.y, this, imageList["Arrow"]));
+            this.arrowState = 1;
         }
         else if (this.arrowState == 2)
         {
+            console.log ("charging")
             this.arrowCharge--;
             this.arrowState = 1;
         }
@@ -252,11 +259,11 @@ class Player extends Character
         }
 
         //Arrow
-        if (keys["Mouse1"] && !this.arrowState && ui.energy >= this.arrowEnergy)
+        if (keys["Mouse2"] && ui.energy >= this.arrowEnergy)
         {
-            if (!prevKeys["Mouse1"])
+            if (!prevKeys["Mouse2"] && !this.arrowState)
                 this.arrowState = 3;
-            else if (prevKeys["Mouse1"] && this.arrowState)
+            else if (prevKeys["Mouse2"] && this.arrowState)
                 this.arrowState = 2;
         }
 

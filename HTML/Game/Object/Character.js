@@ -17,6 +17,8 @@ class Character
         this.vy = 0;
         this.faceX = 1;
         this.faceY = 0;
+        this.centerX = this.x + this.width / 2;
+        this.centerY = this.y + this.height / 2;
 
         this.w = 0;
         this.s = 0;
@@ -46,6 +48,8 @@ class Character
     {
         this.x += this.vx;
         this.y += this.vy;
+        this.centerX = this.x + this.width / 2;
+        this.centerY = this.y + this.height / 2;
             
         if (this.x <= 0) 
         {
