@@ -15,7 +15,7 @@ class Character
         this.y = y;
         this.vx = 0;
         this.vy = 0;
-        this.faceX = 0;
+        this.faceX = 1;
         this.faceY = 0;
 
         this.w = 0;

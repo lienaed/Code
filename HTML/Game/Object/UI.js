@@ -43,10 +43,10 @@ class UI
 
         var bar = (this.Hp / this.maxHp) * this.HpBarW;
                 
-        draw.fillStyle = "#444";
+        draw.fillStyle = "#444444";
         draw.fillRect (this.HpBarX, this.HpBarY, this.HpBarW, this.HpBarH);
 
-        draw.fillStyle = "#f11";
+        draw.fillStyle = "#ff1111";
         draw.fillRect (this.HpBarX, this.HpBarY, bar, this.HpBarH);
     }
 
@@ -59,10 +59,10 @@ class UI
 
         var bar = (this.energy / this.maxEnergy) * this.energyBarW;
         
-        draw.fillStyle = "#444";
+        draw.fillStyle = "#444444";
         draw.fillRect (this.energyBarX, this.energyBarY, this.energyBarW, this.energyBarH);
 
-        draw.fillStyle = "#1f1";
+        draw.fillStyle = "#11ff11";
         draw.fillRect (this.energyBarX, this.energyBarY, bar, this.energyBarH);
     }
 
@@ -75,10 +75,10 @@ class UI
 
         var bar = (this.combo / this.maxCombo) * this.comboBarW;
         
-        draw.fillStyle = "#444";
+        draw.fillStyle = "#444444";
         draw.fillRect (this.comboBarX, this.comboBarY, this.comboBarW, this.comboBarH);
 
-        draw.fillStyle = "#e1d";
+        draw.fillStyle = "#134aec";
         draw.fillRect (this.comboBarX, this.comboBarY, bar, this.comboBarH);
     }
 
@@ -86,10 +86,10 @@ class UI
     {
         var bar = (this.bossHp / this.maxBossHp) * this.barW;
 
-        draw.fillStyle = "#444";
+        draw.fillStyle = "#444444";
         draw.fillRect (this.barX, this.barY, this.barW, this.barH);
 
-        draw.fillStyle = "#f11";
+        draw.fillStyle = "#ff1111";
         draw.fillRect (this.barX, this.barY, bar, this.barH);
     }
 

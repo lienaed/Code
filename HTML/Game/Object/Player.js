@@ -180,6 +180,16 @@ class Player extends Character
         }
     }
 
+    arrow()
+    {
+        
+    }
+
+    surge()
+    {
+
+    }
+
     inputManager()
     {
         //Jump
@@ -322,6 +332,9 @@ class Player extends Character
 
     render()
     {
-        
+        if (this.faceX == 1)
+            draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
+        else if (this.faceX == -1)
+            draw.drawImage (this.image, 64, 0, 32, 64, this.x, this.y, this.width, this.height);
     }
 }
