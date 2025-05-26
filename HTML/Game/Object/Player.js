@@ -16,8 +16,8 @@ class Player extends Character
         this.jumpEnergy = 6;
 
         this.launchForce = 20;
-        this.launchBuffer = 80;
-        this.maxLaunchForce = 70;
+        this.launchCharge = 60;
+        this.maxLaunchForce = 55;
         this.launchState = 0;
         this.launchDX = 0;
         this.launchDY = 0;
@@ -40,6 +40,12 @@ class Player extends Character
         this.attackBuffer = 0;
         this.setAttackBuffer = 10;
         this.attackEnergy = 5;
+
+        this.arrowState = 0;
+        this.setArrowCharge = 30;
+        this.arrowCharge = 30;
+        this.arrowLaunch = 0;
+        this.arrowEnergy = 7;
 
         this.refillBuffer = 150;
         this.setRefillBuffer = 150;
@@ -83,7 +89,7 @@ class Player extends Character
         if (!this.launchState)
         {
             this.currentForce = parseFloat (this.launchForce);
-            this.launchTimer = this.launchBuffer;
+            this.launchTimer = this.launchCharge;
         }
 
         if (this.launchState == 2)
@@ -91,7 +97,7 @@ class Player extends Character
             console.log ("Launching");
             this.vx *= 0.89;
             this.vy *= 0.89;
-            this.currentForce += (this.maxLaunchForce - this.launchForce) / this.launchBuffer;
+            this.currentForce += (this.maxLaunchForce - this.launchForce) / this.launchCharge;
             this.launchDX = parseFloat (mouseX - (this.x + this.width / 2));
             this.launchDY = parseFloat (mouseY - (this.y + this.height / 2));
 
@@ -182,7 +188,23 @@ class Player extends Character
 
     arrow()
     {
-        
+        if (this.arrowState == 1 || this.arrowCharge <= 0)
+        {
+            this.arrowLaunch = 1;
+            this.arrowState = 0;
+        }
+
+        if (this.arrowState == 3)
+        {
+            objects.push (new Arrow (50, 50, this.x, this.y, this, imageSRC["Arrow"]));
+            this.arrowState = 2;
+            this.arrowCharge = this.setArrowCharge;
+        }
+        else if (this.arrowState == 2)
+        {
+            this.arrowCharge--;
+            this.arrowState = 1;
+        }
     }
 
     surge()
@@ -229,10 +251,22 @@ class Player extends Character
             ui.energy -= this.attackEnergy;
         }
 
+        //Arrow
+        if (keys["Mouse1"] && !this.arrowState && ui.energy >= this.arrowEnergy)
+        {
+            if (!prevKeys["Mouse1"])
+                this.arrowState = 3;
+            else if (prevKeys["Mouse1"] && this.arrowState)
+                this.arrowState = 2;
+        }
+
         //Move
         this.w = keys["KeyW"] ? 1 : 0;
         this.s = keys["KeyS"] ? 1 : 0;
+        this.a = keys["KeyA"] ? 1 : 0;
+        this.d = keys["KeyD"] ? 1 : 0;
 
+        //Face
         if (this.w) 
             this.faceY = 1;
         else if (this.s) 
@@ -240,13 +274,11 @@ class Player extends Character
         else 
             this.faceY = 0;
 
-        this.a = keys["KeyA"] ? 1 : 0;
-        this.d = keys["KeyD"] ? 1 : 0;
-
         if (keys["KeyA"])
             this.faceX = -1;
         else if (keys["KeyD"])
             this.faceX = 1;
+
 
         prevKeys = Object.assign ({}, keys);
     }
@@ -323,6 +355,8 @@ class Player extends Character
         this.launch();
         this.dash();
         this.attack();
+        this.arrow();
+        this.surge();
 
         this.energyRefill();
         this.applyMove();

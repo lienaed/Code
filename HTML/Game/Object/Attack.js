@@ -25,6 +25,7 @@ class Attack extends Character
 
     update ()
     {
+        console.log (this.dir);
         if (this.dir == "r")
         {
             this.x = this.host.x + this.host.width;

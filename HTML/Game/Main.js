@@ -22,7 +22,7 @@ function checkLoad()
 function imageLoad()
 {
     imageSRC["Player"] = "https://lienaed.github.io/Code/Images/Ghost.png";
-    imageSRC["Attack"] = "https://lienaed.github.io/Code/Images/Attack4.png";
+    imageSRC["Attack"] = "https://lienaed.github.io/Code/Images/Attack.png";
     imageSRC["Boss"] = "https://lienaed.github.io/Code/Images/Red.png";
     imageSRC["Arrow"] = "https://lienaed.github.io/Code/Images/Arrow.png";
 
@@ -43,7 +43,7 @@ imageLoad();
 //Objects Initialization
 function objInit()
 {
-    objects.push (new Player (25, 50, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
+    objects.push (new Player (32, 64, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
     objects.push (new Boss (500, 500, board.width / 2, 0, imageList["Boss"]));
     loop();
 }
