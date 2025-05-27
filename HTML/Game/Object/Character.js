@@ -6,10 +6,10 @@ class Character
         this.height = height;
         this.image = new Image();
         this.label = label;
-        this.friction = 0.95;
+        this.friction = 0.93;
         this.staticFriction = 0.2;
-        this.moveSpeed = 6;
-        this.gravityForce = 0.7;
+        this.moveSpeed = 7;
+        this.gravityForce = 0.8;
 
         this.x = x;
         this.y = y;

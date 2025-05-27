@@ -9,8 +9,8 @@ class Player extends Character
 
         this.initJumpForce = 20;
         this.jumpForce = 0;
+        this.jumpCounter = 0;
         this.jumpState = 0;
-        this.enableJump = 0;
         this.setJumpBuffer = 2;
         this.jumpBuffer = 0;
         this.jumpEnergy = 6;
@@ -59,26 +59,27 @@ class Player extends Character
 
     jump()
     {
-        if (!this.enableJump)
+        if (!this.jumpState)
         {
             this.jumpForce = this.initJumpForce;
             if (this.y == board.height - this.height)
-                this.jumpState = 2;
+            {
+                console.log ("Reset jump")
+                this.jumpCounter = 2;
+            }
+
         }
         else
         {
-            if (this.enableJump == 2)
-                this.jumpState--;
+            if (this.jumpState == 2)
+                this.jumpCounter--;
 
-            if (this.jumpState >= 0)
+            if (this.jumpForce > 0)
             {
-                if (this.jumpForce > 0)
+                if (this.vy >= -this.jumpForce)
                 {
-                    if (this.vy >= -this.jumpForce)
-                    {
-                        this.vy = -this.jumpForce;
-                        this.jumpForce -= 2;
-                    }
+                    this.vy = -this.jumpForce;
+                    this.jumpForce -= 0.9;
                 }
             }
         }
@@ -203,14 +204,14 @@ class Player extends Character
         if (this.arrowState == 3)
         {
             console.log ("new arrow")
-            objects.push (new Arrow (50, 50, this.x, this.y, this, imageList["Arrow"]));
-            this.arrowState = 1;
+            objects.push (new Arrow (25, 35, this.x, this.y, this, imageList["Arrow"]));
+            this.arrowState = 2;
+            ui.energy -= this.arrowEnergy;
         }
         else if (this.arrowState == 2)
         {
             console.log ("charging")
             this.arrowCharge--;
-            this.arrowState = 1;
         }
     }
 
@@ -222,15 +223,21 @@ class Player extends Character
     inputManager()
     {
         //Jump
-        if (keys["Space"])
-            this.enableJump = 1;
+        if (keys["Space"] && this.jumpState)
+            this.jumpState = 1;
         else
-            this.enableJump = 0;
-        if (keys["Space"] && !prevKeys["Space"] && ui.energy >= this.jumpEnergy)
+            this.jumpState = 0;
+
+        if (keys["Space"] && !prevKeys["Space"] && this.jumpCounter > 0)
         {
-            this.enableJump = 2;
-            if (this.jumpState == 1)
+            if (this.jumpCounter == 2)
+                this.jumpState = 2;
+            else if (this.jumpCounter == 1 && ui.energy >= this.jumpEnergy)
+            {
+                this.jumpState = 2;
                 ui.energy -= this.jumpEnergy;
+            }
+
         }
 
         //Launch
@@ -266,6 +273,8 @@ class Player extends Character
             else if (prevKeys["Mouse2"] && this.arrowState)
                 this.arrowState = 2;
         }
+        else if (!keys["Mouse2"] && prevKeys["Mouse2"] && this.arrowState)
+            this.arrowState = 1;
 
         //Move
         this.w = keys["KeyW"] ? 1 : 0;
@@ -342,8 +351,10 @@ class Player extends Character
 
     update()
     {
+        console.log (this.jumpState, this.jumpCounter, this.jumpForce);
+
+
         this.invincible--;
-        
 
         if (this.disableControl > 0)
         {

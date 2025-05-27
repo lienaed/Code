@@ -48,13 +48,17 @@ function objInit()
     loop();
 }
 
+//Collision
 function collision (a, b, flag)
 {
     if(a.x < b.x + b.width && a.x + a.width > b.x &&
     a.y < b.y + b.height && a.y + a.height > b.y)
     {
         if (!flag)
+        {
             a.onCollision();
+            b.onHit = 1;
+        }
         else
             a.onCollision (b.x, b.y, b.width, b.height);
     }
@@ -74,6 +78,7 @@ function loop ()
     draw.clearRect (0, 0, board.width, board.height);
     objects.sort ((a, b) => b.label - a.label);
 
+    //Update
     ui.update();
     for (var i of objects)
     {
@@ -81,8 +86,10 @@ function loop ()
         i.render();
     }
 
+    //Collision Detect
     var b = objects.find (obj => obj.label == 1);
     var a = objects.find (obj => obj.label == -1);
+    var l = objects.filter (obj => obj.label == -2);
     var p = objects.find (obj => obj.label == 0);
     if (a && b && !a.onHit)
     {
@@ -92,6 +99,10 @@ function loop ()
     if (p && b)
     {
         collision (p, b, 1);
+    }
+    for (i of l)
+    {
+        collision (b, i, 0);
     }
 
 
