@@ -92,7 +92,7 @@ function loop ()
     var a = objects.filter (obj => obj.label < 0);
     var p = objects.find (obj => obj.label == 0);
 
-    if (p && b)
+    if (p && b && p.invincible < 0)
     {
         collision (p, b, 1);
     }

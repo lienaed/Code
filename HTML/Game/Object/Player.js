@@ -437,7 +437,7 @@ class Player extends Character
                 if (this.faceX == 1)
                     draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
                 else if (this.faceX == -1)
-                    draw.drawImage (this.image, 0, 64, 32, 64, this.x, this.y, this.width, this.height);
+                    draw.drawImage (this.image, 64, 0, 32, 64, this.x, this.y, this.width, this.height);
             }
             else
             {
@@ -446,7 +446,7 @@ class Player extends Character
                     if (this.faceX == 1)
                         draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
                     else if (this.faceX == -1)
-                        draw.drawImage (this.image, 0, 64, 32, 64, this.x, this.y, this.width, this.height);
+                        draw.drawImage (this.image, 64, 0, 32, 64, this.x, this.y, this.width, this.height);
                 }
                 this.flashCount++;
                 this.flashCount %= 40;
