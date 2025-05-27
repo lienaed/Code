@@ -25,6 +25,7 @@ function imageLoad()
     imageSRC["Attack"] = "https://lienaed.github.io/Code/Images/Attack.png";
     imageSRC["Boss"] = "https://lienaed.github.io/Code/Images/Red.png";
     imageSRC["Arrow"] = "https://lienaed.github.io/Code/Images/Arrow.png";
+    imageSRC["Lance"] = "https://lienaed.github.io/Code/Images/Lance.png";
 
     for (let i in imageSRC)
     {

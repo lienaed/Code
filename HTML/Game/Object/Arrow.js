@@ -27,7 +27,7 @@ class Arrow extends Character
 
         if (this.host.arrowState == 2 && !this.launch)
         {
-            this.angle = Math.atan2 (this.mouseDY, this.mouseDX)
+            this.angle = Math.atan2 (this.mouseDY, this.mouseDX);
             this.x = this.host.centerX + Math.cos (this.angle) * this.offset;
             this.y = this.host.centerY - Math.sin (this.angle) * this.offset;
         }

@@ -9,7 +9,7 @@ class Player extends Character
 
         this.initJumpForce = 20;
         this.jumpForce = 0;
-        this.jumpCounter = 0;
+        this.jumpCount = 0;
         this.jumpState = 0;
         this.setJumpBuffer = 2;
         this.jumpBuffer = 0;
@@ -25,12 +25,15 @@ class Player extends Character
         this.launchTimer = 0;
         this.currentForce = 0;
         this.launchEnergy = 25;
+        this.enableLaunch = true;
 
         this.dashState = 0;
         this.dashTimer = 0;
         this.dashTime = 6;
         this.dashSpeed = 160;
         this.dashEnergy = 10;
+        this.maxAirDash = 1;
+        this.airDashCount = 0;
 
         this.attackState = 0;
         this.attackDamage = 20;
@@ -48,9 +51,8 @@ class Player extends Character
         this.arrowEnergy = 7;
 
         this.lanceState = 0;
-        this.setLanceCharge = 100;
-        this.lanceCharge = 100;
-        this.lanceLaunch = 0;
+        this.lanceBuffer = 20;
+        this.setLanceBuffer = 30;
 
         this.refillBuffer = 150;
         this.setRefillBuffer = 150;
@@ -67,17 +69,11 @@ class Player extends Character
         if (!this.jumpState)
         {
             this.jumpForce = this.initJumpForce;
-            if (this.y == board.height - this.height)
-            {
-                console.log ("Reset jump")
-                this.jumpCounter = 2;
-            }
-
         }
         else
         {
             if (this.jumpState == 2)
-                this.jumpCounter--;
+                this.jumpCount--;
 
             if (this.jumpForce > 0)
             {
@@ -201,21 +197,18 @@ class Player extends Character
 
         else if (this.arrowState == 1 || this.arrowCharge <= 0)
         {
-            console.log ("release")
             this.arrowLaunch = 1;
             this.arrowState = 0;
         }
 
         if (this.arrowState == 3)
         {
-            console.log ("new arrow")
             objects.push (new Arrow (25, 35, this.x, this.y, this, imageList["Arrow"]));
             this.arrowState = 2;
             ui.energy -= this.arrowEnergy;
         }
         else if (this.arrowState == 2)
         {
-            console.log ("charging")
             this.arrowCharge--;
         }
     }
@@ -223,12 +216,20 @@ class Player extends Character
     lance()
     {
         if (this.lanceState == 0)
-            this.arrowCharge = this.setArrowCharge;
+            this.lanceBuffer = this.setLanceBuffer;
 
         else if (this.lanceState == 1)
         {
-            
+            this.lanceBuffer--;
+            if (this.lanceBuffer <= 0)
+                this.lanceState = 0;
         }
+        else if (this.lanceState == 2)
+        {
+            objects.push (new Lance (35, 35, this.x, this.y, this, imageList["Lance"]));
+            this.lanceState = 1;
+        }
+
     }
 
     inputManager()
@@ -239,22 +240,33 @@ class Player extends Character
         else
             this.jumpState = 0;
 
-        if (keys["Space"] && !prevKeys["Space"] && this.jumpCounter > 0)
+        if (keys["Space"] && !prevKeys["Space"] && this.jumpCount > 0)
         {
-            if (this.jumpCounter == 2)
+            if (this.jumpCount == 2)
+            {
                 this.jumpState = 2;
-            else if (this.jumpCounter == 1 && ui.energy >= this.jumpEnergy)
+                this.airDashCount = 0;
+            }
+
+            else if (this.jumpCount == 1 && ui.energy >= this.jumpEnergy)
             {
                 this.jumpState = 2;
                 ui.energy -= this.jumpEnergy;
+                this.airDashCount = 0;
             }
 
         }
 
         //Launch
         if ((keys["KeyG"] || keys["Mouse3"]) && (!prevKeys["KeyG"] && !prevKeys["Mouse3"]))
-            this.launchState = 1;
+        {
+            if (this.y >= board.height - this.height || this.enableLaunch)
+            {
+                this.launchState = 1;
+                this.enableLaunch = 0;
+            }
 
+        }
         if ((keys["KeyG"] || keys["Mouse3"]) && this.launchState)
         {
             this.launchState = 2;
@@ -265,8 +277,14 @@ class Player extends Character
         //Dash
         if ((keys["ShiftLeft"] || keys["Mouse4"]) && (!prevKeys["ShiftLeft"] && !prevKeys["Mouse4"]) && !this.dashState && ui.energy >= this.dashEnergy)
         {
-            this.dashState = 1;
-            ui.energy -= this.dashEnergy;
+            if (this.y >= board.height - this.height || this.airDashCount < this.maxAirDash)
+            {
+                this.dashState = 1;
+                ui.energy -= this.dashEnergy;
+
+                if (this.y < board.height - this.height)
+                    this.airDashCount++;
+            }
         }
 
         //Attack
@@ -288,10 +306,9 @@ class Player extends Character
             this.arrowState = 1;
 
         //Lance
-        if (keys["keyV"] && ui.combo > 30)
+        if (keys["KeyV"] && !prevKeys["KeyV"] && ui.combo > 30 && !this.lanceState)
         {
-            if (!prevKeys["KeyV"] && !this.lanceState)
-                this.lanceState = 1;
+            this.lanceState = 2;
         }
 
         //Move
@@ -369,10 +386,14 @@ class Player extends Character
 
     update()
     {
-        console.log (this.jumpState, this.jumpCounter, this.jumpForce);
-
-
         this.invincible--;
+
+        if (this.y == board.height - this.height)
+        {
+            this.jumpCount = 2;
+            this.airDashCount = 0;
+            this.enableLaunch = 1;
+        }
 
         if (this.disableControl > 0)
         {
@@ -392,7 +413,7 @@ class Player extends Character
         this.dash();
         this.attack();
         this.arrow();
-        this.surge();
+        this.lance();
 
         this.energyRefill();
         this.applyMove();
@@ -402,9 +423,12 @@ class Player extends Character
 
     render()
     {
-        if (this.faceX == 1)
-            draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
-        else if (this.faceX == -1)
-            draw.drawImage (this.image, 64, 0, 32, 64, this.x, this.y, this.width, this.height);
+        if (!this.lanceState)
+        {
+            if (this.faceX == 1)
+                draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
+            else if (this.faceX == -1)
+                draw.drawImage (this.image, 0, 64, 32, 64, this.x, this.y, this.width, this.height);
+        }
     }
 }
