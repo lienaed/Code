@@ -6,10 +6,19 @@ class Boss extends Character
         this.image = src;
     }
 
-    onCollision()
+    onCollision(label)
     {
-        ui.bossHp -= 5;
-        ui.combo += 10;
+        if (label == -1)
+        {
+            ui.bossHp -= 5;
+            ui.combo += 10;
+        }
+
+        else if (label == -2)
+        {
+            ui.bossHp -= 3;
+            ui.combo += 5;
+        }
     }
 
     update()

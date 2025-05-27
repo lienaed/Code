@@ -56,7 +56,7 @@ function collision (a, b, flag)
     {
         if (!flag)
         {
-            a.onCollision();
+            a.onCollision(b.label);
             b.onHit = 1;
         }
         else
