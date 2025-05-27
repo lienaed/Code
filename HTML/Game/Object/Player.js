@@ -47,6 +47,11 @@ class Player extends Character
         this.arrowLaunch = 0;
         this.arrowEnergy = 7;
 
+        this.lanceState = 0;
+        this.setLanceCharge = 100;
+        this.lanceCharge = 100;
+        this.lanceLaunch = 0;
+
         this.refillBuffer = 150;
         this.setRefillBuffer = 150;
     }
@@ -215,9 +220,15 @@ class Player extends Character
         }
     }
 
-    surge()
+    lance()
     {
+        if (this.lanceState == 0)
+            this.arrowCharge = this.setArrowCharge;
 
+        else if (this.lanceState == 1)
+        {
+            
+        }
     }
 
     inputManager()
@@ -275,6 +286,13 @@ class Player extends Character
         }
         else if (!keys["Mouse2"] && prevKeys["Mouse2"] && this.arrowState)
             this.arrowState = 1;
+
+        //Lance
+        if (keys["keyV"] && ui.combo > 30)
+        {
+            if (!prevKeys["KeyV"] && !this.lanceState)
+                this.lanceState = 1;
+        }
 
         //Move
         this.w = keys["KeyW"] ? 1 : 0;
