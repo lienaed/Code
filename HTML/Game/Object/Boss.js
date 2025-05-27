@@ -10,7 +10,7 @@ class Boss extends Character
     {
         if (label == -1)
         {
-            ui.bossHp -= 5;
+            ui.bossHp -= 4;
             ui.combo += 10;
         }
 
@@ -18,6 +18,11 @@ class Boss extends Character
         {
             ui.bossHp -= 3;
             ui.combo += 5;
+        }
+
+        else if (label == -3)
+        {
+            ui.bossHp -= ui.combo * 0.2;
         }
     }
 

@@ -6,6 +6,8 @@ class Player extends Character
         this.image = src;
 
         this.disableControl = 0;
+        this.invincible = 0;
+        this.flashCount = 0;
 
         this.initJumpForce = 20;
         this.jumpForce = 0;
@@ -15,9 +17,9 @@ class Player extends Character
         this.jumpBuffer = 0;
         this.jumpEnergy = 6;
 
-        this.launchForce = 20;
+        this.launchForce = 30;
         this.launchCharge = 60;
-        this.maxLaunchForce = 55;
+        this.maxLaunchForce = 65;
         this.launchState = 0;
         this.launchDX = 0;
         this.launchDY = 0;
@@ -222,8 +224,13 @@ class Player extends Character
         {
             this.lanceBuffer--;
             if (this.lanceBuffer <= 0)
+            {
                 this.lanceState = 0;
+            }
+
+            this.disableControl = 1;
         }
+
         else if (this.lanceState == 2)
         {
             objects.push (new Lance (35, 35, this.x, this.y, this, imageList["Lance"]));
@@ -338,8 +345,8 @@ class Player extends Character
     {
         if (this.invincible <= 0)
             ui.Hp -= 10;
-        this.invincible = 50;
-        freezeFrame = 2;
+        this.invincible = 40;
+        freezeFrame = 0;
 
         const centerX = this.x + this.width / 2;
         const centerY = this.y + this.height / 2;
@@ -405,7 +412,7 @@ class Player extends Character
 
         if (!this.launchState && !this.dashState)
             this.move (this.w, this.s, this.a, this.d);
-        if (!this.launchState)
+        if (!this.launchState && !this.lanceState)
             this.gravity();
         this.jump();
 
@@ -425,10 +432,25 @@ class Player extends Character
     {
         if (!this.lanceState)
         {
-            if (this.faceX == 1)
-                draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
-            else if (this.faceX == -1)
-                draw.drawImage (this.image, 0, 64, 32, 64, this.x, this.y, this.width, this.height);
+            if (this.invincible < 0)
+            {
+                if (this.faceX == 1)
+                    draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
+                else if (this.faceX == -1)
+                    draw.drawImage (this.image, 0, 64, 32, 64, this.x, this.y, this.width, this.height);
+            }
+            else
+            {
+                if (this.flashCount < 20)
+                {
+                    if (this.faceX == 1)
+                        draw.drawImage (this.image, 0, 0, 32, 64, this.x, this.y, this.width, this.height);
+                    else if (this.faceX == -1)
+                        draw.drawImage (this.image, 0, 64, 32, 64, this.x, this.y, this.width, this.height);
+                }
+                this.flashCount++;
+                this.flashCount %= 40;
+            }
         }
     }
 }

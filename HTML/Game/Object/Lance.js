@@ -5,15 +5,18 @@ class Lance extends Character
         super (width, height, x, y, -3);
         this.host = host;
         this.image = src;
-        this.onhit = 0;
+        this.onHit = 0;
         this.lanceBuffer = 6;
         this.stage = 0;
         this.mouseDX = 0;
         this.mouseDY = 0;
         this.angle = 0;
         this.velocity = 50;
-        this.imageW = 212;
         this.count = 0;
+
+        this.host.jumpCount = 1;
+        this.host.airDashCount = 0;
+        this.host.enableLaunch = 1;
     }
 
     update()

@@ -35,7 +35,6 @@ class Arrow extends Character
         else if (this.host.arrowLaunch || this.launch)
         {
             this.launch = 1;
-            console.log ("1")
             this.vx = Math.cos (this.angle) * this.velocity;
             this.vy = -Math.sin (this.angle) * this.velocity;
             this.x += this.vx;

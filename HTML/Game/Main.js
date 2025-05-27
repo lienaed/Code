@@ -89,21 +89,19 @@ function loop ()
 
     //Collision Detect
     var b = objects.find (obj => obj.label == 1);
-    var a = objects.find (obj => obj.label == -1);
-    var l = objects.filter (obj => obj.label == -2);
+    var a = objects.filter (obj => obj.label < 0);
     var p = objects.find (obj => obj.label == 0);
-    if (a && b && !a.onHit)
-    {
-        collision (b, a, 0);
-        a.onHit = 1;
-    }
+
     if (p && b)
     {
         collision (p, b, 1);
     }
-    for (i of l)
+    for (i of a)
     {
-        collision (b, i, 0);
+        if (i.onHit == 0)
+        {
+            collision (b, i, 0);
+        }
     }
 
 
