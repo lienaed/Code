@@ -6,6 +6,7 @@ const draw = board.getContext ("2d");
 
 var objects = new Array();
 var ui = new UI();
+var player, boss, square, circle, triangle, resonance1, resonance2, resonance3;
 var freezeFrame = 0;
 
 //Images Initialization
@@ -45,8 +46,16 @@ imageLoad();
 //Objects Initialization
 function objInit()
 {
-    objects.push (new Player (32, 64, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
-    objects.push (new Boss (400, 360, board.width / 2 - 200, 100, imageList["GateKeeper"]));
+    player = (new Player (32, 64, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
+    boss = (new Boss (400, 360, board.width / 2 - 200, 150, imageList["GateKeeper"]));
+
+    square = (new Resonance (-100, 100, boss, imageList["Resonance"], 1));
+    circle = (new Resonance (200, -100, boss, imageList["Resonance"], 2));
+    triangle = (new Resonance (500, 100, boss, imageList["Resonance"], 3));
+    resonance1 = (new Resonance (-100, 300, boss, imageList["Resonance"], 4));
+    resonance2 = (new Resonance (200, 400, boss, imageList["Resonance"], 5));
+    resonance3 = (new Resonance (400, 400, boss, imageList["Resonance"], 6));
+    objects.push (player, boss, square, circle, triangle, resonance1, resonance2, resonance3);
     loop();
 }
 
@@ -86,6 +95,17 @@ function loop ()
     {
         i.update();
         i.render();
+        if (keys["KeyB"])
+        {
+            for (i of objects)
+            {
+                draw.save();
+                draw.strokeStyle = "red";
+                draw.lineWidth = 2;
+                draw.strokeRect(i.x, i.y, i.width, i.height);
+                draw.restore();
+            }
+        }
     }
 
     //Collision Detect

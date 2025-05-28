@@ -4,12 +4,24 @@ class Boss extends Character
     {
         super (width, height, x, y, 1);
         this.image = src;
-        objects.push (new Resonance (-100, 100, this, imageList["Resonance"], 1));
-        objects.push (new Resonance (200, -100, this, imageList["Resonance"], 2));
-        objects.push (new Resonance (500, 100, this, imageList["Resonance"], 3));
-        objects.push (new Resonance (-100, 300, this, imageList["Resonance"], 0));
-        objects.push (new Resonance (200, 300, this, imageList["Resonance"], 0));
-        objects.push (new Resonance (400, 400, this, imageList["Resonance"], 0));
+
+        this.centerX = 0;
+        this.centerY = 0;
+
+        this.symbolState = 0;
+        this.symbolRestCount = 0;
+        this.symbolAttacking = 0;
+        this.symbolAttackingObj = 0;
+
+        this.bodyState = 0;
+        this.bodyRestCOunt = 0;
+        this.bodyAttacking = 0;
+        this.bodyAttackType = 0;
+    }
+
+    rest()
+    {
+
     }
 
     onCollision(label)
@@ -34,7 +46,51 @@ class Boss extends Character
 
     update()
     {
+        this.centerX = this.x + this.width / 2;
+        this.centerY = this.y + this.height / 2;
 
+
+        if (this.symbolRestCount < 150)
+        {
+            this.symbolAttacking = 0;
+            this.symbolRestCount++;
+            triangle.rest();
+            circle.rest();
+            square.rest();
+        }
+        else
+        {
+            if (!this.symbolAttacking)
+            {
+                this.symbolAttackingObj = Math.floor (Math.random() * 3);
+            }
+            this.symbolAttacking = 1;
+
+            if (this.symbolAttackingObj == 0)
+                square.squareAttack();
+            else
+                square.rest();
+
+            if (this.symbolAttackingObj == 1)
+                triangle.triangleAttack();
+            else
+                triangle.rest();
+
+            if (this.symbolAttackingObj == 2)
+                circle.circleAttack();
+            else
+                circle.rest();
+        }
+
+
+        if (this.bodyRestCOunt < 150)
+        {
+            this.bodyRestCOunt++;
+            this.rest();
+            resonance1.rest();
+            resonance2.rest();
+            resonance3.rest();
+        }
     }
 
     render()
