@@ -30,4 +30,9 @@ class Boss extends Character
     {
 
     }
+
+    render()
+    {
+        draw.drawImage(this.image, 0, 0, 48, 46, this.x, this.y, this.width, this.height);
+    }
 }
