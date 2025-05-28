@@ -26,6 +26,7 @@ function imageLoad()
     imageSRC["Arrow"] = "https://lienaed.github.io/Code/Images/Arrow.png";
     imageSRC["Lance"] = "https://lienaed.github.io/Code/Images/Lance.png";
     imageSRC["GateKeeper"] = "https://lienaed.github.io/Code/Images/GateKeeper.png"
+    imageSRC["Resonance"] = "https://lienaed.github.io/Code/Images/Resonance.png"
 
     for (let i in imageSRC)
     {
@@ -45,7 +46,7 @@ imageLoad();
 function objInit()
 {
     objects.push (new Player (32, 64, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
-    objects.push (new Boss (300, 399, board.width / 2, 0, imageList["GateKeeper"]));
+    objects.push (new Boss (400, 400, board.width / 2, 0, imageList["GateKeeper"], imageList["Resonance"]));
     loop();
 }
 

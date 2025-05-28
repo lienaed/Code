@@ -1,9 +1,10 @@
 class Boss extends Character
 {
-    constructor (width, height, x, y, src)
+    constructor (width, height, x, y, src1, src2)
     {
         super (width, height, x, y, 1);
-        this.image = src;
+        this.bodyImage = src1;
+        this.pieceImage = src2;
     }
 
     onCollision(label)
@@ -33,6 +34,7 @@ class Boss extends Character
 
     render()
     {
-        draw.drawImage(this.image, 0, 0, 48, 46, this.x, this.y, this.width, this.height);
+        draw.drawImage (this.bodyImage, 0, 0, 240, 200, this.x, this.y, this.width, this.height);
+        draw.drawImage (this.pieceImage, 0, 0, 52, 46, this.x - 100, this.y + 200, 64, 58);
     }
 }
