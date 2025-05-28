@@ -46,7 +46,7 @@ imageLoad();
 function objInit()
 {
     objects.push (new Player (32, 64, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
-    objects.push (new Boss (400, 400, board.width / 2, 0, imageList["GateKeeper"], imageList["Resonance"]));
+    objects.push (new Boss (400, 400, board.width / 2, 0, imageList["GateKeeper"]));
     loop();
 }
 
