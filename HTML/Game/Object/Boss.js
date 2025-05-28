@@ -4,6 +4,12 @@ class Boss extends Character
     {
         super (width, height, x, y, 1);
         this.image = src;
+        objects.push (new Resonance (-100, 100, this, imageList["Resonance"], 1));
+        objects.push (new Resonance (200, -100, this, imageList["Resonance"], 2));
+        objects.push (new Resonance (500, 100, this, imageList["Resonance"], 3));
+        objects.push (new Resonance (-100, 300, this, imageList["Resonance"], 0));
+        objects.push (new Resonance (200, 300, this, imageList["Resonance"], 0));
+        objects.push (new Resonance (400, 400, this, imageList["Resonance"], 0));
     }
 
     onCollision(label)
@@ -33,6 +39,6 @@ class Boss extends Character
 
     render()
     {
-        draw.drawImage (this.image, 0, 0, 240, 200, this.x, this.y, this.width, this.height);
+        draw.drawImage (this.image, 0, 0, 220, 220, this.x - 25, this.y - 25, 450, 450);
     }
 }
