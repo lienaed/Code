@@ -28,18 +28,18 @@ class Attack extends Character
         if (this.dir == "r")
         {
             this.x = this.host.x + this.host.width;
-            this.y = this.host.y;
+            this.y = this.host.y - 20;
         }
 
         else if (this.dir == "l")
         {
             this.x = this.host.x - this.width;
-            this.y = this.host.y;
+            this.y = this.host.y - 20;
         }
 
         else if (this.dir == "u")
         {
-            this.x = this.host.x;
+            this.x = this.host.x - 20;
             this.y = this.host.y - this.height;
         }
     }

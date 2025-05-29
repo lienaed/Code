@@ -80,6 +80,12 @@ class UI
 
         draw.fillStyle = "#134aec";
         draw.fillRect (this.comboBarX, this.comboBarY, bar, this.comboBarH);
+
+        draw.beginPath();
+        draw.moveTo (80, 80);
+        draw.lineTo (80, 100);
+        draw.stroke();
+        draw.closePath();
     }
 
     BossHpBar()

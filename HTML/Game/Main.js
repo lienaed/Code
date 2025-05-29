@@ -8,6 +8,7 @@ var objects = new Array();
 var ui = new UI();
 var player, boss, square, circle, triangle, resonance1, resonance2, resonance3;
 var freezeFrame = 0;
+var victory = 0, gameOver = 0;
 
 //Images Initialization
 var count = 0;
@@ -46,7 +47,7 @@ imageLoad();
 //Objects Initialization
 function objInit()
 {
-    player = (new Player (32, 64, board.width / 2 - 50, board.height / 2 - 50, imageList["Player"]));
+    player = (new Player (32, 64, board.width / 2 - 50, board.height - 100, imageList["Player"]));
     boss = (new Boss (400, 360, board.width / 2 - 200, 150, imageList["GateKeeper"]));
 
     square = (new Resonance (-100, 100, boss, imageList["Resonance"], 1));
@@ -111,12 +112,22 @@ function loop ()
     //Collision Detect
     var b = objects.find (obj => obj.label == 1);
     var a = objects.filter (obj => obj.label < 0);
+    var r = objects.filter (obj => obj.label == 2);
     var p = objects.find (obj => obj.label == 0);
 
     if (p && b && p.invincible < 0)
     {
         collision (p, b, 1);
     }
+
+    if (p && r && p.invincible < 0)
+    {
+        for (i of r)
+        {
+            collision (p, i, 1);
+        }
+    }
+
     for (i of a)
     {
         if (i.onHit == 0)
@@ -125,7 +136,29 @@ function loop ()
         }
     }
 
+    if (ui.Hp < 0)
+    {
+        gameOver = 1;
+    }
+
+    if (ui.bossHp < 0)
+    {
+        victory = 1;
+    }
+
+    if (gameOver || victory) 
+    {
+        draw.save();
+        draw.fillStyle = "white";
+        draw.font = "48px Arial";
+        draw.textAlign = "center";
+        draw.textBaseline = "middle";
+        let text = victory ? "Victory!" : "You Died";
+        draw.fillText(text, board.width / 2, board.height / 2);
+        draw.restore();
+
+        return;
+    }
 
     requestAnimationFrame (loop);
 }
-

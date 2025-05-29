@@ -9,7 +9,7 @@ class Character
         this.friction = 0.93;
         this.staticFriction = 0.2;
         this.moveSpeed = 7;
-        this.gravityForce = 0.8;
+        this.gravityForce = 0.75;
 
         this.x = x;
         this.y = y;

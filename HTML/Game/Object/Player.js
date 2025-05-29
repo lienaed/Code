@@ -168,7 +168,7 @@ class Player extends Character
         {
             this.attackTimer = this.attackFrame;
             this.attackIndex = objects.length;
-            objects.push (new Attack (100, 50, this.x, this.y, this, this.faceX, this.faceY, imageList["Attack"]));
+            objects.push (new Attack (170, 120, this.x, this.y, this, this.faceX, this.faceY, imageList["Attack"]));
             this.attackState = 2;
         }
         else if (this.attackState == 2)
@@ -184,7 +184,7 @@ class Player extends Character
 
             if (this.attackTimer > 0 && this.y < board.height - this.height && this.faceY == 0)
             {
-                this.vx = this.faceX;
+                this.vx = this.faceX / 2;
                 this.vy = Math.abs (this.vy) > 1 ? this.vy * 0.7 : 1;
             }
         }
