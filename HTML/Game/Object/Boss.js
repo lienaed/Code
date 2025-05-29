@@ -175,13 +175,13 @@ dash()
     {
         if (label == -1)
         {
-            ui.bossHp -= 4;
+            ui.bossHp -= 7;
             ui.combo += 10;
         }
 
         else if (label == -2)
         {
-            ui.bossHp -= 3;
+            ui.bossHp -= 2;
             ui.combo += 5;
         }
 

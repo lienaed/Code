@@ -25,8 +25,8 @@ class UI
         this.comboBarX = 20;
         this.comboBarY = 80;
 
-        this.maxBossHp = 100;
-        this.bossHp = 100;
+        this.maxBossHp = 150;
+        this.bossHp = 150;
         this.barW = 1000;
         this.barH = 30;
         this.barX = board.width / 2 - 500;

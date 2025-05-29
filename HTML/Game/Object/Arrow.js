@@ -1,6 +1,6 @@
 class Arrow extends Character
 {
-    constructor (width, height, x, y, host, src)
+    constructor (width, height, x, y, host, src, offset)
     {
         super (width, height, x, y, -2);
         this.host = host;
@@ -11,6 +11,7 @@ class Arrow extends Character
         this.mouseDY = 0;
         this.angle = 0;
         this.offset = 50;
+        this.scatterAngle = offset;
         this.velocity = 50;
         this.vx = 0;
         this.vy = 0;
@@ -27,7 +28,7 @@ class Arrow extends Character
 
         if (this.host.arrowState == 2 && !this.launch)
         {
-            this.angle = Math.atan2 (this.mouseDY, this.mouseDX);
+            this.angle = Math.atan2 (this.mouseDY, this.mouseDX) + (this.scatterAngle || 0);
             this.x = this.host.centerX + Math.cos (this.angle) * this.offset;
             this.y = this.host.centerY - Math.sin (this.angle) * this.offset;
         }

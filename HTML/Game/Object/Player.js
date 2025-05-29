@@ -51,6 +51,8 @@ class Player extends Character
         this.arrowCharge = 60;
         this.arrowLaunch = 0;
         this.arrowEnergy = 7;
+        this.arrowOffset = 0;
+        this.arrowCount = 0;
 
         this.lanceState = 0;
         this.lanceBuffer = 20;
@@ -205,7 +207,20 @@ class Player extends Character
 
         if (this.arrowState == 3)
         {
-            objects.push (new Arrow (25, 35, this.x, this.y, this, imageList["Arrow"]));
+            if (this.arrowCount < 3)
+            {
+                objects.push (new Arrow (25, 35, this.x, this.y, this, imageList["Arrow"], 0));
+                this.arrowCount++;
+            }
+            else
+            {
+                this.arrowCount = 0;
+                for (let offset of [-0.2, 0, 0.2])
+                {
+                    objects.push (new Arrow (25, 35, this.x, this.y, this, imageList["Arrow"], this.arrowOffset));
+                }
+
+            }
             this.arrowState = 2;
             ui.energy -= this.arrowEnergy;
         }
