@@ -408,6 +408,7 @@ class Player extends Character
 
     update()
     {
+        console.log (this.arrowCount);
         this.invincible--;
 
         if (this.y == board.height - this.height)
